@@ -14,6 +14,13 @@ import { UploadFileComponent } from './components/home/upload-file/upload-file.c
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+
+
+
 
 import { HttpClientModule } from'@angular/common/http';
 
@@ -35,7 +42,11 @@ import { HttpClientModule } from'@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule, 
+    FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]
