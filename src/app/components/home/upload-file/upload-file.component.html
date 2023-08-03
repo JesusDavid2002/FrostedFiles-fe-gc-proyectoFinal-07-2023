@@ -1,6 +1,28 @@
 <app-navbar></app-navbar>
 {{ dataCategoriesUpload | json}}
-<select class="form-control">
-    <option value="">Open one category</option>
-    <option *ngFor="let category of dataCategoriesUpload; let i = index" [value]="i">{{ category.name }}</option>
-</select>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <select class="form-control">
+                <option value="">Open one category</option>
+                <option *ngFor="let category of dataCategoriesUpload; let i = index" [value]="i">{{ category.name }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mt-3">
+            <div (drop)="onFileDropped($event)" (dragover)="onDragOver($event)" class="drag-drop">
+                <p>Arrastra y suelta</p>
+                <input type="file" (change)="onFileSelected($event)">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
