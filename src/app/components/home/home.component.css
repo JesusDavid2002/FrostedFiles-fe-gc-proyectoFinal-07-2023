@@ -7,3 +7,23 @@ input{
     border: 1px solid black;
     text-align: center;
 }
+
+.cl-detail{
+    border: 1px solid black;
+    height: 30vw;
+}
+
+.cl-categories{
+    border: 1px solid black;
+    height: 43vw;
+}
+
+.cl-files{
+    height: 125px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.card{
+    margin-top: 15px;
+}
