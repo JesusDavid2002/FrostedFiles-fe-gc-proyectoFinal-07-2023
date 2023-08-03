@@ -5,13 +5,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" style="padding-left: 111px;">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="components/home">Bienvenido</a>
+                        <a class="nav-link" routerLink="/components/home">Bienvenido</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="components/Dashboard">Dashboard</a>
+                        <a class="nav-link" routerLink="/components/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="components/about">About</a>
+                        <a class="nav-link" routerLink="/components/about">About</a>
                     </li>
                 </ul>
             </div>
@@ -28,6 +28,9 @@
             </form>
             <a class="text-light ml-2 mt-2 m-2" routerLink="/register">
                 <i class="bi bi-person-circle fs-5"></i>
+            </a>
+            <a>
+                <button (click)="onClick()" class="btn btn-outline-danger ml-2 mt-2 m-2">Logout</button>
             </a>
         </div>
     </div>
