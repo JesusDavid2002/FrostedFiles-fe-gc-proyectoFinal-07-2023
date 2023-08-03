@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit{
     .then((res) => {
       console.log(res);
       this.router.navigate(['components/home']);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
     });
   }
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit{
     .then((res) => {
       console.log(res);
       this.router.navigate(['components/home']);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
     });
   }

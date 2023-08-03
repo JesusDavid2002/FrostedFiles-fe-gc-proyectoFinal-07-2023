@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {
     this.formReg = new FormGroup({
       email: new FormControl(''),
-      password: new FormControl(''),
+      password: new FormControl('')
     });
   }
 
@@ -23,14 +23,24 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formReg.value);
-    this.userService.register(this.formReg.value)
-    .then((res) => {
-      console.log(res);
-      this.router.navigate(['auth/login']);
-    }).catch((err) => {
-      console.log(err);
-    });
+    if (this.formReg.valid) {
+      let password = this.formReg.get('password')?.value;
+      let passwordValidation = this.formReg.get('passwordValidation')?.value;
+  
+      if (password === passwordValidation) {
+        this.userService.register(this.formReg.value)
+          .then((res) => {
+            console.log(res);
+            this.router.navigate(['auth/login']);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        alert('Passwords are not equal.');
+      }
+    } else {
+      alert('Please fill in all the required fields.');
+    }
   }
-
 }

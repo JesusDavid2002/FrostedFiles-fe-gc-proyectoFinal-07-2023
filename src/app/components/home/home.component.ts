@@ -8,14 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
   constructor(private userService: UserService, private router: Router) {}
+
   onClick(){
     this.userService.logout()
     .then((res) => {
       console.log(res);
       this.router.navigate(['auth/login']);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
     });
   }
+
+  navigateDetails() {
+    this.router.navigate(['/details']);
+  }
+
+  details(){}
 }
