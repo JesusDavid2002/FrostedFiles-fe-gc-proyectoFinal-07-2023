@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'app-upload-file',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./upload-file.component.css']
 })
 export class UploadFileComponent {
+  @Input() dataCategoriesUpload: Array<any> = [];
 
-}
+  ngOnInit(): void{}
+} 

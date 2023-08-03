@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,22 +7,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  public categoriesList: Array<any> = [];
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private router: Router) {}
 
-  onClick(){
-    this.userService.logout()
-    .then((res) => {
-      console.log(res);
-      this.router.navigate(['auth/login']);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  ngOnInit(): void{
+    this.categoriesList= [
+      {
+        name:'Categoria 1'
+      }, 
+      {
+        name: 'Categoria 2'
+      }
+    ];
   }
 
   navigateDetails() {
-    this.router.navigate(['/details']);
+    this.router.navigate(['home/details']);
   }
 
   details(){}

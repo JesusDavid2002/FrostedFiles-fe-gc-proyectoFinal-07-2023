@@ -1,1 +1,6 @@
-<p>upload-file works!</p>
+<app-navbar></app-navbar>
+{{ dataCategoriesUpload | json}}
+<select class="form-control">
+    <option value="">Open one category</option>
+    <option *ngFor="let category of dataCategoriesUpload; let i = index" [value]="i">{{ category.name }}</option>
+</select>

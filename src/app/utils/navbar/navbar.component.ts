@@ -13,7 +13,7 @@ export class NavbarComponent {
     this.userService.logout()
     .then((res) => {
       console.log(res);
-      this.router.navigate(['auth/login']);
+      this.router.navigate(['/login']);
     })
     .catch((err) => {
       console.log(err);
