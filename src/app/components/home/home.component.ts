@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,20 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  public categoriesList: Array<any> = [];
+  @Input() dataCategoriesUpload: Array<any> = [];
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void{
-    this.categoriesList= [
-      {
-        name:'Categoria 1'
-      }, 
-      {
-        name: 'Categoria 2'
-      }
-    ];
-  }
+  ngOnInit(): void{}
 
   navigateDetails() {
     this.router.navigate(['home/details']);
