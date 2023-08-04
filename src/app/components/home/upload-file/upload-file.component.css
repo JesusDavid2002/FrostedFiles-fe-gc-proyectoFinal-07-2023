@@ -1,7 +1,24 @@
-.drag-drop{
+#drag-drop{
     border: 1px solid black;
     height: 70vh;
     width: 70vw;
     text-align: center;
     padding-top: 270px;
+}
+
+.cl-files{
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.inicio{
+    width: 0%;
+}
+
+.final{
+    width: 100%;
+}
+
+.animacion{
+    transition: all 2s ease 5s;
 }

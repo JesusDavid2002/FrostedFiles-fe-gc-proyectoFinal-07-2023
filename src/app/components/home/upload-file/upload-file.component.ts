@@ -8,7 +8,7 @@ import { Component, Input, SimpleChange } from '@angular/core';
 export class UploadFileComponent {
   @Input() dataCategoriesUpload: Array<any> = [];
   selectedFiles: File[] = [];
-
+  
   ngOnInit(): void{}
 
   onFileDropped(event: DragEvent){
@@ -35,7 +35,7 @@ export class UploadFileComponent {
     }
   }
 
-  uploadFile(file: File){
-
+  uploadFile(){
   }
+
 } 
