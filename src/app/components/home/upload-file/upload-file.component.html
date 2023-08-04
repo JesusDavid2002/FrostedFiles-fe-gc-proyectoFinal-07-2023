@@ -1,14 +1,11 @@
 <app-navbar></app-navbar>
 
-{{ dataCategoriesUpload | json}}
-
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
-            <!-- Falta recoger los datos del home -->
+        <div class="col mt-3">
             <select class="form-control">
                 <option value="">Open one category</option>
-                <option *ngFor="let category of dataCategoriesUpload; let i = index" [value]="i">{{ category.name }}</option>
+                <option *ngFor="let category of categoriesList; let i = index" [value]="i">{{ category.name }}</option>
             </select>
         </div>
     </div>
@@ -21,28 +18,27 @@
         </div> 
         <div class="col">
             <select class="form-control">
-                <option value="2">Visibility Public</option>
-                <option value="1">Visibility Private</option>
+                <option value="1">Visibility: Public</option>
+                <option value="2">Visibility: Private</option>
             </select>
             <div class="col mt-5">
                 <ul>
                     <li *ngFor="let file of selectedFiles" class="cl-files">
                         {{ file.name }}
                         <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                            <div id="barra" class="progress-bar progress-bar-striped progress-bar-animated incio animacion"></div>
-                            <!-- Falta meter animacion -->
+                            <div id="barra" class="progress-bar progress-bar-striped progress-bar-animated" style="--w:100%"></div>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="row text-center mt-3">
+    <div class="row text-center mt-5">
         <div class="col">
-            <button type="submit" class="btn btn-info">Upload</button>
+            <button type="submit" class="btn btn-dark">Upload</button>
         </div>
         <div class="col">
-            <button routerLink="/home" class="btn btn-info">Go back to home</button>
+            <button routerLink="/home" class="btn btn-dark">Go back to home</button>
         </div>
     </div>
 </div>

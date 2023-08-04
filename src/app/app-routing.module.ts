@@ -15,7 +15,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UsersListComponent } from './components/users-list/users-list.component';
 
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
@@ -35,7 +35,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), BrowserAnimationsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
