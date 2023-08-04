@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {
     this.formReg = new FormGroup({
       email: new FormControl(''),
-      password: new FormControl('')
+      password: new FormControl(''),
+      passwordValidation: new FormControl('')
     });
   }
 
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
         this.userService.register(this.formReg.value)
           .then((res) => {
             console.log(res);
-            this.router.navigate(['auth/login']);
+            this.router.navigate(['/login']);
           })
           .catch((err) => {
             console.log(err);
