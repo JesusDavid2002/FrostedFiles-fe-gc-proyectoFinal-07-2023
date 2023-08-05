@@ -1,11 +1,25 @@
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h2>Categories</h2>
-            <ul class="list-group" *ngFor="let category of dataCategories">
-                <li >{{ category.name }}</li>
-            </ul>
+        <div class="col-12 col-md-3 d-md-none ">
+            <button class="btn btn-info text-center w-50" type="button" data-bs-toggle="collapse" data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
+                <span class="">Categorias</span>
+            </button>
+            <div class="collapse mt-3" id="categoriasCollapse">
+                <h2 class="d-md-none">Categories</h2>
+                <ul class="list-group p-3">
+                    <li *ngFor="let category of categoriesList" class="list-group-item">{{ category.name }}</li>
+                </ul>
+            </div>
+        </div>
+    
+    <!-- Contenido de las pestañas -->
+        <div class="col-12 col-md-9">
+            <div class="d-none d-md-block">
+                <h2>Categories</h2>
+                <ul class="list-group p-3">
+                    <li *ngFor="let category of categoriesList" class="list-group-item">{{ category.name }}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
-

@@ -3,9 +3,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col mt-3">
-            <select class="form-control">
+            <select class="form-control" id="selectElement">
                 <option value="">Open one category</option>
-                <option *ngFor="let category of categoriesList; let i = index" [value]="i">{{ category.name }}</option>
+                <option *ngFor="let category of categoriesList">{{ category.name }}</option>
             </select>
         </div>
     </div>

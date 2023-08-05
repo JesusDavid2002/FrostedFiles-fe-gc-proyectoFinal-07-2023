@@ -1,23 +1,18 @@
 import { Component, Input } from '@angular/core';
-  
+import { CategoryService } from 'src/app/services/category.service';  
+
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.css']
 })
 export class UploadFileComponent {
-  public categoriesList: Array<any> = [];
+  categoriesList: any[];
   selectedFiles: File[] = [];
 
-  ngOnInit(): void {
-    this.categoriesList= [
-    {
-      name:'Categoria 1'
-    }, 
-    {
-      name: 'Categoria 2'
-    }
-  ];}
+  constructor(private categoryService: CategoryService) {
+    this.categoriesList = this.categoryService.getData();
+  }
 
   // Utilizando el metodo onFileDropped y el evento dragEvent (arrastrar y soltar).
   // Utilizamos el metodo preventDefault() para evitar que el navegador haga su accion predeterminada
@@ -45,8 +40,5 @@ export class UploadFileComponent {
         this.selectedFiles.push(files[i]);
       }
     }
-  }
-
-  uploadFile(){
   }
 } 
