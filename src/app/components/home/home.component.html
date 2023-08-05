@@ -1,40 +1,66 @@
 <app-navbar></app-navbar>
-
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-6 py-2 ps-3">
-            <input type="text" disabled placeholder=" public/multimedia">
-        </div>
-        <div class="col mx-5 py-2 rounded cl-btns">
-                <button type="button" class="btn btn-light mx-1"><img src="../../../assets/img/file_format_icon.png" alt="">Crear Categoría</button>
-                <button type="button" class="btn btn-light mx-1" routerLink="/home/upload-file"><img src="../../../assets/img/file_format_paper_icon.png" alt="">Subir Archivo</button>
-                <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file">Modificar Archivo</button>
-                <button type="button" class="btn btn-danger mx-1">Eliminar Archivo</button>
-                <button type="button" class="btn btn-light mx-1">Compartir Archivo</button>
-        </div>
+    <div class="row">            
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="col py-2 ps-3 d-flex">
+                <input type="text" disabled placeholder=" public/multimedia" class="me-3 p-2 w-100"> 
+                <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="col ms-5 py-2 rounded cl-btns"> 
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <button type="button" class="btn btn-light mx-1"><img src="../../../assets/img/file_format_icon.png" alt="">Crear Categoría</button>
+                        <button type="button" class="btn btn-light mx-1" routerLink="/home/upload-file"><img src="../../../assets/img/file_format_paper_icon.png" alt="">Subir Archivo</button>
+                        <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file">Modificar Archivo</button>
+                        <button type="button" class="btn btn-danger mx-1">Eliminar Archivo</button>
+                        <button type="button" class="btn btn-light mx-1">Compartir Archivo</button>
+                    </div>
+            </div>
+        </nav>
     </div>
-    <div class="row mt-4">
-        <div class="col-3 ms-3 rounded cl-categories">
-            <!-- Aqui ira la jerarquia -->
-            <app-categories [dataCategories]="dataCategoriesUpload"></app-categories> 
+    <div class="row mt-3 mx-auto">
+        <div class="col-md-3">
+            <app-categories></app-categories>
         </div>
-        <div class="col-6 ms-5 cl-files" (dblclick)="navigateDetails()" (click)="details()">
-            <!-- Aqui iran los archivos -->
-            <div class="card mx-3" style="width: 7rem;">
-                <img src="" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">File name</h5>
+        <div class="col">
+            <div class="row row-cols-2 row-cols-md-6 g-4">
+                <div class="col">
+                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
+                        <img src="" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">File name</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
+                        <img src="" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">File name</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
+                        <img src="" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">File name</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
+                        <img src="" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">File name</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card mx-3" style="width: 7rem;">
-                <img src="" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">File name</h5>
-                </div>
-            </div>            
         </div>
-        <div class="col-2 ms-5 rounded cl-detail">
-            <!-- Aqui la vista de detalles de los archivos -->
+        <div class="col-md-3 col-12 ms-md-5 rounded cl-detail">
+
         </div>
     </div>
 </div>
