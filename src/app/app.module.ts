@@ -23,6 +23,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { HttpClientModule } from'@angular/common/http';
 import { DetailsComponent } from './components/home/details/details.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompartirComponent } from './components/home/details/compartir/compartir.component';
 
 @NgModule({
   declarations: [
@@ -39,16 +41,18 @@ import { CategoriesComponent } from './components/categories/categories.componen
     UserProfileComponent,
     DashboardComponent,
     UsersListComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CompartirComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    NgbModule,
     FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
   ],
   exports: [NavbarComponent],
   providers: [],
