@@ -1,2 +1,23 @@
 <app-navbar></app-navbar>
-<p>dashboard works!</p>
+
+<!-- Para poder mostrar las diferentes cards com charts utilizamos la biblioteca de angular materials y la biblioteca ngx-charts -->
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <!--Charts-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Global Graphic">
+        <app-global-chart></app-global-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Monthly Graphic">
+        <app-monthly-chart></app-monthly-chart>
+      </app-card>
+    </mat-grid-tile>
+    <!--Table-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
+      <app-card title="Card 9"><div>Table Content Here</div></app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
