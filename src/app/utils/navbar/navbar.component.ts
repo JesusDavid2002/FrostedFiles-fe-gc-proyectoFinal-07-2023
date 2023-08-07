@@ -7,8 +7,14 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent {
+  menuBtnActive: boolean = false;
+  searchFormActive: boolean = false;
+  profileWindowActive: boolean = false;
+
   constructor(private userService: UserService, private router: Router) {}
+  
   onClick(){
     this.userService.logout()
     .then((res) => {
@@ -18,5 +24,20 @@ export class NavbarComponent {
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  toggleMenu(): void {
+    this.menuBtnActive = !this.menuBtnActive;
+  }
+
+  toggleSearchForm(): void {
+    this.searchFormActive = !this.searchFormActive;
+  }
+  cancelSearch(): void {
+    this.searchFormActive = false;
+  }
+
+  toggleProfileWindow(): void {
+    this.profileWindowActive = !this.profileWindowActive;
   }
 }
