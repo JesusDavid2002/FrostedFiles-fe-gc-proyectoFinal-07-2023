@@ -56,7 +56,6 @@ import { CompartirComponent } from './components/home/details/compartir/comparti
     CardComponent,
     GlobalChartComponent,
     MonthlyChartComponent,
-    CompartirComponent,
     CompartirComponent
   ],
   imports: [
