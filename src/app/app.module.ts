@@ -34,6 +34,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CardComponent } from './components/dashboard/card/card.component';
 import { GlobalChartComponent } from './components/dashboard/charts/global-chart/global-chart.component';
 import { MonthlyChartComponent } from './components/dashboard/charts/monthly-chart/monthly-chart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompartirComponent } from './components/home/details/compartir/compartir.component';
 
 @NgModule({
   declarations: [
@@ -53,13 +55,14 @@ import { MonthlyChartComponent } from './components/dashboard/charts/monthly-cha
     DashboardComponent,
     CardComponent,
     GlobalChartComponent,
-    MonthlyChartComponent
+    MonthlyChartComponent,
+    CompartirComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -69,7 +72,8 @@ import { MonthlyChartComponent } from './components/dashboard/charts/monthly-cha
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgbModule
   ],
   exports: [NavbarComponent],
   providers: [],
