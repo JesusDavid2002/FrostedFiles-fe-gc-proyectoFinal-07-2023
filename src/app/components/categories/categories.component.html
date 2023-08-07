@@ -7,7 +7,11 @@
             <div class="collapse mt-3" id="categoriasCollapse">
                 <h2 class="d-md-none">Categories</h2>
                 <ul class="list-group p-3">
-                    <li *ngFor="let category of categoriesList" class="list-group-item">{{ category.name }}</li>
+                    <li *ngFor="let category of categoriesList" class="list-group-item">{{ category.name }}
+                        <ul *ngIf="category.subcategories && category.subcategories.length > 0">
+                            <li *ngFor="let subcategory of category.subcategories" class="list-group-item">{{ subcategory }}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -17,7 +21,11 @@
             <div class="d-none d-md-block">
                 <h2>Categories</h2>
                 <ul class="list-group p-3">
-                    <li *ngFor="let category of categoriesList" class="list-group-item">{{ category.name }}</li>
+                    <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
+                        <ul *ngIf="category.subcategories && category.subcategories.length > 0">
+                            <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

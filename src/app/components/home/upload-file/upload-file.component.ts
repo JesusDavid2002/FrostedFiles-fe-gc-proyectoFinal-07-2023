@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';  
 
 @Component({
@@ -7,7 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./upload-file.component.css']
 })
 export class UploadFileComponent {
-  categoriesList: any[];
+  categoriesList: Category[];
   selectedFiles: File[] = [];
 
   constructor(private categoryService: CategoryService) {

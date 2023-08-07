@@ -3,7 +3,7 @@
     <div class="row">            
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="col py-2 ps-3 d-flex">
-                <input type="text" disabled placeholder=" public/multimedia" class="me-3 p-2 w-100"> 
+                <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="me-3 p-2 w-100" id="path" disabled>
                 <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                 </button>
@@ -12,9 +12,9 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <button type="button" class="btn btn-light mx-1"><img src="../../../assets/img/file_format_icon.png" alt="">Crear Categoría</button>
                         <button type="button" class="btn btn-light mx-1" routerLink="/home/upload-file"><img src="../../../assets/img/file_format_paper_icon.png" alt="">Subir Archivo</button>
-                        <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file">Modificar Archivo</button>
-                        <button type="button" class="btn btn-danger mx-1">Eliminar Archivo</button>
-                        <button type="button" class="btn btn-light mx-1">Compartir Archivo</button>
+                        <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file" disabled id="btn-files">Modificar Archivo</button>
+                        <button type="button" class="btn btn-danger mx-1" disabled id="btn-files2">Eliminar Archivo</button>
+                        <button type="button" class="btn btn-light mx-1" disabled id="btn-files3">Compartir Archivo</button>
                     </div>
             </div>
         </nav>
