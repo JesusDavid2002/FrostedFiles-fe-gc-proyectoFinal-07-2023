@@ -13,8 +13,8 @@ import { Page404Component } from './components/page404/page404.component';
 import { UpdateFileComponent } from './components/home/update-file/update-file.component';
 import { UploadFileComponent } from './components/home/upload-file/upload-file.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -23,6 +23,17 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { HttpClientModule } from'@angular/common/http';
 import { DetailsComponent } from './components/home/details/details.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CardComponent } from './components/dashboard/card/card.component';
+import { GlobalChartComponent } from './components/dashboard/charts/global-chart/global-chart.component';
+import { MonthlyChartComponent } from './components/dashboard/charts/monthly-chart/monthly-chart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompartirComponent } from './components/home/details/compartir/compartir.component';
 
@@ -39,9 +50,12 @@ import { CompartirComponent } from './components/home/details/compartir/comparti
     UploadFileComponent,
     DetailsComponent,
     UserProfileComponent,
-    DashboardComponent,
     UsersListComponent,
     CategoriesComponent,
+    DashboardComponent,
+    CardComponent,
+    GlobalChartComponent,
+    MonthlyChartComponent,
     CompartirComponent
   ],
   imports: [
@@ -52,6 +66,13 @@ import { CompartirComponent } from './components/home/details/compartir/comparti
     FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    NgxChartsModule,
     NgbModule
   ],
   exports: [NavbarComponent],
