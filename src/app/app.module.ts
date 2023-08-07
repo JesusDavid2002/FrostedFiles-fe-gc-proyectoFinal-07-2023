@@ -49,10 +49,10 @@ import { CompartirComponent } from './components/home/details/compartir/comparti
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule,
     FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    NgbModule
   ],
   exports: [NavbarComponent],
   providers: [],

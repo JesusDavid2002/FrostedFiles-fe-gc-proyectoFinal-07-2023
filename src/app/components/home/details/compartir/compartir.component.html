@@ -4,8 +4,30 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
+
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput2">Asunto</label>
+            <input type="text" class="form-control" formControlName="subject" placeholder="asunto">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" formControlName="message"
+                placeholder="Escribe el contenido del mensaje" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput2">Archivo:</label>
+            <p>{{ name }}</p>
+        </div>
+    </form>
     
+
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="compartir()">Compartir</button>
 </div>
