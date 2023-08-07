@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "loadsh"
+            ],
             "outputPath": "dist/frosted-files-fe-gc-proyecto-final-07-2023",
             "index": "src/index.html",
             "main": "src/main.ts",
