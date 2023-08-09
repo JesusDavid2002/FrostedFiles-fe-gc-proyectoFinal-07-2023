@@ -1,2 +1,37 @@
 <app-navbar></app-navbar>
-<p>user-profile works!</p>
+<div class="perfil-contenedor">
+    <div class="fondo" (click)="handleBackgroundClick()" (drop)="handleBackgroundDrop($event)" (dragover)="allowDrop($event)">
+        <div class="overlay" *ngIf="showOverlay">Introduce un nuevo fondo de imagen</div>
+        <button class="btn btn-primary editar-perfil-btn" [class.btn-green]="buttonClicked" (click)="toggleEditMode($event)">{{ showOverlay ? 'Guardar cambios' : 'Editar perfil' }}</button>
+    </div>
+    <div class="perfil-foto-contenedor" (drop)="handleProfilePhotoDrop($event)" (dragover)="allowDrop($event)">
+        <div class="perfil-outline">
+            <div class="overlay-2" *ngIf="showOverlay">Introduce una foto de perfil nueva</div>
+            <img [src]="profilePhoto" alt="Foto perfil" class="foto-perfil" (click)="openImagePicker('profile')">
+        </div>
+    </div>
+    <div class="perfil-informacion">
+        <div class="perfil-detalles">
+            <div class="perfil-campo">
+                <label>Usuario:</label><br><br>
+                <span>Nombre usuario</span>
+            </div>
+            <div class="perfil-campo">
+                <label>Rol:</label><br><br>
+                <span>Rol usuario</span>
+            </div>
+            <div class="perfil-campo">
+                <label>Fecha de entrada:</label><br><br>
+                <span>Fecha cuando se unio</span>
+            </div>
+            <div class="perfil-campo">
+                <label>Descripcion:</label><br><br>
+                <span>Descripcion</span>
+            </div>
+        </div>
+        <div class="perfil-dashboard">
+            <h2>Archivos subidos / comentarios - Dashboard del usuario</h2>
+        </div>
+    </div>
+
+</div>
