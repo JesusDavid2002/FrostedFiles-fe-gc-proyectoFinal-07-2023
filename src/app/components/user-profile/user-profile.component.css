@@ -1,0 +1,188 @@
+.perfil-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fondo {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    max-width: 80%;
+    height: 200px;
+    background-image: url('https://cdn.discordapp.com/attachments/598612400031268878/1138873345291595806/CubesBlue.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding-left: 15px;
+}
+
+.overlay-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding-left: 15px;
+    border-radius: 50%;
+}
+
+.editar-perfil-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-green {
+    background-color: #5eba5e;
+}
+
+.perfil-foto-contenedor {
+    position: relative;
+    transform: translateY(-50%);
+    top: 0;
+    right: 30%;
+    z-index: 1;
+}
+
+.perfil-outline {
+    width: 170px;
+    height: 170px;
+    border: 5px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.perfil-informacion {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-top: -90px;
+    max-width: 80%;
+    border-radius: 8px;
+}
+
+.perfil-detalles {
+    border: 1px solid rgba(109, 109, 109,55);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-right: 20px;
+    position: relative;
+    width: 30%;
+    margin-top: 20px;
+    max-width: 80%;
+    height: 500px;
+    border-radius: 8px;
+}
+
+.perfil-dashboard {
+    border: 1px solid rgba(109, 109, 109,55);
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    max-width: 80%;
+    height: 500px;
+    border-radius: 4px;
+}
+
+.perfil-campo {
+    margin-bottom: 15px;
+}
+
+.perfil-campo label {
+    font-weight: bold;
+}
+
+.perfil-campo span {
+    margin-left: 10px;
+}
+
+
+/* Responsive media queries */
+@media (max-width: 768px) {
+    .perfil-contenedor {
+        align-items: center;
+    }
+    
+    .fondo {
+        max-width: 100%;
+    }
+    
+    .perfil-info {
+        margin-top: -60px;
+    }
+    
+    .perfil-outline {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .perfil-pic {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 576px) {
+    .fondo {
+        height: 150px;
+    }
+
+    .perfil-outline {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .editar-perfil-button {
+        bottom: 5px;
+        right: 5px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
