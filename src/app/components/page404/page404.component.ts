@@ -8,5 +8,3 @@ import { Component } from '@angular/core';
 export class Page404Component {
   
 }
-
-console.log('Error 404: Page not found');
