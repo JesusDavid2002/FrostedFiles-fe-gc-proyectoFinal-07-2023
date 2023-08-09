@@ -43,5 +43,4 @@ comments = [
     this.comments.splice(this.comments.indexOf(comment), 1);
     
   }
-
 }

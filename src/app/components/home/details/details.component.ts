@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompartirComponent } from './compartir/compartir.component';
 import { CommentService } from 'src/app/services/comment.service';
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -19,7 +20,7 @@ export class DetailsComponent {
   openModalShare() {
     const modalRef = this.modalService.open(CompartirComponent);
     modalRef.componentInstance.name = 'nombre archivo que se compartirá';
-}
+  }
 
 sendComment() {
   let comment = {

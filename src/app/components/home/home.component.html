@@ -3,7 +3,7 @@
     <div class="row">            
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="col py-2 ps-3 d-flex">
-                <input type="text" disabled placeholder=" public/multimedia" class="me-3 p-2 w-100"> 
+                <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="me-3 p-2 w-100" id="path" disabled>
                 <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                 </button>
@@ -12,9 +12,9 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <button type="button" class="btn btn-light mx-1"><img src="../../../assets/img/file_format_icon.png" alt="">Crear Categoría</button>
                         <button type="button" class="btn btn-light mx-1" routerLink="/home/upload-file"><img src="../../../assets/img/file_format_paper_icon.png" alt="">Subir Archivo</button>
-                        <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file">Modificar Archivo</button>
-                        <button type="button" class="btn btn-danger mx-1">Eliminar Archivo</button>
-                        <button type="button" class="btn btn-light mx-1">Compartir Archivo</button>
+                        <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file" disabled id="btn-files">Modificar Archivo</button>
+                        <button type="button" class="btn btn-danger mx-1" disabled id="btn-files2">Eliminar Archivo</button>
+                        <button type="button" class="btn btn-light mx-1" disabled id="btn-files3" (click)="openModalShare()">Compartir Archivo</button>
                     </div>
             </div>
         </nav>
@@ -23,44 +23,24 @@
         <div class="col-md-3">
             <app-categories></app-categories>
         </div>
-        <div class="col">
+        <div class="col-md-6">
             <div class="row row-cols-2 row-cols-md-6 g-4">
-                <div class="col">
-                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
+                <div class="col" *ngFor="let file of fileList; let i = index">
+                    <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
                         <img src="" class="card-img-top" alt="">
                         <div class="card-body">
-                            <h5 class="card-title text-center">File name</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
-                        <img src="" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">File name</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
-                        <img src="" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">File name</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" (dblclick)="navigateDetails()" (click)="details()">
-                        <img src="" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">File name</h5>
+                            <h5 class="card-title text-center">{{ file.name }}{{ file.type }}</h5>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-12 ms-md-5 rounded cl-detail">
-
+        <div class="col"></div>
+        <div class="col-md-2 col-12 ms-md-5 my-3 py-3 rounded cl-detail d-none" id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
+            <h2 class="fileTitle">{{file.name}}</h2>
+            <p>Extension: {{file.type}}</p>
+            <p>Size: {{file.size}}</p>
+            <p>Creation date: {{file.date}}</p>
         </div>
     </div>
 </div>

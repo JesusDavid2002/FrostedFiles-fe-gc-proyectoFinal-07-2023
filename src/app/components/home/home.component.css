@@ -13,6 +13,12 @@ input{
 
 .card{
     margin-top: 15px;
+    display: flex;
+}
+
+.fileTitle{
+    text-align: center;
+    font-weight: bold;
 }
 
 @media (max-width: 700px){
@@ -25,6 +31,7 @@ input{
     }
 
     .cl-detail{
-        display: none;
+        height: auto;
+        /* display: none; */
     }
 }

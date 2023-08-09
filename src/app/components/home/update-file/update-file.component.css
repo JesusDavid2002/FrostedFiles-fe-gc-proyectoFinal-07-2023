@@ -1,0 +1,13 @@
+.cl-vst-prev{
+    border: 1px solid black;
+    height: 65vh;
+}
+
+.cl-type{
+    height: 30px;
+}
+
+.cl-detail{
+    border: 1px solid black;
+    height: 52vh;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -8,11 +9,23 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoriesComponent {
   
-  categoriesList: any[] = [];
+  categoriesList: Category[] = [];
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void{
     this.categoriesList = this.categoryService.getData();
+  }
+
+  update(categoryName?: string, subcategoryName?: string){
+    if( categoryName && !subcategoryName ){
+      let path = `public/multimedia/${categoryName}`;
+      this.categoryService.updateCategory(path);
+    } else if( categoryName && subcategoryName ){
+      let path = `public/multimedia/${categoryName}/${subcategoryName}`;
+      this.categoryService.updateCategory(path);
+      console.log(path);
+      
+    }
   }
 }
