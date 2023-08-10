@@ -12,9 +12,9 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <button type="button" class="btn btn-light mx-1"><img src="../../../assets/img/file_format_icon.png" alt="">Crear Categoría</button>
                         <button type="button" class="btn btn-light mx-1" routerLink="/home/upload-file"><img src="../../../assets/img/file_format_paper_icon.png" alt="">Subir Archivo</button>
-                        <button type="button" class="btn btn-light mx-1" routerLink="/home/update-file" disabled id="btn-files">Modificar Archivo</button>
-                        <button type="button" class="btn btn-danger mx-1" disabled id="btn-files2">Eliminar Archivo</button>
-                        <button type="button" class="btn btn-light mx-1" disabled id="btn-files3" (click)="openModalShare()">Compartir Archivo</button>
+                        <button type="button" class="btn btn-light mx-1 btn-files" routerLink="/home/update-file" disabled>Modificar Archivo</button>
+                        <button type="button" class="btn btn-danger mx-1 btn-files" disabled>Eliminar Archivo</button>
+                        <button type="button" class="btn btn-light mx-1 btn-files" disabled (click)="openModalShare()">Compartir Archivo</button>
                     </div>
             </div>
         </nav>
@@ -41,6 +41,14 @@
             <p>Extension: {{file.type}}</p>
             <p>Size: {{file.size}}</p>
             <p>Creation date: {{file.date}}</p>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-md-2 col-12 ms-md-5 mt-4 me-2 py-3 rounded cl-perms d-none" id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
+            <p>Permisos</p>
+            <div class="btn btn-dark"(click)="openModalPermissions()">Acceder Permisos</div>
         </div>
     </div>
 </div>

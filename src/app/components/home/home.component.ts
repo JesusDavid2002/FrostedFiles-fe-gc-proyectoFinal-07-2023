@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
 import { CompartirComponent } from './details/compartir/compartir.component';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 @Component({
   selector: 'app-home',
@@ -51,12 +52,19 @@ export class HomeComponent {
   }
 
   details(index: number): void{
-    document.getElementById('btn-files')?.removeAttribute('disabled');
-    document.getElementById('btn-files2')?.removeAttribute('disabled');
-    document.getElementById('btn-files3')?.removeAttribute('disabled');
+    
     this.fileList.forEach((file, i) => {
       if (i === index) {
         file.isVisible = !file.isVisible;
+
+        let elements = document.getElementsByClassName('btn-files');
+        for (let i = 0; i < elements.length; i++) {
+          if (file.isVisible) {
+            elements[i].removeAttribute('disabled');
+          } else{
+            elements[i].setAttribute('disabled', 'true');
+          }
+        }
       } else {
         file.isVisible = false;
       }
@@ -64,7 +72,11 @@ export class HomeComponent {
   }
 
   openModalShare() {
-    const modalRef = this.modalService.open(CompartirComponent);
+    let modalRef = this.modalService.open(CompartirComponent);
     modalRef.componentInstance.name = 'nombre archivo que se compartirá';
+  }
+
+  openModalPermissions(){
+    let modalRef = this.modalService.open(PermissionsComponent);
   }
 }

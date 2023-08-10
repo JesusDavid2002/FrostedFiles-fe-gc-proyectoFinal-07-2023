@@ -8,7 +8,12 @@ input{
 
 .cl-detail{
     border: 1px solid black;
-    height: 30vw;
+    height: 60vh;
+}
+
+.cl-perms{
+    border: 1px solid black;
+    height: 15vh;
 }
 
 .card{

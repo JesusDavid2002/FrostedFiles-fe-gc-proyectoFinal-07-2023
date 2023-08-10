@@ -7,7 +7,7 @@ import { GraphicService } from 'src/app/services/graphic.service';
   styleUrls: ['./monthly-chart.component.css']
 })
 export class MonthlyChartComponent {
-  view: [number, number] = [800, 600];
+  view: [number, number] = [800, 300];
 
   // options
   gradient: boolean = true;
@@ -19,17 +19,5 @@ export class MonthlyChartComponent {
 
   getData(){
     return this.graphicService.getMonthlyDataGraphic();
-  }
-
-  onSelect(data: any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }

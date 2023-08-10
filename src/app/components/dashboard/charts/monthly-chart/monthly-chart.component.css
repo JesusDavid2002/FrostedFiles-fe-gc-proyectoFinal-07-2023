@@ -1,0 +1,9 @@
+.chart{
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-align: center;
+}
+
+::ng-deep .advanced-pie-legend .total-label{
+    font-weight: 500;
+}

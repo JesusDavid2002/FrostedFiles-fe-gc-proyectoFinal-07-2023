@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GlobalGraphic, MonthlyGraphic } from '../models/graphic.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
