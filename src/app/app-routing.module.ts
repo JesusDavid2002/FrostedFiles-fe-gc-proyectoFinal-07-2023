@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'page404', component: Page404Component, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
   { path: 'user-profile', component: UserProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
   { path: 'users-list', component: UsersListComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/page404', pathMatch: 'full' }
 ];
 
