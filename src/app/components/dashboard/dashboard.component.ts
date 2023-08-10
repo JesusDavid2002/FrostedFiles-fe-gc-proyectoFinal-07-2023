@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { GlobalChartComponent } from './charts/global-chart/global-chart.component';
+import { MonthlyChartComponent } from './charts/monthly-chart/monthly-chart.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,22 +10,26 @@ import { map } from 'rxjs/operators';
 })
 
 export class DashboardComponent {
-  private breakpointObserver = inject(BreakpointObserver);
-  cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return {
-          columns: 1,
-          chart: { cols: 1, rows: 2 },
-          table: { cols: 1, rows: 4 },
-        };
-      }
+  cards: any[]=[
+    {id: 'cd-global', title: 'Global Chart', chartComponent: GlobalChartComponent},
+    {id: 'cd-month', title: 'Month Chart', chartComponent: MonthlyChartComponent}
+  ];
 
-      return {
-        columns: 4,
-        chart: { cols: 2, rows: 2 },
-        table: { cols: 4, rows: 4 },
-      };
-    })
-  );
+  onHide(index: number){
+    this.cards.splice(index, 1)
+  }
+  
+  onShow(){
+    let newCard = {id: 'cd-month', title: 'Month Chart', chartComponent: MonthlyChartComponent}
+    this.cards.push(newCard);
+  }
+
+  onShowGlobal(){
+    let newCard = {id: 'cd-global', title: 'Global Chart', chartComponent: GlobalChartComponent}
+    this.cards.push(newCard);
+  }
+
+  drop(event: CdkDragDrop<any[]>){
+    moveItemInArray(this.cards, event.previousIndex, event.currentIndex);
+  }
 }

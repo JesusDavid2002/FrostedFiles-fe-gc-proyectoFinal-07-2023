@@ -18,7 +18,6 @@ import { UploadFileComponent } from './components/home/upload-file/upload-file.c
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CardComponent } from './components/dashboard/card/card.component';
 import { GlobalChartComponent } from './components/dashboard/charts/global-chart/global-chart.component';
 import { MonthlyChartComponent } from './components/dashboard/charts/monthly-chart/monthly-chart.component';
 import { CompartirComponent } from './components/home/details/compartir/compartir.component';
@@ -28,13 +27,10 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { HttpClientModule } from'@angular/common/http';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PermissionsComponent } from './components/home/permissions/permissions.component';
 
 @NgModule({
   declarations: [
@@ -52,10 +48,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UsersListComponent,
     CategoriesComponent,
     DashboardComponent,
-    CardComponent,
     GlobalChartComponent,
     MonthlyChartComponent,
-    CompartirComponent
+    CompartirComponent,
+    PermissionsComponent
   ],
   imports: [
     BrowserModule,
@@ -66,13 +62,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     BrowserAnimationsModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
     NgxChartsModule,
-    NgbModule
+    NgbModule,
+    DragDropModule
   ],
   exports: [NavbarComponent],
   providers: [],

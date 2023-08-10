@@ -25,7 +25,6 @@ export class CategoriesComponent {
       let path = `public/multimedia/${categoryName}/${subcategoryName}`;
       this.categoryService.updateCategory(path);
       console.log(path);
-      
     }
   }
 }

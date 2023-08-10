@@ -1,23 +1,36 @@
 <app-navbar></app-navbar>
 
-<!-- Para poder mostrar las diferentes cards com charts utilizamos la biblioteca de angular materials y la biblioteca ngx-charts -->
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
-    <!--Charts-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Global Graphic">
-        <app-global-chart></app-global-chart>
-      </app-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Monthly Graphic">
-        <app-monthly-chart></app-monthly-chart>
-      </app-card>
-    </mat-grid-tile>
-    <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
-      <app-card title="Card 9"><div>Table Content Here</div></app-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col my-3">
+      <div class="dropdown float-end">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Options
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" (click)="onShow()">Añadir gráfica mensual</a></li>
+        <li><a class="dropdown-item" (click)="onShowGlobal()">Añadir gráfica global</a></li>
+      </ul>
+    </div>
+    </div>
+    
+  </div>
+  <div class="row" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="col" *ngFor="let card of cards; let i = index" cdkDrag>
+      <div class="card my-1 mx-3" >
+        <div class="card-body" [id]="card.id">
+          <div class="dropdown float-end">
+            <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" (click)="onHide(i)">Eliminar</a></li>
+            </ul>
+          </div>
+          <h3>{{ card.title }}</h3>
+           <ng-container *ngComponentOutlet="card.chartComponent"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
