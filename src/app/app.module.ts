@@ -31,6 +31,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PermissionsComponent } from './components/home/permissions/permissions.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PermissionsComponent } from './components/home/permissions/permissions.
     GlobalChartComponent,
     MonthlyChartComponent,
     CompartirComponent,
-    PermissionsComponent
+    PermissionsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
