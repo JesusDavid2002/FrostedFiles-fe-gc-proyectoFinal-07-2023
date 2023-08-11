@@ -54,7 +54,7 @@ import { ModalCategoriaComponent } from './components/home/modal_categoria/modal
     MonthlyChartComponent,
     CompartirComponent,
     PermissionsComponent,
-    WelcomeComponent
+    WelcomeComponent,
     ModalCategoriaComponent
   ],
   imports: [
