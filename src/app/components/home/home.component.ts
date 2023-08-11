@@ -7,6 +7,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
 import { CompartirComponent } from './details/compartir/compartir.component';
 import { PermissionsComponent } from './permissions/permissions.component';
+import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.component';
 
 @Component({
   selector: 'app-home',
@@ -28,19 +29,19 @@ export class HomeComponent {
     }];
 
   selectedCategory: string = '';
-  categoriesList: Category[] = [
-    { name: 'Category 1',
-      subcategories: ['Subcategory 1.1', 'Subcategory 1.2']
-    },
-    { name: 'Category 2' },
-    { name: 'Category 3' },
-    { name: 'Category 4' }];
+  // categoriesList: Category[] = [
+  //   { name: 'Category 1',
+  //     subcategories: ['Subcategory 1.1', 'Subcategory 1.2']
+  //   },
+  //   { name: 'Category 2' },
+  //   { name: 'Category 3' },
+  //   { name: 'Category 4' }];
     
   constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService) {}
 
   ngOnInit(): void{
     this.fileService.setData(this.fileList);
-    this.categoryService.setData(this.categoriesList);
+    // this.categoryService.setData(this.categoriesList);
 
     this.categoryService.selectedCategory$.subscribe(category => {
       this.selectedCategory = category;
@@ -79,4 +80,10 @@ export class HomeComponent {
   openModalPermissions(){
     let modalRef = this.modalService.open(PermissionsComponent);
   }
+
+  openModalCategory(){
+    const modalRef = this.modalService.open(ModalCategoriaComponent);
+    modalRef.componentInstance.name = 'nombre categoria que se creará';
+  }
+  
 }

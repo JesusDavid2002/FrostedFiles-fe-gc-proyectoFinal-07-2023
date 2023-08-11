@@ -32,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PermissionsComponent } from './components/home/permissions/permissions.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ModalCategoriaComponent } from './components/home/modal_categoria/modal-categoria.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     CompartirComponent,
     PermissionsComponent,
     WelcomeComponent
+    ModalCategoriaComponent
   ],
   imports: [
     BrowserModule,

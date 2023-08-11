@@ -14,7 +14,10 @@ export class CategoriesComponent {
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void{
-    this.categoriesList = this.categoryService.getData();
+    // this.categoriesList = this.categoryService.getData();
+   this.categoryService.getData().subscribe(categories => {
+     this.categoriesList = categories;
+    });
   }
 
   update(categoryName?: string, subcategoryName?: string){
