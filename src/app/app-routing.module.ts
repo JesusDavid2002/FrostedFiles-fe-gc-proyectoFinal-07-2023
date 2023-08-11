@@ -13,6 +13,7 @@ import { UploadFileComponent } from './components/home/upload-file/upload-file.c
 import { CategoriesComponent } from './components/categories/categories.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'page404', component: Page404Component, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
   { path: 'user-profile', component: UserProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
   { path: 'users-list', component: UsersListComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
+  { path: 'welcome', component: WelcomeComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/page404', pathMatch: 'full' }
 ];

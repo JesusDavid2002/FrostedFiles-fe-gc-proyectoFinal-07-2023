@@ -31,6 +31,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PermissionsComponent } from './components/home/permissions/permissions.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ModalCategoriaComponent } from './components/home/modal_categoria/modal-categoria.component';
 
 @NgModule({
@@ -53,6 +54,7 @@ import { ModalCategoriaComponent } from './components/home/modal_categoria/modal
     MonthlyChartComponent,
     CompartirComponent,
     PermissionsComponent,
+    WelcomeComponent
     ModalCategoriaComponent
   ],
   imports: [
