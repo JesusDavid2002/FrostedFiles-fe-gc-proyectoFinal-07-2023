@@ -8,11 +8,13 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./upload-file.component.css']
 })
 export class UploadFileComponent {
-  categoriesList: Category[];
+  categoriesList: Category[] = [];
   selectedFiles: File[] = [];
 
   constructor(private categoryService: CategoryService) {
-    this.categoriesList = this.categoryService.getData();
+    this.categoryService.getData().subscribe(categories => {
+      this.categoriesList = categories;
+     });
   }
 
   // Utilizando el metodo onFileDropped y el evento dragEvent (arrastrar y soltar).

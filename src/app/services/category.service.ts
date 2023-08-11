@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../models/category.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
   private data: Category[] = [];
+  categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([
+    { name: 'Category 1',
+      subcategories: ['Subcategory 1.1', 'Subcategory 1.2']
+    },
+    { name: 'Category 2' },
+    { name: 'Category 3' },
+    { name: 'Category 4' }]);
 
   constructor() { }
 
-  getData(): Category[]{
-    return this.data;
+  getData(): Observable<Category[]>{
+    // return this.data;
+    return this.categories;
   }
 
   setData(data: Category[]){
@@ -23,5 +31,10 @@ export class CategoryService {
 
   updateCategory(categoryName: string) {
     this.selectedCategorySource.next(categoryName);
+  }
+
+  addCategory(category: Category){
+    // this.categories.value.push(category);
+    this.categories.next(this.categories.value.concat(category));
   }
 }
