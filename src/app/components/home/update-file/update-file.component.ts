@@ -14,11 +14,12 @@ export class UpdateFileComponent {
 
   fileId: number = 1;
   file: Files = new Files;
-  categoriesList: Category[];
+  categoriesList: Category[] = [];
 
   constructor(private categoryService: CategoryService, private fileService: FileService, private route: ActivatedRoute) {
-    this.categoriesList = this.categoryService.getData();
-  }
+    this.categoryService.getData().subscribe(categories => {
+      this.categoriesList = categories;
+});  }
 
   ngOnInit(): void{
     this.route.params.subscribe(params =>{
