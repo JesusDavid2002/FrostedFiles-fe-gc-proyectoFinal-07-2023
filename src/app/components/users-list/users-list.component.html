@@ -1,2 +1,32 @@
 <app-navbar></app-navbar>
-<p>users-list works!</p>
+<div class="my-5 mx-4">
+<table class="table table-bordered my-5">
+    <thead class="table-primary">
+        <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark Jacob</td>
+            <td>markjacob@fat</td>
+            <td>user</td>
+            <td class="text-center w-25">
+                <div class="btn btn-outline-info mx-4" (click)="modifyUser()">Modify User</div>
+                <div class="btn btn-outline-danger" (click)="deleteUser()">Delete User</div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Otto Thornton</td>
+            <td>ottothornton@fat</td>
+            <td>user</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table></div>
