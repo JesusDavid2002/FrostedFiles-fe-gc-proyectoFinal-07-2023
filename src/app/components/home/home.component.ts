@@ -16,17 +16,35 @@ import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.compo
 })
 export class HomeComponent {
   fileList: Files[] = [
-    {name: 'File 1',
+    {
+      name: 'CV Ejemplo',
       type: '.pdf',
       size: 600,
       date: '20/08/2020',
       isVisible: false
-    }, {name: 'File 2',
-    type: '.txt',
-    size: 200,
-    date: '21/08/2020',    
-    isVisible: false
-    }];
+    }, 
+    {
+      name: 'Texto de compra',
+      type: '.txt',
+      size: 200,
+      date: '21/08/2020',    
+      isVisible: false
+    },
+    {
+      name: 'Musica3',
+      type: '.mp3',
+      size: 700,
+      date: '21/08/2021',    
+      isVisible: false
+    },
+    {
+      name: 'Extension rara',
+      type: '.cir',
+      size: 700,
+      date: '21/08/2021',    
+      isVisible: false
+    },
+  ];
 
   selectedCategory: string = '';
   // categoriesList: Category[] = [
@@ -48,12 +66,26 @@ export class HomeComponent {
     });
   }
 
+  getIconSource(fileType: string | undefined): string {
+    // Mapa de extension de archivo por imagen
+    const iconMappings: Record<string, string> = {
+        '.pdf': 'pdf.png',
+        '.txt': 'txt.png',
+        '.png': 'img.png',
+        '.jpg': 'img.png',
+        '.mp3': 'mp3.png',
+    };
+
+    const defaultIcon = 'text.png'; // Icono por defecto
+
+    return `../../../assets/img/icons/${iconMappings[fileType || ''] || defaultIcon}`;
+}
+
   navigateDetails() {
     this.router.navigate(['home/details']);
   }
 
   details(index: number): void{
-    
     this.fileList.forEach((file, i) => {
       if (i === index) {
         file.isVisible = !file.isVisible;

@@ -19,20 +19,20 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
+  { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'about', component: AboutComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'dashboard', component: DashboardComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'home/details', component: DetailsComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'home/update-file', component: UpdateFileComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'home/upload-file', component: UploadFileComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'home/categories/:id', component: CategoriesComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'page404', component: Page404Component, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'user-profile', component: UserProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'users-list', component: UsersListComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: 'welcome', component: WelcomeComponent, ...canActivate(() => redirectUnauthorizedTo(['auth/login']))},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'about', component: AboutComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'dashboard', component: DashboardComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'home/details', component: DetailsComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'home/update-file', component: UpdateFileComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'home/upload-file', component: UploadFileComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'home/categories/:id', component: CategoriesComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'page404', component: Page404Component, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'user-profile', component: UserProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'users-list', component: UsersListComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'welcome', component: WelcomeComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/page404', pathMatch: 'full' }
 ];
 

@@ -1,5 +1,44 @@
-input{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.containerRoot {
+    position: relative;
+    height: 92.5vh;
+    color: white;
+    overflow-x: hidden;
+    background-color: #f0f7ff;
+}
+
+nav  {
+    background-color: #5079a5;
+}
+
+input {
+    border: none;
     height: 50px;
+    border-left: 4px solid #95d5ff;
+    background-color: #95d5ff3d;
+    color: white;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.884);
+    opacity: 1;
+}
+
+input[type=text]:focus {
+    background-color: #4a87af;
+    color: rgba(255, 255, 255, 0.884);
+}
+
+button {
+    padding: 6px;
+    height: 50px;
+    width: 150px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .cl-btns{
@@ -19,17 +58,121 @@ input{
 .card{
     margin-top: 15px;
     display: flex;
+    border: 1px solid rgb(0, 153, 255);
+}
+
+hr {
+    height: 2px;
+    background-color: #303030;
+    border: none;
+}
+
+#categoriasYfichero {
+    position: relative;
+    top: -16px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 84vh;
+    overflow-x: hidden;
+}
+
+#navbarNavDropdown img {
+    padding-bottom: 5px;
+    margin-right: 5px;
+    height: 35px;
+    width: 30px;
+    visibility: visible;
+}
+
+#ArchivosContainer.col {
+    margin: 15px;
+}
+
+#ArchivosContainer img {
+    height: 65px;
+    width: 60px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#search img {
+    padding-bottom: 5px;
+    margin-right: 5px;
+    height: 35px;
+    width: 30px;
+    visibility: visible;
+}
+
+#search button {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 45px;
+}
+
+.card {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.card-title {
+    font-weight: 500;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+
+.TextoEsconder {
+    display: inline-block;
 }
 
 .fileTitle{
     text-align: center;
     font-weight: bold;
+    color: black;
 }
 
-@media (max-width: 700px){
-    .navbar-expand-lg{
-        display: block;
-    }
+.cl-detail,
+.cl-perms {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #000;
+}
+
+.cl-detail {
+    position: relative;
+    bottom: 0;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cl-perms {
+    display: flex;
+    flex-direction: column;
+}
+
+#ArchivosContainer,#ArchivosDetalles,#ArchivosContainerRoot {
+    color: black;
+}
+
+.verticalLine {
+    border-left: solid #a2d5ff;
+}
+
+#ArchivoPermisos {
+    border: 1px solid rgb(255, 0, 0);
+}
+
+@media (max-width: 1900px){
     
     .cl-btns{
         margin-left: 0px !important;
@@ -38,5 +181,31 @@ input{
     .cl-detail{
         height: auto;
         /* display: none; */
+    }
+
+    .TextoEsconder {
+        color: transparent;
+        width: 0%;
+        height: 0%; 
+    }
+    button {
+        width: 80px; 
+    }
+}
+
+@media (max-width: 768px) {
+    #ArchivosContainer img {
+        height: 50px;
+        width: 45px;
+    }
+    .card {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    #ArchivosContainer img {
+        height: 40px;
+        width: 35px;
     }
 }
