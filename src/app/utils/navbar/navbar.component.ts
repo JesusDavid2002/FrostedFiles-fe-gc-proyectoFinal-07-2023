@@ -19,7 +19,7 @@ export class NavbarComponent {
     this.userService.logout()
     .then((res) => {
       console.log(res);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/welcome']);
     })
     .catch((err) => {
       console.log(err);
