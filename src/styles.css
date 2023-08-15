@@ -1,4 +1,237 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body { 
+    margin: 0;
+    font-family: "Ysabeau Office", Geneva, Tahoma, sans-serif;
+}
+
+.boton {
+    padding: 10px 20px;
+    margin-top: 5%;
+    margin-right: 10px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton:hover {
+    background: linear-gradient(to bottom, #2980b9, #3498db);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton:focus {
+    border: 1px solid #2980b9;
+    outline: none;
+}
+
+.boton-Peligro { /* Boton color rojo*/
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #db3434, #b92929);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton-Peligro:hover {
+    background: linear-gradient(to bottom, #b92929, #db3434);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Peligro:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Peligro:focus {
+    border: 1px solid #b92929;
+    outline: none;
+}
+
+.boton-Accion { /* Boton color amarillo */
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #dbd034, #b99f29);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton-Accion:hover {
+    background: linear-gradient(to bottom, #b9a329, #dbbc34);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Accion:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Accion:focus {
+    border: 1px solid #b9a329;
+    outline: none;
+}
+
+.boton-Crear { /* Boton color Verde */
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #34db34, #29b93c);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton-Crear:hover {
+    background: linear-gradient(to bottom, #2eb929, #34db3c);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Crear:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Crear:focus {
+    border: 1px solid #29b935;
+    outline: none;
+}
+
+.boton-Modificar { /* Boton color Azul */
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #3469db, #295bb9);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton-Modificar:hover {
+    background: linear-gradient(to bottom, #2957b9, #3477db);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Modificar:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Modificar:focus {
+    border: 1px solid #2963b9;
+    outline: none;
+}
+
+.boton-Compartir { /* Boton color Morado */
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #7434db, #6729b9);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton-Compartir:hover {
+    background: linear-gradient(to bottom, #7829b9, #8a34db);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Compartir:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Compartir:focus {
+    border: 1px solid #6c29b9;
+    outline: none;
+}
+
+.boton-Copiar { /* Boton color Morado */
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #a7dfff, #4fdcff);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.boton-Copiar:hover {
+    background: linear-gradient(to bottom, #85cdf7, #34b4db);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Copiar:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.boton-Copiar:focus {
+    border: 1px solid #a5fffa;
+    outline: none;
+}
