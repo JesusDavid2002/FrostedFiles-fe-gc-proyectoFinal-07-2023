@@ -32,16 +32,16 @@ export class RegisterComponent implements OnInit {
         this.userService.register(this.formReg.value)
           .then((res) => {
             console.log(res);
-            this.router.navigate(['/login']);
+            this.router.navigate(['/home']);
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
-        alert('Passwords are not equal.');
+        alert('Las contraseñas no son iguales.');
       }
     } else {
-      alert('Please fill in all the required fields.');
+      alert('Por favor, rellene todos los campos obligatorios.');
     }
   }
 }
