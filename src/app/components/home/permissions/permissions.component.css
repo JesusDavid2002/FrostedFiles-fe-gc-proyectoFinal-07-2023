@@ -1,5 +1,112 @@
-.modal-content{
-    width: 100% !important;
-    text-align: center;
-    margin-left: -100px;
+.custom-modal-content {
+    height: 1px !important;
+    margin-top: 10rem !important;
+}
+
+.modal-content {
+    width: 40vw;
+    height: 70vh;
+    margin-left: -17rem;
+    margin-top: -10.2rem;
+}
+
+@media (max-width: 1920px) {
+    .modal-content {
+        width: 40vw;
+        height: 75vh;
+        margin-left: -8rem;
+        margin-top: -10.2rem;
+    }
+}
+
+@media (max-width: 1720px) {
+    .modal-content {
+        width: 45vw;
+        height: 75vh;
+        margin-left: -8rem;
+        margin-top: -10.2rem;
+    }
+}
+
+@media (max-width: 1520px) {
+    .modal-content {
+        width: 50vw;
+        height: 75vh;
+        margin-left: -8rem;
+        margin-top: -10.2rem;
+    }
+}
+
+@media (max-width: 1245px) {
+    .modal-content {
+        width: 80vw;
+        height: 65vh;
+        margin-left: -14rem;
+        margin-top: -10rem;
+    }
+}
+
+@media (max-width: 1140px) {
+    .modal-content {
+        width: 80vw;
+        height: 60vh;
+        margin-left: -12rem;
+        margin-top: -10.2rem;
+    }
+}
+
+
+@media (max-width: 980px) {
+    .modal-content {
+        width: 70vw;
+    height: 80vh;
+    margin-left: -4vw;
+    margin-top: -11rem;
+    }
+}
+
+@media (max-width: 760px) {
+    .modal-content {
+        width: 85vw;
+        height: 80vh;
+        margin-left: -4vw;
+        margin-top: -10.2rem;
+    }
+}
+
+
+@media (max-width: 590px) {
+    .modal-content {
+        width: 86vw;
+        height: 80vh;
+        margin-top: -10.2rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .modal-content {
+        width: 98vw;
+        height: 80vh;
+        margin-left: -2vw;
+        margin-top: -10.2rem;
+    }
+}
+
+
+@media (max-width: 550px) {
+    .modal-content {
+        width: 98vw;
+        height: 80vh;
+        margin-left: -2vw;
+        margin-top: -10.2rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .modal-content {
+        width: 98vw;
+        height: 80vh;
+        margin-left: -2vw;
+        margin-top: -10.2rem;
+    }
 }
