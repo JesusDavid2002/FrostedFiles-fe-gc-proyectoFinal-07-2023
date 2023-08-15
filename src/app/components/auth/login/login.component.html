@@ -1,28 +1,31 @@
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Login</h4>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
-                        <div class="form-group">
-                            <label for="email">Mail:</label>
-                            <input type="text" class="form-control my-3" id="email" placeholder="Enter his email" formControlName="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control my-3" id="password" placeholder="Enter his password" formControlName="password">
-                        </div>
-                        <div class="my-3">
-                            <button type="submit" class="btn btn-primary mx-3">Login</button> 
-                            <button class="btn btn-info mx-3" (click)="onClick()">Login with Google</button>
-                        </div>
-                        <div>
-                            <small><a routerLink="/register">Create an account →</a></small>
-                        </div>
-                    </form>
+<div class="root-container">
+    <div class="container">
+        <h1 class="bienvenida-text">Frosted Files</h1>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label for="email">Mail:</label>
+                                <input type="text" class="form-control my-3" id="email" placeholder="Enter your email" formControlName="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control my-3" id="password" placeholder="Enter your password" formControlName="password">
+                            </div>
+                            <div class="my-3">
+                                <button type="submit" class="boton">Login</button> 
+                                <button class="boton" (click)="onClick()">Login with Google</button>
+                            </div>
+                            <div>
+                                <small><a routerLink="/register">Create an account →</a></small>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

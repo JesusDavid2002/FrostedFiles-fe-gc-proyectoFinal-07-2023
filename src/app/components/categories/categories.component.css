@@ -2,3 +2,19 @@ li{
     list-style: none;
     cursor: pointer;
 }
+
+.containerRoot {
+    position: relative;
+    top: 0;
+    left: -20px;
+    height: 100%;
+    width: 100%;
+    color: white;
+    overflow-x: hidden;
+    background-color: #c7e4ff;
+}
+
+h2 {
+    margin-left: 50px;
+    color: black;
+}

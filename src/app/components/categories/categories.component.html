@@ -1,32 +1,34 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12 col-md-3 d-md-none ">
-            <button class="btn btn-info text-center w-50" type="button" data-bs-toggle="collapse" data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
-                <span class="">Categorias</span>
-            </button>
-            <div class="collapse mt-3" id="categoriasCollapse">
-                <h2 class="d-md-none">Categories</h2>
-                <ul class="list-group p-3">
-                    <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
-                        <ul *ngIf="category.subcategories && category.subcategories.length > 0">
-                            <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
-                        </ul>
-                    </li>
-                </ul>
+<div class="containerRoot">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 d-md-none ">
+                <button class="btn btn-info text-center w-50" type="button" data-bs-toggle="collapse" data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
+                    <span class="">Categorias</span>
+                </button>
+                <div class="collapse mt-3" id="categoriasCollapse">
+                    <h2 class="d-md-none">Categories</h2>
+                    <ul class="list-group p-3">
+                        <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
+                            <ul *ngIf="category.subcategories && category.subcategories.length > 0">
+                                <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    
-    <!-- Contenido de las pestañas -->
-        <div class="col-12 col-md-9">
-            <div class="d-none d-md-block">
-                <h2>Categories</h2>
-                <ul class="list-group p-3">
-                    <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
-                        <ul *ngIf="category.subcategories && category.subcategories.length > 0">
-                            <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
-                        </ul>
-                    </li>
-                </ul>
+        
+        <!-- Contenido de las pestañas -->
+            <div class="col-12 col-md-18">
+                <div class="d-none d-md-block">
+                    <h2>Categories</h2>
+                    <ul class="list-group p-3">
+                        <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
+                            <ul *ngIf="category.subcategories && category.subcategories.length > 0">
+                                <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
