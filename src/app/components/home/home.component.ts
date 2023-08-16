@@ -8,11 +8,25 @@ import { FileService } from 'src/app/services/file.service';
 import { CompartirComponent } from './details/compartir/compartir.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.component';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('caida', [
+      state('iniciar', style({
+        transform: 'translateY(0)'
+      })),
+      state('detener', style({
+        transform: 'translateY(-100%)'
+      })),
+      transition('detener => iniciar', [
+        animate('3s ease-in')
+      ])
+    ])
+  ]
 })
 export class HomeComponent {
   fileList: Files[] = [
@@ -124,6 +138,4 @@ export class HomeComponent {
     const modalRef = this.modalService.open(ModalCategoriaComponent);
     modalRef.componentInstance.name = 'nombre categoria que se creará';
   }
-  
-
 }
