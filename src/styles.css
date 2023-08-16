@@ -204,6 +204,11 @@ body {
     outline: none;
 }
 
+.boton-Modificar:disabled, .boton-Compartir:disabled, .boton-Peligro:disabled {
+    background: linear-gradient(to bottom, #1c3977, #0e1f3f);
+    color: #999999;
+}
+
 .boton-Copiar { /* Boton color Morado */
     padding: 10px 20px;
     background: linear-gradient(to bottom, #a7dfff, #4fdcff);

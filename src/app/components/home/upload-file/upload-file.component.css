@@ -1,14 +1,41 @@
+.containerRoot {
+    position: relative;
+    height: 92.5vh;
+    color: white;
+    overflow-x: hidden;
+    background-color: #f0f7ff;
+}
+
+.row{
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+.form-control {
+    border: none;
+    border-left: 4px solid #95d5ff;
+    background-color: #95d5ff3d;
+    /* color: white; */
+}
+
+
 #drag-drop{
     border: 1px solid black;
+    border-radius: 10px;
     height: 70vh;
-    width: 70vw;
+    /* width: 70vw; */
     text-align: center;
     padding-top: 270px;
+    color: black;
 }
 
 .cl-files{
     list-style: none;
     margin-bottom: 15px;
+}
+
+.cl-progress{
+    color: black;
 }
 
 .progress{

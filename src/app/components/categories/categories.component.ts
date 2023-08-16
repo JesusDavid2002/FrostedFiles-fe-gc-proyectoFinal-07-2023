@@ -15,8 +15,8 @@ export class CategoriesComponent {
 
   ngOnInit(): void{
     // this.categoriesList = this.categoryService.getData();
-   this.categoryService.getData().subscribe(categories => {
-     this.categoriesList = categories;
+    this.categoryService.getData().subscribe(categories => {
+    this.categoriesList = categories;
     });
   }
 

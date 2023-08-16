@@ -15,6 +15,8 @@ import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.compo
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  
+  menuBtnActive: boolean = false;
   fileList: Files[] = [
     {
       name: 'CV Ejemplo',
@@ -44,6 +46,13 @@ export class HomeComponent {
       date: '21/08/2021',    
       isVisible: false
     },
+    {
+      name: 'Extension rara',
+      type: '.cir',
+      size: 700,
+      date: '21/08/2021',    
+      isVisible: false
+    }
   ];
 
   selectedCategory: string = '';
@@ -118,4 +127,8 @@ export class HomeComponent {
     modalRef.componentInstance.name = 'nombre categoria que se creará';
   }
   
+  toggleMenu(): void {
+    this.menuBtnActive = !this.menuBtnActive;
+  }
+
 }

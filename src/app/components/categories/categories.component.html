@@ -1,8 +1,8 @@
 <div class="containerRoot">
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-3 d-md-none ">
-                <button class="btn btn-info text-center w-50" type="button" data-bs-toggle="collapse" data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
+        <div class="row mx-3 my-4">
+            <div class="col-12 col-md-12 col-lg-3 d-lg-none">
+                <button class="btn btn-info text-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
                     <span class="">Categorias</span>
                 </button>
                 <div class="collapse mt-3" id="categoriasCollapse">
@@ -18,8 +18,8 @@
             </div>
         
         <!-- Contenido de las pestañas -->
-            <div class="col-12 col-md-18">
-                <div class="d-none d-md-block">
+            <div class="col cl-categories">
+                <div class="d-none d-lg-block">
                     <h2>Categories</h2>
                     <ul class="list-group p-3">
                         <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}

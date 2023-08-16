@@ -6,8 +6,7 @@ li{
 .containerRoot {
     position: relative;
     top: 0;
-    left: -20px;
-    height: 100%;
+    height: 85vh;
     width: 100%;
     color: white;
     overflow-x: hidden;
@@ -17,4 +16,17 @@ li{
 h2 {
     margin-left: 50px;
     color: black;
+}
+
+@media (max-width: 1140px) {
+    .list-group{
+        width: 250px;
+        margin-left: -20px;
+    }
+}
+@media (max-width: 1000px) {
+    .containerRoot{
+        height: auto;
+        width: auto;
+    }
 }

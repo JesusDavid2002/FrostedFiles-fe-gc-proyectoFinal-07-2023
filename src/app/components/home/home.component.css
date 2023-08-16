@@ -17,6 +17,7 @@ nav  {
 
 input {
     border: none;
+    width: 45vw;
     height: 50px;
     border-left: 4px solid #95d5ff;
     background-color: #95d5ff3d;
@@ -31,6 +32,10 @@ input::placeholder {
 input[type=text]:focus {
     background-color: #4a87af;
     color: rgba(255, 255, 255, 0.884);
+}
+
+.boton-Copiar{
+    margin-left: 10px;
 }
 
 button {
@@ -70,14 +75,9 @@ hr {
 #categoriasYfichero {
     position: relative;
     top: -16px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
     overflow-y: hidden;
     overflow-x: hidden;
-    height: 84vh;
-    overflow-x: hidden;
+    height: 83vh;
 }
 
 #navbarNavDropdown img {
@@ -86,6 +86,14 @@ hr {
     height: 35px;
     width: 30px;
     visibility: visible;
+}
+
+#ArchivosContainerRoot{
+    margin-left: 70px;
+}
+
+#ArchivosContainer{
+    gap: 1vw;
 }
 
 #ArchivosContainer.col {
@@ -129,7 +137,6 @@ hr {
     max-width: 100%;
 }
 
-
 .TextoEsconder {
     display: inline-block;
 }
@@ -149,13 +156,16 @@ hr {
 .cl-detail {
     position: relative;
     bottom: 0;
-    height: inherit;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-right: 35px;
 }
 
 .cl-perms {
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -168,44 +178,45 @@ hr {
     border-left: solid #a2d5ff;
 }
 
-#ArchivoPermisos {
-    border: 1px solid rgb(255, 0, 0);
-}
 
-@media (max-width: 1900px){
+@media (max-width: 1600px)  {
     
-    .cl-btns{
-        margin-left: 0px !important;
-    }
-
-    .cl-detail{
-        height: auto;
-        /* display: none; */
-    }
-
     .TextoEsconder {
         color: transparent;
         width: 0%;
         height: 0%; 
-    }
+    } 
+    
     button {
         width: 80px; 
     }
 }
 
-@media (max-width: 768px) {
-    #ArchivosContainer img {
-        height: 50px;
-        width: 45px;
-    }
-    .card {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 576px) {
-    #ArchivosContainer img {
+@media (max-width: 1400px) {
+    /* input{
+        width: 65vw;
+        margin-right: 5px;
+    } */
+    
+    /* #ArchivosContainer img {
         height: 40px;
         width: 35px;
+    } */
+
+    #categoriasYfichero{
+        height: auto;
+    }
+
+    #ArchivosContainer{
+        gap: 0;
+    }
+    
+    #ArchivosContainerRoot{
+        margin-left: 0;
+    }
+    .navbar-collapse.navbar-expand-lg.collapse.show{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-left: 20px;
     }
 }
