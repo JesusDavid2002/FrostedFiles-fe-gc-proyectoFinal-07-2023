@@ -1,32 +1,78 @@
-li{
-    list-style: none;
-    cursor: pointer;
-}
-
-.containerRoot {
+/* Estilos para los nodos */
+.containerRoot{
     position: relative;
     top: 0;
     height: 85vh;
     width: 100%;
-    color: white;
+    color: rgb(44, 44, 44);
     overflow-x: hidden;
     background-color: #c7e4ff;
 }
 
-h2 {
-    margin-left: 50px;
-    color: black;
+.tree-list {
+    list-style-type: none;
+    padding-left: 20px;
 }
 
-@media (max-width: 1140px) {
-    .list-group{
-        width: 250px;
-        margin-left: -20px;
-    }
+.node {
+    cursor: pointer;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
 }
+
+.sub-tree {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.sub-node {
+    cursor: pointer;
+    padding: 5px 0;
+    font-size: 0.9em;
+    color: rgb(44, 44, 44);
+}
+
+.icon-open::before {
+    content: '▼';
+    margin-right: 5px;
+}
+
+.icon-closed::before {
+    content: '►';
+    margin-right: 5px;
+}
+
+.node:hover {
+    background-color: #f0f0f0;
+}
+
+/* Estilos responsive */
 @media (max-width: 1000px) {
     .containerRoot{
         height: auto;
         width: auto;
+    }
+}
+@media (max-width: 767px) { 
+    .cl-categories {
+        padding: 15px;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .tree-list, .sub-tree {
+        padding-left: 10px;
+    }
+    
+    .node, .sub-node {
+        padding: 2px 0;
+        font-size: 0.9em;
+    }
+    
+    .icon-open::before, .icon-closed::before {
+        margin-right: 3px;
     }
 }

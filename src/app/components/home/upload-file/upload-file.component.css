@@ -15,7 +15,6 @@
     border: none;
     border-left: 4px solid #95d5ff;
     background-color: #95d5ff3d;
-    /* color: white; */
 }
 
 
@@ -23,7 +22,6 @@
     border: 1px solid black;
     border-radius: 10px;
     height: 70vh;
-    /* width: 70vw; */
     text-align: center;
     padding-top: 270px;
     color: black;
@@ -56,4 +54,10 @@
 @keyframes aumentar {
     0%{width:0%;}
     100%{width:var(--w)}
+}
+
+@media (max-width: 450px) {
+    .cl-progress{
+        margin-left: -30px;
+    }
 }

@@ -1,48 +1,54 @@
 <app-navbar></app-navbar>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col mt-3">
-            <select class="form-control" id="selectElement">
-                <option value="">Open one category</option>
-                <ng-container *ngFor="let category of categoriesList">
-                    <option [value]="category.name">{{ category.name }}</option>
-                    <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
-                        <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
-                            &nbsp;&nbsp;&nbsp;{{ subcategory }}
-                        </option>
-                    </optgroup>
-                </ng-container>
-            </select>
-        </div>
-    </div>
-    <div class="row mt-3" *ngIf="file">
-        <div class="col">
-            <input type="text" class="w-100" placeholder="{{file.name}}">
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-8">
-            <div class="rounded cl-vst-prev text-center">
-                Vista detalles
+<div class="containerRoot">
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-12 col-md-9 my-1">            
+                <select class="form-control p-3 rounded" id="selectElement">
+                    <option value="">Open one category</option>
+                    <ng-container *ngFor="let category of categoriesList">
+                        <option [value]="category.name">{{ category.name }}</option>
+                        <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
+                            <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
+                                &nbsp;&nbsp;&nbsp;{{ subcategory }}
+                            </option>
+                        </optgroup>
+                    </ng-container>
+                </select>
             </div>
-        </div> 
-        <div class="col">
-            <input type="text" class="w-100 rounded cl-type">
-            <select class="form-control my-4">
-                <option value="1">Visibility: Public</option>
-                <option value="2">Visibility: Private</option>
-            </select>
-            <div class="col rounded p-3 cl-detail">
-                nombre: ejemplo
+            <div class="col-12 col-md-3 my-1">
+                <select class="form-control p-3">
+                    <option value="1">Visibility: Public</option>
+                    <option value="2">Visibility: Private</option>
+                </select>
             </div>
         </div>
-    </div>
-    <div class="row text-center mt-5">
-        <div class="col">
-            <button type="submit" class="btn btn-dark">Upload</button>
+        <div class="row mt-3" *ngIf="file">
+            <div class="col-12 col-md-9 my-1 ">
+                <input type="text" class="w-100 ps-2" placeholder="{{file.name}}">
+            </div>
+            <div class="col-11 col-md-3 my-1 rounded p-3 cl-type">
+                {{ file.type}}
+            </div>
         </div>
-        <div class="col">
-            <button routerLink="/home" class="btn btn-dark">Go back to home</button>
+        <div class="row mt-3">
+            <div class="col-12 col-md-9">
+                <div class="rounded cl-vst-prev text-center">
+                    Vista detalles
+                </div>
+            </div> 
+            <div class="col">
+                <div class="rounded p-5 cl-detail">
+                    nombre: ejemplo
+                </div>
+            </div>
+        </div>
+        <div class="row text-center my-4">
+            <div class="col">
+                <button type="submit" class="btn btn-dark">Upload</button>
+            </div>
+            <div class="col">
+                <button routerLink="/home" class="btn btn-dark">Go back to home</button>
+            </div>
         </div>
     </div>
+</div>

@@ -20,6 +20,10 @@ export class CategoriesComponent {
     });
   }
 
+  toggleCategory(category: Category) {
+    category.open = !category.open;
+  }
+  
   update(categoryName?: string, subcategoryName?: string){
     if( categoryName && !subcategoryName ){
       let path = `public/multimedia/${categoryName}`;
