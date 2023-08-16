@@ -5,7 +5,7 @@
 
 .containerRoot {
     position: relative;
-    height: 92.5vh;
+    height: 92.6vh;
     color: white;
     overflow-x: hidden;
     background-color: #f0f7ff;
@@ -63,11 +63,9 @@ hr {
 }
 
 #categoriasYfichero {
-    position: relative;
-    top: -16px;
     overflow-y: hidden;
     overflow-x: hidden;
-    height: 83vh;
+    height: 85.5vh;
 }
 
 #navbarNavDropdown img {
@@ -80,6 +78,11 @@ hr {
 
 #ArchivosContainerRoot{
     margin-left: 70px;
+    /* background: linear-gradient(#2980b9 0%, white 100%); */
+    background-image: linear-gradient(to left, rgba(240, 247, 255, 1), transparent), linear-gradient(to right, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/fondo.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #ArchivosContainer{
@@ -137,6 +140,11 @@ hr {
     color: black;
 }
 
+.cl-img{
+    background: linear-gradient(to right, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/c3522a22-7996-463f-a731-b5a32cc3a06c.jpg);
+    background-size: cover;
+}
+
 .cl-detail,
 .cl-perms {
     background-color: rgba(255, 255, 255, 0.1);
@@ -146,11 +154,11 @@ hr {
 
 .cl-detail {
     position: relative;
-    height: auto;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+    background-color: rgba(155, 158, 168, 0.418);
 }
 
 .cl-perms {
@@ -209,5 +217,19 @@ hr {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         margin-left: 20px;
+    }
+    
+}
+
+@media (max-width: 1000px) {
+    .cl-detail{
+        height: auto;
+    }
+    .cl-img{
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/down.jpg);
+    }
+    #ArchivosContainerRoot{
+        background-image: linear-gradient(to top, rgba(240, 247, 255, 1), transparent), linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/fondo.jpg);
     }
 }

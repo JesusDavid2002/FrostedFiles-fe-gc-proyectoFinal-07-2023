@@ -4,9 +4,15 @@
     top: 0;
     height: 85vh;
     width: 100%;
-    color: rgb(44, 44, 44);
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: large;
     overflow-x: hidden;
-    background-color: #c7e4ff;
+    background: linear-gradient(to left, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/662277.jpg);
+    background-size: cover;
+    /* background-color: #c7e4ff; */
+    /* background: rgb(135,164,250);
+    background: linear-gradient(90deg, rgba(135,164,250,1) 67%, rgba(199,228,255,1) 85%, rgba(240,247,255,1) 98%);     */
 }
 
 .tree-list {
@@ -16,7 +22,8 @@
 
 .node {
     cursor: pointer;
-    padding: 5px 0;
+    padding: 10px 0;
+    padding-left: 15px;
     display: flex;
     align-items: center;
 }
@@ -28,9 +35,10 @@
 
 .sub-node {
     cursor: pointer;
-    padding: 5px 0;
+    padding: 10px 0;
+    padding-left: 15px;
     font-size: 0.9em;
-    color: rgb(44, 44, 44);
+    color: rgb(0, 0, 0);
 }
 
 .icon-open::before {
@@ -44,7 +52,7 @@
 }
 
 .node:hover {
-    background-color: #f0f0f0;
+    background-color: #f5f5f5d8;
 }
 
 /* Estilos responsive */
@@ -52,6 +60,8 @@
     .containerRoot{
         height: auto;
         width: auto;
+        background: linear-gradient(to top, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/top.jpg);
+        
     }
 }
 @media (max-width: 767px) { 
@@ -75,4 +85,5 @@
     .icon-open::before, .icon-closed::before {
         margin-right: 3px;
     }
+    
 }
