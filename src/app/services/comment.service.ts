@@ -41,6 +41,5 @@ comments = [
 
   deleteComment(comment: any) {
     this.comments.splice(this.comments.indexOf(comment), 1);
-    
   }
 }
