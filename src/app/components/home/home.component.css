@@ -5,7 +5,7 @@
 
 .containerRoot {
     position: relative;
-    height: 92.5vh;
+    height: 92.6vh;
     color: white;
     overflow-x: hidden;
     background-color: #f0f7ff;
@@ -17,6 +17,7 @@ nav  {
 
 input {
     border: none;
+    width: 45vw;
     height: 50px;
     border-left: 4px solid #95d5ff;
     background-color: #95d5ff3d;
@@ -33,6 +34,10 @@ input[type=text]:focus {
     color: rgba(255, 255, 255, 0.884);
 }
 
+.boton-Copiar{
+    margin-left: 10px;
+}
+
 button {
     padding: 6px;
     height: 50px;
@@ -45,20 +50,29 @@ button {
     text-align: center;
 }
 
-.cl-detail{
-    border: 1px solid black;
-    height: 60vh;
-}
-
-.cl-perms{
-    border: 1px solid black;
-    height: 15vh;
-}
-
 .card{
     margin-top: 15px;
     display: flex;
     border: 1px solid rgb(0, 153, 255);
+    margin-left: 3px;
+    margin-right: 3px;
+} 
+
+.card-title {
+    font-weight: 500;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+#ArchivosContainerCard img {
+    height: 65px;
+    width: 60px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 hr {
@@ -68,16 +82,9 @@ hr {
 }
 
 #categoriasYfichero {
-    position: relative;
-    top: -16px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
     overflow-y: hidden;
     overflow-x: hidden;
-    height: 84vh;
-    overflow-x: hidden;
+    height: 85.5vh;
 }
 
 #navbarNavDropdown img {
@@ -88,11 +95,19 @@ hr {
     visibility: visible;
 }
 
-#ArchivosContainer.col {
+#ArchivosContainerRoot{
+    margin-left: 70px;
+}
+
+#ArchivosContainer, #ArchivosContainerCard{
+    gap: 1vw;
+}
+
+#ArchivosContainer.col, #ArchivosContainer.col  {
     margin: 15px;
 }
 
-#ArchivosContainer img {
+.search img {
     height: 65px;
     width: 60px;
     display: block;
@@ -129,7 +144,6 @@ hr {
     max-width: 100%;
 }
 
-
 .TextoEsconder {
     display: inline-block;
 }
@@ -140,24 +154,33 @@ hr {
     color: black;
 }
 
+.cl-img{
+    background: linear-gradient(to left, rgb(195, 232, 255), transparent);
+    background-size: cover;
+}
+
 .cl-detail,
 .cl-perms {
     background-color: rgba(255, 255, 255, 0.1);
     color: #000;
+    border: 1px solid black;
 }
 
 .cl-detail {
     position: relative;
-    bottom: 0;
-    height: inherit;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.418);
 }
 
 .cl-perms {
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
+    height: 15vh;
 }
 
 #ArchivosContainer,#ArchivosDetalles,#ArchivosContainerRoot {
@@ -172,40 +195,113 @@ hr {
     border: 1px solid rgb(255, 0, 0);
 }
 
-@media (max-width: 1900px){
+#ArchivosContainer {
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.file-table th,
+.file-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.file-table th:not(:first-child),
+.file-table td:not(:first-child) {
+    text-align: center;
+}
+
+.file-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.file-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.file-table th:first-child,
+.file-table td:first-child {
+    padding-left: 0;
+}
+
+.file-table td:nth-child(2) {
+    text-align: left;
+}
+
+.file-table th:hover {
+    background-color: #f5f5f5;
+}
+
+/* Sorting indicators */
+.sort-icon {
+    margin-left: 5px;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    transition: transform 0.2s;
+}
+
+.sort-icon.asc {
+    transform: rotate(180deg);
+}
+
+.sort-icon:hover {
+    opacity: 1;
+}
+
+.icon-small {
+    font-size: 16px;
+}
+
+
+@media (max-width: 1600px)  {
     
-    .cl-btns{
-        margin-left: 0px !important;
-    }
-
-    .cl-detail{
-        height: auto;
-        /* display: none; */
-    }
-
     .TextoEsconder {
         color: transparent;
         width: 0%;
         height: 0%; 
-    }
+    } 
+    
     button {
         width: 80px; 
     }
 }
 
-@media (max-width: 768px) {
-    #ArchivosContainer img {
-        height: 50px;
-        width: 45px;
+@media (max-width: 1400px) {
+
+    #categoriasYfichero{
+        height: auto;
     }
-    .card {
-        flex-direction: column;
+
+    #ArchivosContainer{
+        gap: 0;
     }
+    
+    #ArchivosContainerRoot{
+        margin-left: 0;
+    }
+    .navbar-collapse.navbar-expand-lg.collapse.show{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-left: 20px;
+    }
+    
 }
 
-@media (max-width: 576px) {
-    #ArchivosContainer img {
-        height: 40px;
-        width: 35px;
+@media (max-width: 1000px) {
+    .cl-detail{
+        height: auto;
+    }
+    .cl-img{
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/down.jpg);
+    }
+    #ArchivosContainerRoot{
+        background-image: linear-gradient(to top, rgba(240, 247, 255, 1), transparent), linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/fondo.jpg);
     }
 }

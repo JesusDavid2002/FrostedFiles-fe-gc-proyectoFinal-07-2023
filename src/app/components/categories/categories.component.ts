@@ -13,19 +13,19 @@ export class CategoriesComponent {
 
   constructor(private categoryService: CategoryService, private swalService: SwalService) {}
 
-  ngOnInit(): void {
-    this.categoryService.getData().subscribe(
-      (categories) => {
-        this.categoriesList = categories;
-      },
-      (error) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
+  ngOnInit(): void{
+    this.categoryService.getData().subscribe(categories => {
+    this.categoriesList = categories;
+    });
   }
 
-  update(categoryName?: string, subcategoryName?: string) {
-    if (categoryName && !subcategoryName) {
+  toggleCategory(category: Category) {
+    category.open = !category.open;
+  }
+  
+  update(categoryName?: string, subcategoryName?: string){
+    if( categoryName && !subcategoryName ){
+
       let path = `public/multimedia/${categoryName}`;
       this.categoryService.updateCategory(path);
     } else if (categoryName && subcategoryName) {

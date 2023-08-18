@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompartirComponent } from './compartir/compartir.component';
 import { CommentService } from 'src/app/services/comment.service';
+import { FileService } from 'src/app/services/file.service';
 import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
@@ -10,12 +11,13 @@ import { SwalService } from 'src/app/services/swal.service';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent {
-  comment: any;
-  comments: any = [];
+  comment : any;
+  comments : any = [];
+  visitCount: number = 0;
 
-  constructor(private modalService: NgbModal, public commentService: CommentService, private swalService: SwalService) {
-    console.log(this.commentService.getComments());
+  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService) {
     this.comments = this.commentService.getComments();
+    this.visitCount = fileService.getVisitCount();
   }
 
   openModalShare() {

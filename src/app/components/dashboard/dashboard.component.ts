@@ -1,5 +1,5 @@
-import { Component, Host, HostListener  } from '@angular/core';
-import { CdkDragDrop, CdkDragRelease, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, HostListener  } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { GlobalChartComponent } from './charts/global-chart/global-chart.component';
 import { MonthlyChartComponent } from './charts/monthly-chart/monthly-chart.component';
 

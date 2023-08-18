@@ -1,11 +1,13 @@
 <app-navbar></app-navbar>
+
 <div class="containerRoot">
     <div class="container-fluid">
         <div class="row">            
             <nav id="searchBotones" class="navbar navbar-expand-lg">
                 <div id="search" class="col py-2 ps-3 d-flex">
-                    <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100" id="path" disabled>
+                    <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100 rounded" id="path" disabled>
                     <button type="button" class="boton-Copiar"><img src="../../../assets/img/copy.png" alt=""></button>
+                    <button type="button" class="boton-Copiar"  (click)="cambiarVista()"><img src="../../../assets/img/icons/table.png" alt="" id="imagenVista"></button>
                     <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                     </button>
@@ -13,22 +15,21 @@
                 <div class="verticalLine"></div>
                 <div class="col ms-5 py-2 rounded cl-btns"> 
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <div class="verticalLine"><button type="button" class="boton-Accion" (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png" alt=""><span class="TextoEsconder">Crear</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Crear" routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png" alt=""><span class="TextoEsconder">Subir</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Modificar" routerLink="/home/update-file" disabled><img src="../../../assets/img/edit-file.png" alt=""><span class="TextoEsconder">Modificar</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Peligro" (click)="onDeleteFile()" [disabled]="selectedFileIndex === null">
-                                <img src="../../../assets/img/delete-file.png" alt=""><span class="TextoEsconder">Eliminar</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Compartir" disabled (click)="openModalShare()"><img src="../../../assets/img/share-file.png" alt=""><span class="TextoEsconder">Compartir</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png" alt=""><span class="TextoEsconder">Crear</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png" alt=""><span class="TextoEsconder">Subir</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" routerLink="/home/update-file" disabled><img src="../../../assets/img/edit-file.png" alt=""><span class="TextoEsconder">Modificar</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" disabled><img src="../../../assets/img/delete-file.png" alt=""><span class="TextoEsconder">Eliminar</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" disabled (click)="openModalShare()"><img src="../../../assets/img/share-file.png" alt=""><span class="TextoEsconder">Compartir</span></button></div>
                         </div>
                 </div>
             </nav>
         </div>
-        <div id="categoriasYfichero" class="row mt-3 mx-auto">
-            <div class="col-md-3">
+        <div id="categoriasYfichero" class="row mx-auto cl-categories">
+            <div class="col-lg-3">
                 <app-categories></app-categories>
             </div>
-            <div id="ArchivosContainerRoot" class="col-md-6">
-                <div id="ArchivosContainer" class="row row-cols-2 row-cols-md-6 ">
+            <div id="ArchivosContainerRoot" class="col-md-6 mt-3">
+                <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-6 my-3 mx-3">
                     <div class="col" *ngFor="let file of fileList; let i = index">
                         <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
                             <img [src]="getIconSource(file.type)" class="card-img-top" alt="">
@@ -38,18 +39,71 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col"></div>
-            <div class="col-md-2 col-12 ms-md-5 my-3 py-3 rounded cl-detail d-none" id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
-                <div id="ArchivosDetalles">
-                    <h2 class="fileTitle">{{file.name}}</h2>
-                    <p>Extension: {{file.type}}</p>
-                    <p>Size: {{file.size}}</p>
-                    <p>Creation date: {{file.date}}</p>
+                <div id="ArchivosContainer" class="list-container d-none">
+                    <table class="file-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    <div (click)="sortTable('name')">
+                                        File Name
+                                        <i *ngIf="currentSortColumn === 'name'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div (click)="sortTable('type')">
+                                        File Type
+                                        <i *ngIf="currentSortColumn === 'type'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div (click)="sortTable('size')">
+                                        File Size (KB)
+                                        <i *ngIf="currentSortColumn === 'size'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div (click)="sortTable('date')">
+                                        Date
+                                        <i *ngIf="currentSortColumn === 'date'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let file of fileList; let i = index" (dblclick)="navigateDetails()" (click)="details(i)">
+                                <td><img [src]="getIconSource(file.type)" class="file-icon" alt=""></td>
+                                <td>{{ file.name }}</td>
+                                <td>{{ file.type }}</td>
+                                <td>{{ file.size }}</td>
+                                <td>{{ file.date }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
-                <div class="rounded cl-perms" id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
-                    <p>Permisos</p>
-                    <div class="btn btn-dark"(click)="openModalPermissions()">Acceder Permisos</div>
+            </div>
+            <div class="col-10 col-lg px-4 cl-img">
+                <div class="me-0 me-lg-4 my-4 pt-3 rounded cl-detail d-none " id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
+                    <div id="ArchivosDetalles" class="p-4">
+                        <h2 class="fileTitle mb-4">{{file.name}}</h2>
+                        <hr>
+                        <p class="my-2">Extension: {{file.type}}</p>
+                        <p class="my-2">Size: {{file.size}}</p>
+                        <p class="my-2">Creation date: {{file.date}}</p>
+                    </div>
+                    <div class="rounded text-center cl-perms pt-2" id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
+                        <h4>Permisos</h4>
+                        <div class="btn btn-dark mt-3 p-2"(click)="openModalPermissions()">Acceder Permisos</div>
+                    </div>
                 </div>
             </div>
         </div>
