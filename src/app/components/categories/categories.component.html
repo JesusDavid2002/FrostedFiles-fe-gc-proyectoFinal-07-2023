@@ -37,7 +37,7 @@
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}
                                     <!-- Cruz de borrar para cada categoría -->
-                                    <i class="bi bi-x-circle float-end cursor-pointer" (click)="deleteCategory(category.name); $event.stopPropagation()"></i>
+                                    <i class="bi bi-x-circle cursor-pointer" (click)="deleteCategory(category.name); $event.stopPropagation()"></i>
                                 </div>
                                 <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">

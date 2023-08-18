@@ -99,11 +99,11 @@ hr {
     margin-left: 70px;
 }
 
-#ArchivosContainer, #ArchivosContainerCard{
+#ArchivosContainerCard{
     gap: 1vw;
 }
 
-#ArchivosContainer.col, #ArchivosContainer.col  {
+#ArchivosContainerList.col, #ArchivosContainerCard.col  {
     margin: 15px;
 }
 
@@ -183,7 +183,7 @@ hr {
     height: 15vh;
 }
 
-#ArchivosContainer,#ArchivosDetalles,#ArchivosContainerRoot {
+#ArchivosContainerList, #ArchivosDetalles,#ArchivosContainerRoot {
     color: black;
 }
 
@@ -195,7 +195,7 @@ hr {
     border: 1px solid rgb(255, 0, 0);
 }
 
-#ArchivosContainer {
+#ArchivosContainerList {
     margin-top: 10px;
     background-color: #ffffff;
 }
@@ -278,13 +278,14 @@ hr {
         height: auto;
     }
 
-    #ArchivosContainer{
+    #ArchivosContainerCard{
         gap: 0;
     }
     
     #ArchivosContainerRoot{
         margin-left: 0;
     }
+
     .navbar-collapse.navbar-expand-lg.collapse.show{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -297,11 +298,9 @@ hr {
     .cl-detail{
         height: auto;
     }
+
     .cl-img{
         width: 100%;
-        background: linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/down.jpg);
-    }
-    #ArchivosContainerRoot{
-        background-image: linear-gradient(to top, rgba(240, 247, 255, 1), transparent), linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/fondo.jpg);
+        background: linear-gradient(to top, rgb(195, 232, 255), transparent);
     }
 }

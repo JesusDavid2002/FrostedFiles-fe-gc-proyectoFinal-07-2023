@@ -168,7 +168,7 @@ export class HomeComponent {
   }
 
   cambiarVista(){
-    let lista = document.getElementById("ArchivosContainer");
+    let lista = document.getElementById("ArchivosContainerList");
     let tabla = document.getElementById("ArchivosContainerCard");
 
     if (lista && tabla) {

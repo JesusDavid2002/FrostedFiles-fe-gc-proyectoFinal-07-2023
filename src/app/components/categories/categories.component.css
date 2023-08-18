@@ -54,7 +54,6 @@
 .node:hover {
     background-color: rgba(59, 59, 59, 0.753);
     color: whitesmoke;
-    /* background-color: #f5f5f5d8; */
 }
 
 /* Estilos responsive */
@@ -69,10 +68,6 @@
 @media (max-width: 767px) { 
     .cl-categories {
         padding: 15px;
-    }
-
-    .d-none {
-        display: none !important;
     }
 
     .tree-list, .sub-tree {
