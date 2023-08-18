@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^15.1.0",
     "@swimlane/ngx-charts": "^20.4.1",
     "bootstrap": "^5.3.1",
+    "bootstrap-icons": "^1.10.5",
     "d3-shape": "^3.2.0",
     "firebase": "^9.23.0",
     "rxjs": "~7.8.0",
