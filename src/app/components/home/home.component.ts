@@ -65,6 +65,22 @@ export class HomeComponent {
       date: '21/08/2021',    
       isVisible: false
     },
+    {
+      id: 5,
+      name: 'CV 2',
+      type: '.pdf',
+      size: 800,
+      date: '21/08/2022',    
+      isVisible: false
+    },
+    {
+      id: 6,
+      name: 'Video',
+      type: '.mp3',
+      size: 2200,
+      date: '11/01/2023',    
+      isVisible: false
+    },
   ];
   
   

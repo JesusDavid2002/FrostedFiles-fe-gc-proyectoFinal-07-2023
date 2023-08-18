@@ -31,9 +31,10 @@
     <div class="profile-circle" style="left: 5px;" (click)="toggleProfileWindow()">
         <i class="fas fa-user"></i>
         <div class="profile-popup" [class.active]="profileWindowActive">
-            <li style="list-style-type: none"><a>usuario:Ejemplo</a></li>
-            <li style="list-style-type: none"><a class="btn btn-outline-primary" href="/user-profile">Ver perfil</a></li>
-            <li style="list-style-type: none"><button (click)="onClick()" class="btn btn-outline-danger">Logout</button></li>
+            <li style="list-style-type: none" class="pt-2"><a>Usuario</a></li>
+            <hr>
+            <li style="list-style-type: none" class="pt-2 text-center"><a class="btn btn-primary p-1 " href="/user-profile">Ver perfil</a></li>
+            <li style="list-style-type: none" class="pt-2 text-center"><button (click)="onClick()" class="btn btn-danger p-1">Logout</button></li>
         </div>
     </div>
 </nav>
