@@ -1,3 +1,8 @@
+.containerRoot{
+    background-color: #f0f7ff;
+    height: 92.5vh;
+}
+
 .marg-top-cont{
     margin-top: 7em;
 }
@@ -40,6 +45,9 @@
 
 /* Responsive media queries */
 @media (max-width: 768px) {
+    .containerRoot{
+        height: auto;
+    }
     .perfil-contenedor {
         align-items: center;
     }

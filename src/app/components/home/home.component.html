@@ -22,7 +22,7 @@
                 </div>
             </nav>
         </div>
-        <div id="categoriasYfichero" class="row mx-auto">
+        <div id="categoriasYfichero" class="row mx-auto cl-categories">
             <div class="col-lg-3">
                 <app-categories></app-categories>
             </div>
@@ -42,6 +42,7 @@
                 <div class="me-0 me-lg-4 my-4 pt-3 rounded cl-detail d-none " id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
                     <div id="ArchivosDetalles" class="p-4">
                         <h2 class="fileTitle mb-4">{{file.name}}</h2>
+                        <hr>
                         <p class="my-2">Extension: {{file.type}}</p>
                         <p class="my-2">Size: {{file.size}}</p>
                         <p class="my-2">Creation date: {{file.date}}</p>

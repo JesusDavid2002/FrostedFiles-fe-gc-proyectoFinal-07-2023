@@ -14,6 +14,7 @@
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }" ></span>
                                     {{ category.name }}
                                 </div>
+                                <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
                                         <div class="node sub-node" (click)="update(category.name, subcategory)">
@@ -37,6 +38,7 @@
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}
                                 </div>
+                                <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
                                         <div class="node sub-node" (click)="update(category.name, subcategory)">
