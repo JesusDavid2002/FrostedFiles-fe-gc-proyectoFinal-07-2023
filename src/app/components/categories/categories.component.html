@@ -18,18 +18,26 @@
             </div>
         
         <!-- Contenido de las pestañas -->
-            <div class="col-12 col-md-18">
-                <div class="d-none d-md-block">
-                    <h2>Categories</h2>
-                    <ul class="list-group p-3">
-                        <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
-                            <ul *ngIf="category.subcategories && category.subcategories.length > 0">
-                                <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+        <div class="col-12 col-md-18">
+            <div class="d-none d-md-block">
+                <h2>Categories</h2>
+                <ul class="list-group p-3">
+                    <li *ngFor="let category of categoriesList" class="list-group-item">
+                        {{ category.name }}
+                        <!-- Cruz de borrar para cada categoría -->
+                        <i class="bi bi-x-circle float-end cursor-pointer" (click)="deleteCategory(category.name); $event.stopPropagation()"></i>
+                        <ul *ngIf="category.subcategories && category.subcategories.length > 0">
+                            <li *ngFor="let subcategory of category.subcategories" class="list-group-item">
+                                {{ subcategory }}
+                                <!-- Cruz de borrar para cada subcategoría -->
+                                <i class="bi bi-x-circle float-end cursor-pointer" (click)="deleteSubcategory(category.name, subcategory)"></i>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
+        </div>
+        
         </div>
     </div>
 </div>

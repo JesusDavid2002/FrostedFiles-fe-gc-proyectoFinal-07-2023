@@ -22,4 +22,7 @@ export class FileService {
   getById(id: number): Observable<Files>{
     return this.http.get<Files>(''+id);
   }
+  deleteFile(id: number): Observable<Files>{
+    return this.http.delete<Files>(''+id);
+  }
 }
