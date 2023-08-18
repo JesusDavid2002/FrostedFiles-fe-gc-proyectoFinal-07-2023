@@ -1,16 +1,17 @@
 <div class="chart mx-3">
-<ngx-charts-bar-vertical-2d
-    [view]="view"
-    scheme="fire"
-    [results]="getData()"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    xAxisLabel="Month"
-    yAxisLabel="Value"
-    (select)="onSelect($event)"
-    (activate)="onActivate($event)"
-    (deactivate)="onDeactivate($event)">
-</ngx-charts-bar-vertical-2d></div>
+    <ngx-charts-bar-vertical-2d
+        [view]="view"
+        scheme="cool"
+        [results]="getData()"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        xAxisLabel="Month"
+        yAxisLabel="Value"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
+    </ngx-charts-bar-vertical-2d>
+</div>

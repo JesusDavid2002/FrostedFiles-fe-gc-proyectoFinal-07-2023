@@ -6,27 +6,48 @@
                     <span class="">Categorias</span>
                 </button>
                 <div class="collapse mt-3" id="categoriasCollapse">
-                    <h2 class="d-md-none">Categories</h2>
-                    <ul class="list-group p-3">
-                        <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
-                            <ul *ngIf="category.subcategories && category.subcategories.length > 0">
-                                <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
-                            </ul>
-                        </li>
+                    <h2 >Categories</h2>
+                    <ul class="tree-list">
+                        <ng-container *ngFor="let category of categoriesList">
+                            <li>
+                                <div class="node" (click)="toggleCategory(category)">
+                                    <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }" ></span>
+                                    {{ category.name }}
+                                </div>
+                                <hr>
+                                <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
+                                    <li *ngFor="let subcategory of category.subcategories">
+                                        <div class="node sub-node" (click)="update(category.name, subcategory)">
+                                            {{ subcategory }}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ng-container>
                     </ul>
                 </div>
             </div>
-        
-        <!-- Contenido de las pestañas -->
+            
             <div class="col cl-categories">
-                <div class="d-none d-lg-block">
+                <div class="d-none d-lg-block mx-4">
                     <h2>Categories</h2>
-                    <ul class="list-group p-3">
-                        <li *ngFor="let category of categoriesList" class="list-group-item" (click)="update(category.name)">{{ category.name }}
-                            <ul *ngIf="category.subcategories && category.subcategories.length > 0">
-                                <li *ngFor="let subcategory of category.subcategories" class="list-group-item" (click)="update(category.name, subcategory)">{{ subcategory }}</li>
-                            </ul>
-                        </li>
+                    <ul class="tree-list">
+                        <ng-container *ngFor="let category of categoriesList">
+                            <li>
+                                <div class="node my-2" (click)="toggleCategory(category)">
+                                    <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
+                                    {{ category.name }}
+                                </div>
+                                <hr>
+                                <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
+                                    <li *ngFor="let subcategory of category.subcategories">
+                                        <div class="node sub-node" (click)="update(category.name, subcategory)">
+                                            {{ subcategory }}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ng-container>
                     </ul>
                 </div>
             </div>

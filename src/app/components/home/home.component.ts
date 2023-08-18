@@ -8,15 +8,27 @@ import { FileService } from 'src/app/services/file.service';
 import { CompartirComponent } from './details/compartir/compartir.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.component';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('caida', [
+      state('iniciar', style({
+        transform: 'translateY(0)'
+      })),
+      state('detener', style({
+        transform: 'translateY(-100%)'
+      })),
+      transition('detener => iniciar', [
+        animate('3s ease-in')
+      ])
+    ])
+  ]
 })
 export class HomeComponent {
-  
-  menuBtnActive: boolean = false;
   fileList: Files[] = [
     {
       name: 'CV Ejemplo',
@@ -49,15 +61,7 @@ export class HomeComponent {
   ];
 
   selectedCategory: string = '';
-  // categoriesList: Category[] = [
-  //   { name: 'Category 1',
-  //     subcategories: ['Subcategory 1.1', 'Subcategory 1.2']
-  //   },
-  //   { name: 'Category 2' },
-  //   { name: 'Category 3' },
-  //   { name: 'Category 4' }];
-    
-  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService) {}
+  visitCount: number = 0;
 
   ngOnInit(): void{
     this.fileService.setData(this.fileList);
@@ -67,6 +71,8 @@ export class HomeComponent {
       this.selectedCategory = category;
     });
   }
+
+  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService) {}
 
   getIconSource(fileType: string | undefined): string {
     // Mapa de extension de archivo por imagen
@@ -85,6 +91,8 @@ export class HomeComponent {
 
   navigateDetails() {
     this.router.navigate(['home/details']);
+    this.fileService.increaseVisitCount();
+    this.visitCount = this.fileService.getVisitCount();
   }
 
   details(index: number): void{
@@ -148,9 +156,4 @@ export class HomeComponent {
     const modalRef = this.modalService.open(ModalCategoriaComponent);
     modalRef.componentInstance.name = 'nombre categoria que se creará';
   }
-  
-  toggleMenu(): void {
-    this.menuBtnActive = !this.menuBtnActive;
-  }
-
 }

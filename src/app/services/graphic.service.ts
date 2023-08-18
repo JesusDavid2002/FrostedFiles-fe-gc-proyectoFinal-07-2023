@@ -19,6 +19,10 @@ export class GraphicService {
     {
       name: "Share Files",
       value: 860
+    },
+    {
+      name: "Visualization Files",
+      value: 1500
     }
   ];
 

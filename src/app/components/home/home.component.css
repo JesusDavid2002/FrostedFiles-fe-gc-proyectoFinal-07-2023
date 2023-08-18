@@ -5,7 +5,7 @@
 
 .containerRoot {
     position: relative;
-    height: 92.5vh;
+    height: 92.6vh;
     color: white;
     overflow-x: hidden;
     background-color: #f0f7ff;
@@ -50,16 +50,6 @@ button {
     text-align: center;
 }
 
-.cl-detail{
-    border: 1px solid black;
-    height: 60vh;
-}
-
-.cl-perms{
-    border: 1px solid black;
-    height: 15vh;
-}
-
 .card{
     /* margin-top: 15px; */
     display: flex;
@@ -73,11 +63,9 @@ hr {
 }
 
 #categoriasYfichero {
-    position: relative;
-    top: -16px;
     overflow-y: hidden;
     overflow-x: hidden;
-    height: 83vh;
+    height: 85.5vh;
 }
 
 #navbarNavDropdown img {
@@ -147,20 +135,25 @@ hr {
     color: black;
 }
 
+.cl-img{
+    background: linear-gradient(to left, rgb(195, 232, 255), transparent);
+    background-size: cover;
+}
+
 .cl-detail,
 .cl-perms {
     background-color: rgba(255, 255, 255, 0.1);
     color: #000;
+    border: 1px solid black;
 }
 
 .cl-detail {
     position: relative;
-    bottom: 0;
-    height: auto;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 35px;
+    background-color: rgba(255, 255, 255, 0.418);
 }
 
 .cl-perms {
@@ -168,6 +161,7 @@ hr {
     padding-right: 20px;
     display: flex;
     flex-direction: column;
+    height: 15vh;
 }
 
 #ArchivosContainer,#ArchivosDetalles,#ArchivosContainerRoot {
@@ -245,6 +239,7 @@ hr {
     font-size: 16px;
 }
 
+
 @media (max-width: 1600px)  {
     
     .TextoEsconder {
@@ -284,5 +279,19 @@ hr {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         margin-left: 20px;
+    }
+    
+}
+
+@media (max-width: 1000px) {
+    .cl-detail{
+        height: auto;
+    }
+    .cl-img{
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/down.jpg);
+    }
+    #ArchivosContainerRoot{
+        background-image: linear-gradient(to top, rgba(240, 247, 255, 1), transparent), linear-gradient(to bottom, rgba(240, 247, 255, 1), transparent), url(../../../assets/img/fondo.jpg);
     }
 }
