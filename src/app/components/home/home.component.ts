@@ -86,8 +86,6 @@ export class HomeComponent {
     });
   }
 
-  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService) {}
-
   getIconSource(fileType: string | undefined): string {
     // Mapa de extension de archivo por imagen
     const iconMappings: Record<string, string> = {
