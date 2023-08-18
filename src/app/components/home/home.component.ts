@@ -68,15 +68,7 @@ export class HomeComponent {
   ];
 
   selectedCategory: string = '';
-  // categoriesList: Category[] = [
-  //   { name: 'Category 1',
-  //     subcategories: ['Subcategory 1.1', 'Subcategory 1.2']
-  //   },
-  //   { name: 'Category 2' },
-  //   { name: 'Category 3' },
-  //   { name: 'Category 4' }];
-    
-  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService) {}
+  visitCount: number = 0;
 
   ngOnInit(): void{
     this.fileService.setData(this.fileList);
@@ -86,6 +78,8 @@ export class HomeComponent {
       this.selectedCategory = category;
     });
   }
+
+  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService) {}
 
   getIconSource(fileType: string | undefined): string {
     // Mapa de extension de archivo por imagen
@@ -104,6 +98,8 @@ export class HomeComponent {
 
   navigateDetails() {
     this.router.navigate(['home/details']);
+    this.fileService.increaseVisitCount();
+    this.visitCount = this.fileService.getVisitCount();
   }
 
   details(index: number): void{
