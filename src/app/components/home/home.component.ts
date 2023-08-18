@@ -46,13 +46,6 @@ export class HomeComponent {
       date: '21/08/2021',    
       isVisible: false
     },
-    {
-      name: 'Extension rara',
-      type: '.cir',
-      size: 700,
-      date: '21/08/2021',    
-      isVisible: false
-    }
   ];
 
   selectedCategory: string = '';
@@ -88,7 +81,7 @@ export class HomeComponent {
     const defaultIcon = 'text.png'; // Icono por defecto
 
     return `../../../assets/img/icons/${iconMappings[fileType || ''] || defaultIcon}`;
-}
+  }
 
   navigateDetails() {
     this.router.navigate(['home/details']);
@@ -112,6 +105,35 @@ export class HomeComponent {
       }
     });
   }
+
+  sortDirection: string = 'asc';
+  currentSortColumn: keyof Files = 'name';
+
+  sortTable(column: keyof Files): void {
+    this.fileList.sort((a, b) => {
+        const aValue = a[column as keyof Files];
+        const bValue = b[column as keyof Files];
+
+        if (typeof aValue === 'string' && typeof bValue === 'string') {
+            if (this.sortDirection === 'asc') {
+                return aValue.localeCompare(bValue);
+            } else {
+                return bValue.localeCompare(aValue);
+            }
+        } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+            return (this.sortDirection === 'asc') ? aValue - bValue : bValue - aValue;
+        } else {
+            return 0;
+        }
+    });
+
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.currentSortColumn = column;
+  }
+
+
+
+
 
   openModalShare() {
     let modalRef = this.modalService.open(CompartirComponent);

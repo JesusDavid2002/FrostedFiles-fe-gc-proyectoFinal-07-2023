@@ -5,19 +5,20 @@
         <div class="row">            
             <nav id="searchBotones" class="navbar navbar-expand-lg">
                 <div id="search" class="col py-2 ps-3 d-flex">
-                    <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 rounded" id="path" disabled>
+                    <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100" id="path" disabled>
                     <button type="button" class="boton-Copiar"><img src="../../../assets/img/copy.png" alt=""></button>
-                    <button class="navbar-toggler" id="menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
+                <div class="verticalLine"></div>
                 <div class="col ms-5 py-2 rounded cl-btns"> 
-                        <div class="collapse navbar-collapse navbar-expand-lg" id="navbarNavDropdown">
-                            <div class="verticalLine"><button type="button" class="boton-Accion" (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png" alt="" ><span class="TextoEsconder">Crear</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Crear" routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png" alt=""><span class="TextoEsconder">Subir</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Modificar btn-files" routerLink="/home/update-file" disabled><img src="../../../assets/img/edit-file.png" alt=""><span class="TextoEsconder">Modificar</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Peligro btn-files" disabled><img src="../../../assets/img/delete-file.png" alt=""><span class="TextoEsconder" >Eliminar</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Compartir btn-files" (click)="openModalShare()" disabled><img src="../../../assets/img/share-file.png" alt=""><span class="TextoEsconder">Compartir</span></button></div>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png" alt=""><span class="TextoEsconder">Crear</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png" alt=""><span class="TextoEsconder">Subir</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" routerLink="/home/update-file" disabled><img src="../../../assets/img/edit-file.png" alt=""><span class="TextoEsconder">Modificar</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" disabled><img src="../../../assets/img/delete-file.png" alt=""><span class="TextoEsconder">Eliminar</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja" disabled (click)="openModalShare()"><img src="../../../assets/img/share-file.png" alt=""><span class="TextoEsconder">Compartir</span></button></div>
                         </div>
                 </div>
             </nav>
@@ -26,16 +27,64 @@
             <div class="col-lg-3">
                 <app-categories></app-categories>
             </div>
-            <div id="ArchivosContainerRoot" class="col-lg-6">
-                <div id="ArchivosContainer" class="row row-cols-2 row-cols-md-6 my-3 mx-3">
-                    <div class="col" *ngFor="let file of fileList; let i = index">
-                        <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
-                            <img [src]="getIconSource(file.type)" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">{{ file.name }}{{ file.type }}</h5>
-                            </div>
-                        </div>
+            <div id="ArchivosContainerRoot" class="col-md-6">
+                <div id="ArchivosContainer" class="list-container">
+                    <div id="search" class="col py-2 ps-3 d-flex">
+                        <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100" id="path" disabled>
+                        <button type="button" class="boton-Copiar"><img src="../../../assets/img/copy.png" alt=""></button>
+                        <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
+                    <table class="file-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    <div (click)="sortTable('name')">
+                                        File Name
+                                        <i *ngIf="currentSortColumn === 'name'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div (click)="sortTable('type')">
+                                        File Type
+                                        <i *ngIf="currentSortColumn === 'type'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div (click)="sortTable('size')">
+                                        File Size (KB)
+                                        <i *ngIf="currentSortColumn === 'size'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div (click)="sortTable('date')">
+                                        Date
+                                        <i *ngIf="currentSortColumn === 'date'" class="material-icons icon-small">
+                                            {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                                        </i>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let file of fileList; let i = index" (dblclick)="navigateDetails()" (click)="details(i)">
+                                <td><img [src]="getIconSource(file.type)" class="file-icon" alt=""></td>
+                                <td>{{ file.name }}</td>
+                                <td>{{ file.type }}</td>
+                                <td>{{ file.size }}</td>
+                                <td>{{ file.date }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
             </div>
             <div class=" col-10 col-lg-2 ms-5 ms-lg-5 my-3 pt-3 rounded cl-detail d-none " id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.isVisible}">
