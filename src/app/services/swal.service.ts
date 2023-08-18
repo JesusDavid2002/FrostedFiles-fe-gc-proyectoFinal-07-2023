@@ -90,6 +90,58 @@ export class SwalService {
     });
   }
 
+  showDeleteAlertCategory(id: number | null, callback: Function) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-warning'
+      },
+      buttonsStyling: true,
+    });
+    swalWithBootstrapButtons.fire({
+      showCloseButton: true,
+      title: '¿Estás seguro de borrar esta categoría?',
+      text: 'No podrás recuperar la categoría borrada',
+      showCancelButton: true,
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: false
+    }).then((result) => {
+      if (result.value) {
+        callback();
+        this.showSuccessToast("Categoría borrada exitosamente");
+      } else {
+        console.log('cancel');
+      }
+    });
+  }
+
+  showDeleteAlertSubcategory(id: number | null, callback: Function) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-warning'
+      },
+      buttonsStyling: true,
+    });
+    swalWithBootstrapButtons.fire({
+      showCloseButton: true,
+      title: '¿Estás seguro de borrar esta subcategoría?',
+      text: 'No podrás recuperar la subcategoría borrada',
+      showCancelButton: true,
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: false
+    }).then((result) => {
+      if (result.value) {
+        callback();
+        this.showSuccessToast("Subcategoría borrada exitosamente");
+      } else {
+        console.log('cancel');
+      }
+    });
+  }
+
   showSuccessToast(title: string, typeIcon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'success', timerProgressBar: boolean = false) {
     Swal.fire({
       toast: true,
