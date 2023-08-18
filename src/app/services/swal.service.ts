@@ -72,6 +72,7 @@ export class SwalService {
       },
       buttonsStyling: true,
     });
+
     swalWithBootstrapButtons.fire({
       showCloseButton: true,
       title: '¿Estás seguro de borrar este archivo?',
@@ -80,7 +81,8 @@ export class SwalService {
       confirmButtonText: 'Borrar',
       cancelButtonText: 'Cancelar',
       reverseButtons: false
-    }).then((result) => {
+    })
+    .then((result) => {
       if (result.value) {
         callback();
         this.showSuccessToast("Archivo borrado exitosamente");
@@ -98,6 +100,7 @@ export class SwalService {
       },
       buttonsStyling: true,
     });
+
     swalWithBootstrapButtons.fire({
       showCloseButton: true,
       title: '¿Estás seguro de borrar esta categoría?',
@@ -106,7 +109,8 @@ export class SwalService {
       confirmButtonText: 'Borrar',
       cancelButtonText: 'Cancelar',
       reverseButtons: false
-    }).then((result) => {
+    })
+    .then((result) => {
       if (result.value) {
         callback();
         this.showSuccessToast("Categoría borrada exitosamente");
@@ -124,6 +128,7 @@ export class SwalService {
       },
       buttonsStyling: true,
     });
+
     swalWithBootstrapButtons.fire({
       showCloseButton: true,
       title: '¿Estás seguro de borrar esta subcategoría?',
@@ -132,7 +137,8 @@ export class SwalService {
       confirmButtonText: 'Borrar',
       cancelButtonText: 'Cancelar',
       reverseButtons: false
-    }).then((result) => {
+    })
+    .then((result) => {
       if (result.value) {
         callback();
         this.showSuccessToast("Subcategoría borrada exitosamente");

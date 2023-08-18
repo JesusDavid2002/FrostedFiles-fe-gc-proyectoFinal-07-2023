@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SwalService } from 'src/app/services/swal.service';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -10,10 +11,7 @@ import { SwalService } from 'src/app/services/swal.service';
 export class CategoriesComponent {
   categoriesList: Category[] = [];
 
-  constructor(
-    private categoryService: CategoryService,
-    private swalService: SwalService
-  ) { }
+  constructor(private categoryService: CategoryService, private swalService: SwalService) {}
 
   ngOnInit(): void {
     this.categoryService.getData().subscribe(
