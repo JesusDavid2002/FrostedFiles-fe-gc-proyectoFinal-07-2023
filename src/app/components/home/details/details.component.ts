@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompartirComponent } from './compartir/compartir.component';
 import { CommentService } from 'src/app/services/comment.service';
 import { FileService } from 'src/app/services/file.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-details',
@@ -14,12 +15,11 @@ export class DetailsComponent {
   comments : any = [];
   visitCount: number = 0;
 
-  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService) {
-    console.log(this.commentService.getComments());
+  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService) {
     this.comments = this.commentService.getComments();
     this.visitCount = fileService.getVisitCount();
   }
-  
+
   openModalShare() {
     const modalRef = this.modalService.open(CompartirComponent);
     modalRef.componentInstance.name = 'nombre archivo que se compartirá';
@@ -32,16 +32,13 @@ export class DetailsComponent {
       author: 'John Doe',
       date: '15-05-2015',
       text: this.comment,
-    }
+    };
     this.commentService.addComment(comment);
   }
 
-  deleteComment(id: any) {
-    this.commentService.deleteComment(id);
+  onDeleteComment(id: any) {
+    this.swalService.showDeleteAlertComment(id, () =>
+      this.commentService.deleteComment(id)
+    );
   }
-
 }
-
-
-
-		// const modalRef = this.modalService.open(DetailsComponent);

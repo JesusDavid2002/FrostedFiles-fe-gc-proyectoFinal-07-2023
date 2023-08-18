@@ -49,4 +49,9 @@ export class FileService {
   getVisitCount(): number {
     return this.visitCount;
   }
+  
+  deleteFile(id: number): Observable<Files>{
+    return this.http.delete<Files>(''+id);
+  }
+  
 }

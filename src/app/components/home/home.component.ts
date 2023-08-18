@@ -9,6 +9,9 @@ import { CompartirComponent } from './details/compartir/compartir.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { SwalService } from 'src/app/services/swal.service';
+import { id } from '@swimlane/ngx-charts';
+
 
 @Component({
   selector: 'app-home',
@@ -31,6 +34,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class HomeComponent {
   fileList: Files[] = [
     {
+      id: 1,
       name: 'CV Ejemplo',
       type: '.pdf',
       size: 600,
@@ -38,6 +42,7 @@ export class HomeComponent {
       isVisible: false
     }, 
     {
+      id: 2,
       name: 'Texto de compra',
       type: '.txt',
       size: 200,
@@ -45,6 +50,7 @@ export class HomeComponent {
       isVisible: false
     },
     {
+      id: 3,
       name: 'Musica3',
       type: '.mp3',
       size: 700,
@@ -52,6 +58,7 @@ export class HomeComponent {
       isVisible: false
     },
     {
+      id: 4,
       name: 'Extension rara',
       type: '.cir',
       size: 700,
@@ -59,9 +66,16 @@ export class HomeComponent {
       isVisible: false
     },
   ];
+  
+  
 
   selectedCategory: string = '';
   visitCount: number = 0;
+  selectedFileIndex: number | null = null; 
+
+    
+  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
+
 
   ngOnInit(): void{
     this.fileService.setData(this.fileList);
@@ -96,6 +110,8 @@ export class HomeComponent {
   }
 
   details(index: number): void{
+    this.selectedFileIndex = index;
+    console.log('Archivo seleccionado con índice:', this.selectedFileIndex);
     this.fileList.forEach((file, i) => {
       if (i === index) {
         file.isVisible = !file.isVisible;
@@ -154,7 +170,6 @@ export class HomeComponent {
   }
 
   cambiarVista(){
-    
     let lista = document.getElementById("ArchivosContainer");
     let tabla = document.getElementById("ArchivosContainerCard");
 
@@ -173,4 +188,17 @@ export class HomeComponent {
     }
   }
 
+  onDeleteFile() {
+    console.log('Método onDeleteFile llamado');
+    console.log("this es:", this);
+    console.log("this.selectedFileIndex es:", this.selectedFileIndex);
+  
+    if (this.selectedFileIndex !== null) {
+      this.swalService.showDeleteAlertFile(this.selectedFileIndex, () => {
+        console.log('Callback de Swal ejecutado');
+        this.fileList.splice(this.selectedFileIndex!, 1);
+        this.selectedFileIndex = null;
+      });
+    }
+  }
 }

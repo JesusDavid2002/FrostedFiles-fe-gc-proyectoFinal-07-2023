@@ -26,8 +26,7 @@
                         </ng-container>
                     </ul>
                 </div>
-            </div>
-            
+            </div>            
             <div class="col cl-categories">
                 <div class="d-none d-lg-block mx-4">
                     <h2>Categories</h2>
@@ -37,12 +36,16 @@
                                 <div class="node my-2" (click)="toggleCategory(category)">
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}
+                                     <!-- Cruz de borrar para cada categoría -->
+                                      <i class="bi bi-x-circle float-end cursor-pointer" (click)="deleteCategory(category.name); $event.stopPropagation()"></i>
                                 </div>
                                 <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
                                         <div class="node sub-node" (click)="update(category.name, subcategory)">
                                             {{ subcategory }}
+                                            <!-- Cruz de borrar para cada subcategoría -->
+                                            <i class="bi bi-x-circle float-end cursor-pointer" (click)="deleteSubcategory(category.name, subcategory)"></i>
                                         </div>
                                     </li>
                                 </ul>
@@ -51,6 +54,7 @@
                     </ul>
                 </div>
             </div>
+          </div>
         </div>
     </div>
 </div>
