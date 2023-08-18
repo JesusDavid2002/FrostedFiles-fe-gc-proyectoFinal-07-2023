@@ -139,10 +139,6 @@ export class HomeComponent {
     this.currentSortColumn = column;
   }
 
-
-
-
-
   openModalShare() {
     let modalRef = this.modalService.open(CompartirComponent);
     modalRef.componentInstance.name = 'nombre archivo que se compartirá';
@@ -156,4 +152,31 @@ export class HomeComponent {
     const modalRef = this.modalService.open(ModalCategoriaComponent);
     modalRef.componentInstance.name = 'nombre categoria que se creará';
   }
+
+  cambiarVista(){
+    
+    let lista = document.getElementById("ArchivosContainer");
+    let tabla = document.getElementById("ArchivosContainerCard");
+
+  if (lista && tabla) {
+    if (tabla.style.display === "none") {
+      lista.classList.add("d-none");
+      tabla.classList.remove("d-none");
+      
+      const imagen = document.getElementById("imagenVista") as HTMLImageElement;
+      if (imagen) {
+        imagen.src = "../../../assets/img/icons/list.png";
+      }
+    } else {
+      lista.classList.remove("d-none");
+      tabla.classList.add("d-none");
+
+      const imagen = document.getElementById("imagenVista") as HTMLImageElement;
+      if (imagen) {
+        imagen.src = "../../../assets/img/icons/table.png";
+      }
+    }
+  }
+  }
+
 }

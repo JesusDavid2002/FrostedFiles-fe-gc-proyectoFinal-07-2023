@@ -5,8 +5,9 @@
         <div class="row">            
             <nav id="searchBotones" class="navbar navbar-expand-lg">
                 <div id="search" class="col py-2 ps-3 d-flex">
-                    <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100" id="path" disabled>
+                    <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100 rounded" id="path" disabled>
                     <button type="button" class="boton-Copiar"><img src="../../../assets/img/copy.png" alt=""></button>
+                    <button type="button" class="boton-Copiar"  (click)="cambiarVista()"><img src="../../../assets/img/icons/table.png" alt="" id="imagenVista"></button>
                     <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                     </button>
@@ -27,15 +28,18 @@
             <div class="col-lg-3">
                 <app-categories></app-categories>
             </div>
-            <div id="ArchivosContainerRoot" class="col-md-6">
-                <div id="ArchivosContainer" class="list-container">
-                    <div id="search" class="col py-2 ps-3 d-flex">
-                        <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 w-100" id="path" disabled>
-                        <button type="button" class="boton-Copiar"><img src="../../../assets/img/copy.png" alt=""></button>
-                        <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                        </button>
+            <div id="ArchivosContainerRoot" class="col-md-6 mt-3">
+                <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-6 my-3 mx-3">
+                    <div class="col" *ngFor="let file of fileList; let i = index">
+                        <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
+                            <img [src]="getIconSource(file.type)" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ file.name }}{{ file.type }}</h5>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div id="ArchivosContainer" class="list-container d-none">
                     <table class="file-table">
                         <thead>
                             <tr>

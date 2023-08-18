@@ -19,8 +19,8 @@ input {
     border: none;
     width: 45vw;
     height: 50px;
-    border-left: 4px solid #28a6fa;
-    background-color: #0099ff7a;
+    border-left: 4px solid #95d5ff;
+    background-color: #95d5ff3d;
     color: white;
 }
 
@@ -51,9 +51,28 @@ button {
 }
 
 .card{
-    /* margin-top: 15px; */
+    margin-top: 15px;
     display: flex;
     border: 1px solid rgb(0, 153, 255);
+    margin-left: 3px;
+    margin-right: 3px;
+} 
+
+.card-title {
+    font-weight: 500;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+#ArchivosContainerCard img {
+    height: 65px;
+    width: 60px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 hr {
@@ -80,11 +99,11 @@ hr {
     margin-left: 70px;
 }
 
-#ArchivosContainer{
+#ArchivosContainer, #ArchivosContainerCard{
     gap: 1vw;
 }
 
-#ArchivosContainer.col {
+#ArchivosContainer.col, #ArchivosContainer.col  {
     margin: 15px;
 }
 
@@ -254,15 +273,6 @@ hr {
 }
 
 @media (max-width: 1400px) {
-    /* input{
-        width: 65vw;
-        margin-right: 5px;
-    } */
-    
-    /* #ArchivosContainer img {
-        height: 40px;
-        width: 35px;
-    } */
 
     #categoriasYfichero{
         height: auto;
