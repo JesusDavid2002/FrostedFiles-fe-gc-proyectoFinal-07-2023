@@ -4,8 +4,6 @@ import { CompartirComponent } from './compartir/compartir.component';
 import { CommentService } from 'src/app/services/comment.service';
 
 import Swal from 'sweetalert2';
-import { id } from '@swimlane/ngx-charts';
-import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-details',
@@ -40,29 +38,6 @@ export class DetailsComponent {
     };
     this.commentService.addComment(comment);
   }
-
-  // async data() {
-  //   const { value: formValues } = await Swal.fire({
-  //     title: 'Multiple inputs',
-  //     html:
-  //       '<input id="swal-input1" class="swal2-input">' +
-  //       '<input id="swal-input2" class="swal2-input">',
-  //     showConfirmButton: true,
-  //     showCancelButton: true,
-  //     confirmButtonText: "Anartz",
-  //     focusConfirm: false,
-  //     preConfirm: () => {
-  //       return [
-  //         (document.getElementById('swal-input1') as HTMLInputElement).value,
-  //         (document.getElementById('swal-input2') as HTMLInputElement).value
-  //       ]
-  //     }
-  //   })
-
-  //   if (formValues) {
-  //     Swal.fire(JSON.stringify(formValues));
-  //   }
-  // }
 
   onDeleteComment(id: any) {
     this.swalService.showDeleteAlertComment(id, () =>
