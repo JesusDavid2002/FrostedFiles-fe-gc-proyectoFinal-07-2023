@@ -95,8 +95,6 @@ export class HomeComponent {
 
   ngOnInit(): void{
     this.fileService.setData(this.fileList);
-    // this.categoryService.setData(this.categoriesList);
-
     this.categoryService.selectedCategory$.subscribe(category => {
       this.selectedCategory = category;
     });
@@ -152,7 +150,12 @@ export class HomeComponent {
         const aValue = a[column as keyof Files];
         const bValue = b[column as keyof Files];
 
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
+        if (column === 'date') {
+            const aDate = this.convertToDate(aValue as string);
+            const bDate = this.convertToDate(bValue as string);
+
+            return (this.sortDirection === 'asc') ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
+        } else if (typeof aValue === 'string' && typeof bValue === 'string') {
             if (this.sortDirection === 'asc') {
                 return aValue.localeCompare(bValue);
             } else {
@@ -167,7 +170,14 @@ export class HomeComponent {
 
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     this.currentSortColumn = column;
-  }
+}
+
+// Helper para convertir cadena a objeto tipo Date
+convertToDate(dateString: string): Date {
+    const [day, month, year] = dateString.split('/').map(part => parseInt(part, 10));
+    return new Date(year, month - 1, day);
+}
+
 
   openModalShare() {
     let modalRef = this.modalService.open(CompartirComponent);
