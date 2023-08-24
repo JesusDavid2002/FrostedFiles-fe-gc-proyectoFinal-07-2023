@@ -10,22 +10,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark Jacob</td>
-            <td>markjacob@fat</td>
-            <td>user</td>
+        <tr *ngFor="let user of users; let i = index;">
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}t</td>
+            <td>{{ user.role }}</td>
             <td class="text-center w-25">
                 <div class="btn btn-outline-info mx-4" (click)="modifyUser()">Modify User</div>
                 <div class="btn btn-outline-danger" (click)="deleteUser()">Delete User</div>
             </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Otto Thornton</td>
-            <td>ottothornton@fat</td>
-            <td>user</td>
-            <td></td>
         </tr>
     </tbody>
 </table>
