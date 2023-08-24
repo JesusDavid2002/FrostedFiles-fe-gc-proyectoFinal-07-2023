@@ -9,6 +9,8 @@ import { SwalService } from 'src/app/services/swal.service';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent {
+  rightPanelStyle: any = {};
+  currentRecord: any;
   categoriesList: Category[] = [];
 
   constructor(private categoryService: CategoryService, private swalService: SwalService) {}
@@ -17,9 +19,10 @@ export class CategoriesComponent {
     this.categoryService.getData().subscribe(categories => {
     this.categoriesList = categories;
     });
+    
   }
 
-  toggleCategory(category: Category) {
+  desplegar(category: Category) {
     category.open = !category.open;
   }
   
@@ -35,6 +38,24 @@ export class CategoriesComponent {
     }
   }
 
+  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any){
+    if($event.which === 3){
+      this.rightPanelStyle = {
+        'display': 'block',
+        'position': 'absolute',
+        'left.px': $event.clientX,
+        'top.px': $event.clientY
+      };
+      this.currentRecord = user;
+    }
+  }
+
+  closeContextMenu(){
+    this.rightPanelStyle = {
+      'display': 'none'
+    };
+  }
+  
   async deleteCategory(categoryName?: string) {
     if (!categoryName) {
       console.error('El nombre de la categoría no puede estar vacío');
