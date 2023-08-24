@@ -38,10 +38,22 @@ export class ModalCategoriaComponent {
     if (selectedValue) {
       const path = selectedValue.split('/');
       if (path.length === 1) {
-        // Se seleccionó una categoría, agregamos una subcategoría
+        // Se seleccionó solo una categoría, agregamos una subcategoría
         this.categoryService.addSubcategory(path[0], newCategoryName);
       } else if (path.length === 2) {
-        // Se seleccionó una subcategoría, agregamos una sub-subcategoría (el modelo que tenemos creado lo permite)
+        if (path[1] === "newSubSubcategory") {
+          // Se seleccionó "Nueva Sub-Subcategoría" bajo una categoría
+          this.categoryService.addSubcategory(path[0], newCategoryName);
+        } else {
+          // Se seleccionó una subcategoría, agregamos una sub-subcategoría
+          this.categoryService.addSubSubcategory(
+            path[0],
+            path[1],
+            newCategoryName
+          );
+        }
+      } else if (path.length === 3 && path[2] === "newSubSubcategory") {
+        // Se seleccionó "Nueva Sub-Subcategoría" bajo una subcategoría
         this.categoryService.addSubSubcategory(
           path[0],
           path[1],
@@ -55,5 +67,6 @@ export class ModalCategoriaComponent {
       this.categoryService.addCategory(category);
     }
     this.activeModal.close('Close click');
-  }
+}
+
 }

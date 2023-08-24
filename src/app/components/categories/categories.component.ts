@@ -13,21 +13,21 @@ export class CategoriesComponent {
   currentRecord: any;
   categoriesList: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private swalService: SwalService) {}
+  constructor(private categoryService: CategoryService, private swalService: SwalService) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.categoryService.getData().subscribe(categories => {
-    this.categoriesList = categories;
+      this.categoriesList = categories;
     });
-    
+
   }
 
   desplegar(category: Category) {
     category.open = !category.open;
   }
-  
-  update(categoryName?: string, subcategoryName?: string){
-    if( categoryName && !subcategoryName ){
+
+  update(categoryName?: string, subcategoryName?: string, subsubcategoryName?: string) {
+    if (categoryName && !subcategoryName) {
 
       let path = `public/multimedia/${categoryName}`;
       this.categoryService.updateCategory(path);
@@ -38,8 +38,13 @@ export class CategoriesComponent {
     }
   }
 
-  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any){
-    if($event.which === 3){
+  handleClickOnCategory(category: Category): void {
+    this.desplegar(category);
+    this.update(category.name);
+  }
+
+  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any) {
+    if ($event.which === 3) {
       this.rightPanelStyle = {
         'display': 'block',
         'position': 'absolute',
@@ -50,12 +55,12 @@ export class CategoriesComponent {
     }
   }
 
-  closeContextMenu(){
+  closeContextMenu() {
     this.rightPanelStyle = {
       'display': 'none'
     };
   }
-  
+
   async deleteCategory(categoryName?: string) {
     if (!categoryName) {
       console.error('El nombre de la categoría no puede estar vacío');
@@ -81,4 +86,12 @@ export class CategoriesComponent {
       this.categoryService.deleteSubcategory(categoryName, subcategoryName);
     });
   }
+
+  async deleteSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string): Promise<void> {
+    this.swalService.showDeleteAlertSubSubcategory(null, () => {
+      console.log(`Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`);
+      this.categoryService.deleteSubSubcategory(categoryName, subcategoryName, subSubcategoryName);
+    });
+  }
+
 }
