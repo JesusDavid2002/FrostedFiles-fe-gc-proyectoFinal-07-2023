@@ -4,41 +4,56 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 
-
 @Component({
   selector: 'ngbd-modal-component',
   templateUrl: './modal-categoria.component.html',
-  styleUrls: ['./modal-categoria.component.css']
+  styleUrls: ['./modal-categoria.component.css'],
 })
 export class ModalCategoriaComponent {
   @Input() name: any;
   formCategory: FormGroup;
   categoriesList: Category[] = [];
 
-
-
-  constructor(public activeModal: NgbActiveModal, private categoryService: CategoryService) {
+  constructor(
+    public activeModal: NgbActiveModal,
+    private categoryService: CategoryService
+  ) {
     this.formCategory = new FormGroup({
-      category: new FormControl(''),
-      subcategory: new FormControl('')
+      existingCategory: new FormControl(''), // Para seleccionar categoría existente
+      newCategoryName: new FormControl(''), // Para nombre de nueva categoría o subcategoría
     });
   }
 
-
-  ngOnInit(): void{
+  ngOnInit(): void {
     // this.categoriesList = this.categoryService.getData();
-    this.categoryService.getData().subscribe(categories => {
-    this.categoriesList = categories;
+    this.categoryService.getData().subscribe((categories) => {
+      this.categoriesList = categories;
     });
   }
 
-  
   crearCategoria() {
-    // console.log(this.name);
-    console.log(this.formCategory.get('category')?.value);
-    let category = new Category();
-    category.name = this.formCategory.get('category')?.value;
-    this.categoryService.addCategory(category);
+    const selectedValue = this.formCategory.get('existingCategory')?.value;
+    const newCategoryName = this.formCategory.get('newCategoryName')?.value;
+
+    if (selectedValue) {
+      const path = selectedValue.split('/');
+      if (path.length === 1) {
+        // Se seleccionó una categoría, agregamos una subcategoría
+        this.categoryService.addSubcategory(path[0], newCategoryName);
+      } else if (path.length === 2) {
+        // Se seleccionó una subcategoría, agregamos una sub-subcategoría (el modelo que tenemos creado lo permite)
+        this.categoryService.addSubSubcategory(
+          path[0],
+          path[1],
+          newCategoryName
+        );
+      }
+    } else {
+      // Si no se seleccionó ninguna categoría o subcategoría, agregamos una nueva categoría principal
+      let category = new Category();
+      category.name = newCategoryName;
+      this.categoryService.addCategory(category);
+    }
     this.activeModal.close('Close click');
   }
 }
