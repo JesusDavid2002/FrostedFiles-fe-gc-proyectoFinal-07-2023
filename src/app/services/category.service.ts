@@ -10,11 +10,16 @@ export class CategoryService {
   categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([
     {
       name: 'Category 1',
-      subcategories: ['Subcategory 1.1', 'Subcategory 1.2']
+      subcategories: [
+        { name: 'Subcategory 1.1' },
+        { name: 'Subcategory 1.2' }
+      ]
     },
     { name: 'Category 2' },
     { name: 'Category 3' },
-    { name: 'Category 4' }]);
+    { name: 'Category 4' }
+  ]);
+
 
   constructor() { }
 
@@ -50,11 +55,33 @@ export class CategoryService {
       if (category.name === categoryName && category.subcategories) {
         return {
           ...category,
-          subcategories: category.subcategories.filter(subcategory => subcategory !== subcategoryName)
+          subcategories: category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         }
       }
       return category;
     }));
+  }
+
+  deleteSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string): void {
+    this.categories.next(
+      this.categories.value.map(category => {
+        if (category.name === categoryName && category.subcategories) {
+          return {
+            ...category,
+            subcategories: category.subcategories.map(subcategory => {
+              if (subcategory.name === subcategoryName && subcategory.subsubcategories) {
+                return {
+                  ...subcategory,
+                  subsubcategories: subcategory.subsubcategories.filter(subSubcategory => subSubcategory.name !== subSubcategoryName)
+                };
+              }
+              return subcategory;
+            })
+          };
+        }
+        return category;
+      })
+    );
   }
 
   addSubcategory(categoryName: string, subcategoryName: string) {
@@ -62,7 +89,7 @@ export class CategoryService {
       if (category.name === categoryName) {
         return {
           ...category,
-          subcategories: [...(category.subcategories || []), subcategoryName]
+          subcategories: [...(category.subcategories || []), { name: subcategoryName }]
         }
       }
       return category;
@@ -70,12 +97,19 @@ export class CategoryService {
     this.categories.next(updatedCategories);
   }
 
+
   addSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string) {
     this.categories.next(this.categories.value.map(category => {
       if (category.name === categoryName && category.subcategories) {
         return {
           ...category,
           subcategories: category.subcategories.map(subcategory => {
+            if (subcategory.name === subcategoryName) {
+              return {
+                ...subcategory,
+                subsubcategories: [...(subcategory.subsubcategories || []), { name: subSubcategoryName }]
+              }
+            }
             return subcategory;
           })
         }
@@ -83,5 +117,6 @@ export class CategoryService {
       return category;
     }));
   }
+
 
 }

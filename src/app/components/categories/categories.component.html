@@ -1,40 +1,15 @@
 <div class="containerRoot">
     <div class="container">
         <div class="row mx-3 my-4">
-            <div class="col-12 col-md-12 col-lg-3 d-lg-none">
-                <button class="btn btn-info text-center w-100" type="button" data-bs-toggle="collapse" data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
-                    <span class="">Categorias</span>
-                </button>
-                <div class="collapse mt-3" id="categoriasCollapse">
-                    <h2 >Categories</h2>
-                    <ul class="tree-list">
-                        <ng-container *ngFor="let category of categoriesList">
-                            <li>
-                                <div class="node" (click)="desplegar(category)">
-                                    <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }" ></span>
-                                    {{ category.name }}
-                                </div>
-                                <hr>
-                                <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
-                                    <li *ngFor="let subcategory of category.subcategories">
-                                        <div class="node sub-node" (click)="update(category.name, subcategory)">
-                                            {{ subcategory }}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ng-container>
-                    </ul>
-                </div>
-            </div>            
+            <!-- ... (Parte móvil) ... -->
 
             <div class="col cl-categories">
                 <div class="d-none d-lg-block mx-4">
                     <h2>Categories</h2>
                     <ul class="tree-list">
-                        <ng-container *ngFor="let category of categoriesList" >
+                        <ng-container *ngFor="let category of categoriesList">
                             <li>
-                                <div class="node my-2" (click)="desplegar(category)" (click)="update(category.name)" (mouseup)="detectRightMouseClick($event,category)">
+                                <div class="node my-2" (click)="handleClickOnCategory(category)" (mouseup)="detectRightMouseClick($event, category)">
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}
                                     <!-- Cruz de borrar para cada categoría -->
@@ -43,11 +18,26 @@
                                 <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
-                                        <div class="node sub-node" (click)="update(category.name, subcategory)" (mouseup)="detectRightMouseClick($event,subcategory)">
-                                            {{ subcategory }}
+                                        <div class="node sub-node" (click)="handleClickOnCategory(subcategory)">
+                                            {{ subcategory.name }}
+                                            <!-- Opción para expandir sub-subcategorías -->
+                                            <span [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }" ></span>
                                             <!-- Cruz de borrar para cada subcategoría -->
-                                            <i class="bi bi-x-circle float-end cursor-pointer" ></i>
+                                            <i class="bi bi-x-circle float-end cursor-pointer" (click)="deleteSubcategory(category.name, subcategory.name); $event.stopPropagation()"></i>
                                         </div>
+                                
+                                        <!-- Aquí es donde mostramos las sub-subcategorías -->
+                                        <ul *ngIf="subcategory.open && subcategory.subsubcategories && subcategory.subsubcategories.length > 0" class="sub-sub-tree">
+                                            <li *ngFor="let subsubcategory of subcategory.subsubcategories">
+                                                <div class="node sub-sub-node" (click)="update(category.name, subcategory.name, subsubcategory.name)">
+                                                    {{ subsubcategory.name }}
+                                                    <!-- Cruz de borrar para cada sub-subcategoría -->
+                                                    <i class="bi bi-x-circle float-end cursor-pointer" 
+                                                    (click)="category.name && deleteSubSubcategory(category.name, subcategory.name, subsubcategory.name); $event.stopPropagation()">
+                                                    </i>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
