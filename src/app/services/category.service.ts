@@ -19,7 +19,6 @@ export class CategoryService {
   constructor() { }
 
   getData(): Observable<Category[]> {
-    // return this.data;
     return this.categories;
   }
 
@@ -35,7 +34,6 @@ export class CategoryService {
   }
 
   addCategory(category: Category) {
-    // this.categories.value.push(category);
     this.categories.next(this.categories.value.concat(category));
   }
 
@@ -59,5 +57,31 @@ export class CategoryService {
     }));
   }
 
+  addSubcategory(categoryName: string, subcategoryName: string) {
+    const updatedCategories = this.categories.value.map(category => {
+      if (category.name === categoryName) {
+        return {
+          ...category,
+          subcategories: [...(category.subcategories || []), subcategoryName]
+        }
+      }
+      return category;
+    });
+    this.categories.next(updatedCategories);
+  }
+
+  addSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string) {
+    this.categories.next(this.categories.value.map(category => {
+      if (category.name === categoryName && category.subcategories) {
+        return {
+          ...category,
+          subcategories: category.subcategories.map(subcategory => {
+            return subcategory;
+          })
+        }
+      }
+      return category;
+    }));
+  }
 
 }
