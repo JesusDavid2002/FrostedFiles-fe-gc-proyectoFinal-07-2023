@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category.model';
+import { Subcategory } from 'src/app/models/subcategory.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SwalService } from 'src/app/services/swal.service';
 
@@ -10,16 +12,22 @@ import { SwalService } from 'src/app/services/swal.service';
 })
 export class CategoriesComponent {
   rightPanelStyle: any = {};
+  selectedCategory: any;
   currentRecord: any;
   categoriesList: Category[] = [];
+  categories: Observable<Category[]> | undefined;
 
-  constructor(private categoryService: CategoryService, private swalService: SwalService) {}
+  constructor(private categoryService: CategoryService, private swalService: SwalService) {
+    this.categories = this.categoryService.getData();
+  }
 
   ngOnInit(): void{
     this.categoryService.getData().subscribe(categories => {
     this.categoriesList = categories;
     });
-    
+    this.rightPanelStyle = {
+      'display': 'none',
+    };
   }
 
   desplegar(category: Category) {
@@ -38,7 +46,7 @@ export class CategoriesComponent {
     }
   }
 
-  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any){
+  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subcategory?: Subcategory | null, category?: Category){
     if($event.which === 3){
       this.rightPanelStyle = {
         'display': 'block',
@@ -46,7 +54,9 @@ export class CategoriesComponent {
         'left.px': $event.clientX,
         'top.px': $event.clientY
       };
-      this.currentRecord = user;
+
+      this.currentRecord = subcategory;
+      this.selectedCategory = category;
     }
   }
 
@@ -55,6 +65,23 @@ export class CategoriesComponent {
       'display': 'none'
     };
   }
+
+  deleteSelectedItem() {
+    console.log(this.currentRecord.toString());
+    
+    if(this.currentRecord){
+      this.deleteSubcategory(this.selectedCategory.name, this.currentRecord.name);
+    }
+    // AQUI ES EL ERROR SI SE QUITA PODRAS ELIMINAR LAS SUBCATEGORIAS PERO NO LAS CATEGORIAS
+    // SI ESTA PODRAS ELIMINAR TODA LA CATEGORIA PERO NO SUS SUBCATEGORIAS
+    else if (this.selectedCategory) {
+      this.deleteCategory(this.selectedCategory.name);
+    }
+    
+
+    this.closeContextMenu();
+  }
+  
   
   async deleteCategory(categoryName?: string) {
     if (!categoryName) {

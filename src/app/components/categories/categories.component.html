@@ -17,8 +17,8 @@
                                 <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
-                                        <div class="node sub-node" (click)="update(category.name, subcategory)">
-                                            {{ subcategory }}
+                                        <div class="node sub-node" (click)="update(category.name, subcategory.name)">
+                                            {{ subcategory.name }}
                                         </div>
                                     </li>
                                 </ul>
@@ -32,21 +32,20 @@
                 <div class="d-none d-lg-block mx-4">
                     <h2>Categories</h2>
                     <ul class="tree-list">
-                        <ng-container *ngFor="let category of categoriesList" >
+                        <ng-container *ngFor="let category of categories | async" >
                             <li>
-                                <div class="node my-2" (click)="desplegar(category)" (click)="update(category.name)" (mouseup)="detectRightMouseClick($event,category)">
+                                <ul class="node my-2" (click)="desplegar(category)" (click)="update(category.name)" (mouseup)="detectRightMouseClick($event, null, category)">
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}
                                     <!-- Cruz de borrar para cada categoría -->
-                                    <i class="bi bi-x-circle cursor-pointer" (click)="deleteCategory(category.name); $event.stopPropagation()"></i>
-                                </div>
+                                    <!-- <i class="bi bi-x-circle cursor-pointer" (click)="deleteCategory(category.name); $event.stopPropagation()"></i> -->
+                                </ul>
+                                        
                                 <hr>
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
-                                        <div class="node sub-node" (click)="update(category.name, subcategory)" (mouseup)="detectRightMouseClick($event,subcategory)">
-                                            {{ subcategory }}
-                                            <!-- Cruz de borrar para cada subcategoría -->
-                                            <i class="bi bi-x-circle float-end cursor-pointer" ></i>
+                                        <div class="node sub-node" (click)="update(category.name, subcategory.name)" (mouseup)="detectRightMouseClick($event, subcategory, category)">
+                                            {{ subcategory.name }}
                                         </div>
                                     </li>
                                 </ul>
@@ -64,6 +63,6 @@
     <ul class="menu">
         <li><a><i class="fa fa-eye" aria-hidden="true"></i>Edit</a></li>
         <li><a><img src="../../../assets/img/icons/pencil.png" alt=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i>View</a></li>
-        <li class="trash" (click)="deleteCategory()"><a><i class="fa fa-trash" aria-hidden="true"></i>Delete</a></li>
+        <li class="trash" (click)="deleteSelectedItem()"><a><i class="fa fa-trash" aria-hidden="true"></i>Delete</a></li>
     </ul>
 </div>
