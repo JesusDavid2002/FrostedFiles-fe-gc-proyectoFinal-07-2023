@@ -57,6 +57,13 @@
 }
 
 /* Estilos responsive */
+@media (max-width: 1400px), (min-width: 990px){
+
+    .tree-list, .sub-tree {
+        margin-left: -20px;
+    }
+}
+
 @media (max-width: 1000px) {
     .containerRoot{
         height: auto;
@@ -65,6 +72,7 @@
         
     }
 }
+
 @media (max-width: 767px) { 
     .cl-categories {
         padding: 15px;
