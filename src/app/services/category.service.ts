@@ -13,7 +13,10 @@ export class CategoryService {
     {
       name: 'Category 1',
       subcategories: [
-        {'name': 'Subcategoria1'}
+        {'name': 'Subcategoria1',
+                  'subsubcategories': [{
+                    'name': 'subsubcategoria1'
+                  }]},
         {'name': 'Subcategory 1.2' }
       ]},
         { name: 'Category 2' },
@@ -61,9 +64,9 @@ export class CategoryService {
         let updateSubcategories = category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         return {
           ...category,
-          //subcategories: updateSubcategories
+          subcategories: updateSubcategories
 
-          subcategories: category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
+          //subcategories: category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         }
       }
       return category;
