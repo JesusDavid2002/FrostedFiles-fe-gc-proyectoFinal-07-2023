@@ -288,7 +288,7 @@ hr {
 
     .navbar-collapse.navbar-expand-lg.collapse.show{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         margin-left: 20px;
     } 
 
