@@ -21,10 +21,11 @@ export class CategoriesComponent {
     this.categories = this.categoryService.getData();
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.categoryService.getData().subscribe(categories => {
-    this.categoriesList = categories;
+      this.categoriesList = categories;
     });
+    
     this.rightPanelStyle = {
       'display': 'none',
     };
@@ -33,9 +34,12 @@ export class CategoriesComponent {
   desplegar(category: Category) {
     category.open = !category.open;
   }
-  
-  update(categoryName?: string, subcategoryName?: string){
-    if( categoryName && !subcategoryName ){
+ handleClickOnCategory(category: Category): void {
+    this.desplegar(category);
+    this.update(category.name);
+  }
+  update(categoryName?: string, subcategoryName?: string, subsubcategoryName?: string) {
+    if (categoryName && !subcategoryName) {
 
       let path = `public/multimedia/${categoryName}`;
       this.categoryService.updateCategory(path);
@@ -46,8 +50,15 @@ export class CategoriesComponent {
     }
   }
 
+  
   detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subcategory?: Subcategory | string, category?: Category){
     if($event.which === 3){
+
+ 
+
+//   detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any) {
+//     if ($event.which === 3) {
+
       this.rightPanelStyle = {
         'display': 'block',
         'position': 'absolute',
@@ -60,16 +71,14 @@ export class CategoriesComponent {
     }
   }
 
-  closeContextMenu(){
+  closeContextMenu() {
     this.rightPanelStyle = {
       'display': 'none'
     };
   }
 
-  deleteSelectedItem() {
-    console.log(this.currentRecord.toString());
-    
-    
+
+  deleteSelectedItem() {   
     if(!this.currentRecord){
       this.deleteCategory(this.selectedCategory.name);
     } else{
@@ -78,8 +87,7 @@ export class CategoriesComponent {
 
     this.closeContextMenu();
   }
-  
-  
+
   async deleteCategory(categoryName?: string) {
     if (!categoryName) {
       console.error('El nombre de la categoría no puede estar vacío');
@@ -105,4 +113,12 @@ export class CategoriesComponent {
       this.categoryService.deleteSubcategory(categoryName, subcategoryName);
     });
   }
+
+  async deleteSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string): Promise<void> {
+    this.swalService.showDeleteAlertSubSubcategory(null, () => {
+      console.log(`Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`);
+      this.categoryService.deleteSubSubcategory(categoryName, subcategoryName, subSubcategoryName);
+    });
+  }
+
 }

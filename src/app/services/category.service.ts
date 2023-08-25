@@ -14,11 +14,12 @@ export class CategoryService {
       name: 'Category 1',
       subcategories: [
         {'name': 'Subcategoria1'}
-      ]
-    },
-    { name: 'Category 2' },
-    { name: 'Category 3' },
-    { name: 'Category 4' }]);
+        {'name': 'Subcategory 1.2' }
+      ]},
+        { name: 'Category 2' },
+        { name: 'Category 3' },
+        { name: 'Category 4' }
+    ]);
   
   constructor(private subcategoryService: SubcategoryService) { }
 
@@ -39,8 +40,6 @@ export class CategoryService {
   }
 
   addCategory(category: Category) {
-    // this.categories.value.push(category);
-    //this.categories.next(this.categories.value.concat(category));
     if(category.subcategories){
       category.subcategories.forEach(element => 
         this.subcategoryService.addSubcategories(element));
@@ -62,7 +61,65 @@ export class CategoryService {
         let updateSubcategories = category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         return {
           ...category,
-          subcategories: updateSubcategories
+          //subcategories: updateSubcategories
+
+          subcategories: category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
+        }
+      }
+      return category;
+    }));
+  }
+
+  deleteSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string): void {
+    this.categories.next(
+      this.categories.value.map(category => {
+        if (category.name === categoryName && category.subcategories) {
+          return {
+            ...category,
+            subcategories: category.subcategories.map(subcategory => {
+              if (subcategory.name === subcategoryName && subcategory.subsubcategories) {
+                return {
+                  ...subcategory,
+                  subsubcategories: subcategory.subsubcategories.filter(subSubcategory => subSubcategory.name !== subSubcategoryName)
+                };
+              }
+              return subcategory;
+            })
+          };
+        }
+        return category;
+      })
+    );
+  }
+
+  addSubcategory(categoryName: string, subcategoryName: string) {
+    const updatedCategories = this.categories.value.map(category => {
+      if (category.name === categoryName) {
+        return {
+          ...category,
+          subcategories: [...(category.subcategories || []), { name: subcategoryName }]
+        }
+      }
+      return category;
+    });
+    this.categories.next(updatedCategories);
+  }
+
+
+  addSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string) {
+    this.categories.next(this.categories.value.map(category => {
+      if (category.name === categoryName && category.subcategories) {
+        return {
+          ...category,
+          subcategories: category.subcategories.map(subcategory => {
+            if (subcategory.name === subcategoryName) {
+              return {
+                ...subcategory,
+                subsubcategories: [...(subcategory.subsubcategories || []), { name: subSubcategoryName }]
+              }
+            }
+            return subcategory;
+          })
         }
       }
       return category;

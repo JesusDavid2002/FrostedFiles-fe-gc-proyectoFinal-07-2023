@@ -4,21 +4,34 @@
 </div>
 <div class="modal-body">
     <form [formGroup]="formCategory">
+        <!-- Dropdown para seleccionar una categoría existente o decidir agregar una nueva categoría/subcategoría/sub-subcategoría -->
         <div class="form-group">
-            <select name="" id="">
+            <label for="existingCategory">Seleccionar categoría (opcional)</label>
+            <select class="form-control" id="existingCategory" formControlName="existingCategory">
+                <option value="">-- Nueva o existente categoría --</option>
                 <ng-container *ngFor="let category of categoriesList">
                     <option [value]="category.name">{{ category.name }}</option>
-                    <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
+
+                  <!-- <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
                         <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
                             &nbsp;&nbsp;&nbsp;{{ subcategory.name }}
                         </option>
-                    </optgroup>
+                    </optgroup> -->
+
+                    <ng-container *ngFor="let subcategory of category.subcategories">
+                        <option [value]="category.name + '/' + subcategory.name">{{ category.name }} > {{ subcategory.name }}</option>
+                        <!-- Aquí incluimos una opción para añadir una nueva sub-subcategoría -->
+                        <option [value]="category.name + '/' + subcategory.name + '/newSubSubcategory'">-- {{ category.name }} > {{ subcategory.name }} > Nueva Sub-Subcategoría</option>
+                    </ng-container>
+
                 </ng-container>
             </select>
         </div>
+        <!-- Input para el nombre de la nueva categoría, subcategoría o sub-subcategoría -->
         <div class="form-group">
-            <label for="exampleFormControlInput2"></label>
-            <input type="text" class="form-control" formControlName="category" placeholder="Inserte nombre carpeta">
+            <label for="newCategoryName">Nombre de la nueva categoría/subcategoría/sub-subcategoría</label>
+            <input type="text" class="form-control" id="newCategoryName" formControlName="newCategoryName"
+                placeholder="Inserte nombre">
         </div>
     </form>
 </div>
