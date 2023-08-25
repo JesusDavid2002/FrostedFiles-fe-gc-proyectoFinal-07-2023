@@ -9,7 +9,7 @@
                     <option [value]="category.name">{{ category.name }}</option>
                     <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
                         <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
-                            &nbsp;&nbsp;&nbsp;{{ subcategory }}
+                            &nbsp;&nbsp;&nbsp;{{ subcategory.name }}
                         </option>
                     </optgroup>
                 </ng-container>

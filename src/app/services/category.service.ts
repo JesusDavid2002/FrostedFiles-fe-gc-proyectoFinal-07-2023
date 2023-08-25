@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../models/category.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Subcategory } from '../models/subcategory.model';
+import { SubcategoryService } from './subcategory.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +13,19 @@ export class CategoryService {
     {
       name: 'Category 1',
       subcategories: [
-        { name: 'Subcategory 1.1' },
-        { name: 'Subcategory 1.2' }
-      ]
-    },
-    { name: 'Category 2' },
-    { name: 'Category 3' },
-    { name: 'Category 4' }
-  ]);
-
-
-  constructor() { }
+        {'name': 'Subcategoria1'}
+        {'name': 'Subcategory 1.2' }
+      ]},
+        { name: 'Category 2' },
+        { name: 'Category 3' },
+        { name: 'Category 4' }
+    ]);
+  
+  constructor(private subcategoryService: SubcategoryService) { }
 
   getData(): Observable<Category[]> {
-    return this.categories;
+    // return this.data;
+    return this.categories.asObservable();
   }
 
   setData(data: Category[]) {
@@ -39,7 +40,11 @@ export class CategoryService {
   }
 
   addCategory(category: Category) {
-    this.categories.next(this.categories.value.concat(category));
+    if(category.subcategories){
+      category.subcategories.forEach(element => 
+        this.subcategoryService.addSubcategories(element));
+    }
+    this.categories.next([...this.categories.value, category]);
   }
 
   deleteCategory(categoryName: string) {
@@ -53,8 +58,11 @@ export class CategoryService {
   deleteSubcategory(categoryName: string, subcategoryName: string | null) {
     this.categories.next(this.categories.value.map(category => {
       if (category.name === categoryName && category.subcategories) {
+        let updateSubcategories = category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         return {
           ...category,
+          //subcategories: updateSubcategories
+
           subcategories: category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         }
       }

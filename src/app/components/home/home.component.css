@@ -48,6 +48,7 @@ button {
 
 .cl-btns{
     text-align: center;
+    margin-left: 5vw;
 }
 
 .card{
@@ -259,7 +260,7 @@ hr {
 }
 
 
-@media (max-width: 1600px)  {
+@media (max-width: 1850px)  {
     
     .TextoEsconder {
         color: transparent;
@@ -270,10 +271,34 @@ hr {
     button {
         width: 80px; 
     }
+
+    .cl-btns{
+        margin-left: 20%;
+    }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1700px) {
 
+    .cl-btns{
+        margin-left: 15%;
+    }
+}
+
+@media (max-width: 1500px) {
+
+    .navbar-collapse.navbar-expand-lg.collapse.show{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        margin-left: 20px;
+    } 
+
+    .cl-btns{
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 990px) {
+    
     #categoriasYfichero{
         height: auto;
     }
@@ -285,16 +310,6 @@ hr {
     #ArchivosContainerRoot{
         margin-left: 0;
     }
-
-    .navbar-collapse.navbar-expand-lg.collapse.show{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin-left: 20px;
-    }
-    
-}
-
-@media (max-width: 1000px) {
     .cl-detail{
         height: auto;
     }
