@@ -34,14 +34,23 @@
                 <div class="d-none d-lg-block mx-4">
                     <h2>Categories</h2>
                     <ul class="tree-list">
-
+                        <!-- <button
+                        (touchstart)="startPress()"
+                        (touchend)="endPress()"
+                        (mousedown)="startPress()"
+                        (mouseup)="endPress()"
+                      >
+                        Mantén pulsado
+                      </button> -->
 <!--                         <ng-container *ngFor="let category of categories | async" >
                             <li>
                                 <ul class="node my-2" (click)="desplegar(category)" (click)="update(category.name)" (mouseup)="detectRightMouseClick($event, '', category)"> -->
 
                         <ng-container *ngFor="let category of categories |async">
                             <li>
-                                <div class="node my-2" (click)="handleClickOnCategory(category)" (mouseup)="detectRightMouseClick($event, '',category)">
+                                <!-- Aquí es donde mostramos las categorías -->
+                                <div class="node my-2" (click)="handleClickOnCategory(category)" (mouseup)="detectRightMouseClick($event, '', '',category)"
+                                (touchstart)="startPress($event, '', '',category)" (mouseover)="closeContextMenu()">
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}                               
                                 </div>     
@@ -49,16 +58,17 @@
                                 <!-- Aquí es donde mostramos las subcategorías -->
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0" class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
-
-                                        <div class="node sub-node"(click)="handleClickOnCategory(subcategory)" (click)="update(category.name, subcategory.name)" (mouseup)="detectRightMouseClick($event, subcategory, category)">
+                                        <div class="node sub-node"(click)="handleClickOnCategory(subcategory)" (click)="update(category.name, subcategory.name)" 
+                                        (mouseup)="detectRightMouseClick($event, '', subcategory, category)" (touchstart)="startPress($event, '', subcategory,category)">
                                             <span [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }" ></span>
                                             {{ subcategory.name }}
                                         </div>
-                                
                                         <!-- Aquí es donde mostramos las sub-subcategorías -->
                                         <ul *ngIf="subcategory.open && subcategory.subsubcategories && subcategory.subsubcategories.length > 0" class="sub-sub-tree">
                                             <li *ngFor="let subsubcategory of subcategory.subsubcategories">
-                                                <div class="node sub-sub-node" (click)="update(category.name, subcategory.name, subsubcategory.name)">
+                                                <div class="node sub-sub-node" (click)="update(category.name, subcategory.name, subsubcategory.name)"
+                                                (mouseup)="detectRightMouseClick($event, subsubcategory.name, subcategory, category)"
+                                                (touchstart)="startPress($event, subsubcategory.name, subcategory,category)">  
                                                     {{ subsubcategory.name }}
                                                 </div>
                                             </li>
