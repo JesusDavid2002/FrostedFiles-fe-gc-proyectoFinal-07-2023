@@ -34,10 +34,12 @@ export class CategoriesComponent {
   desplegar(category: Category) {
     category.open = !category.open;
   }
- handleClickOnCategory(category: Category): void {
+
+  handleClickOnCategory(category: Category): void {
     this.desplegar(category);
     this.update(category.name);
   }
+
   update(categoryName?: string, subcategoryName?: string, subsubcategoryName?: string) {
     if (categoryName && !subcategoryName) {
 
@@ -54,7 +56,7 @@ export class CategoriesComponent {
   detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subcategory?: Subcategory | string, category?: Category){
     if($event.which === 3){
 
- 
+
 
 //   detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any) {
 //     if ($event.which === 3) {
@@ -83,6 +85,7 @@ export class CategoriesComponent {
       this.deleteCategory(this.selectedCategory.name);
     } else{
       this.deleteSubcategory(this.selectedCategory.name, this.currentRecord.name);
+      this.selectedCategory.subSubcategoryName
     }   
 
     this.closeContextMenu();
@@ -101,20 +104,20 @@ export class CategoriesComponent {
 
   async deleteSubcategory(categoryName?: string, subcategoryName?: string) {
     if (!categoryName || !subcategoryName) {
-      console.error(
-        'El nombre de la categoría o subcategoría no puede estar vacío'
-      );
+      console.error('El nombre de la categoría o subcategoría no puede estar vacío');
       return;
     }
     this.swalService.showDeleteAlertSubcategory(null, () => {
-      console.log(
-        `Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`
-      );
+      console.log(`Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`);
       this.categoryService.deleteSubcategory(categoryName, subcategoryName);
     });
   }
 
   async deleteSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string): Promise<void> {
+    if (!categoryName || !subcategoryName || !subSubcategoryName) {
+      console.error('El nombre de la categoría o subcategoría no puede estar vacío');
+      return;
+    }
     this.swalService.showDeleteAlertSubSubcategory(null, () => {
       console.log(`Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`);
       this.categoryService.deleteSubSubcategory(categoryName, subcategoryName, subSubcategoryName);
