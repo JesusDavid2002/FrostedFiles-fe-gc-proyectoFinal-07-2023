@@ -46,7 +46,7 @@ export class CategoriesComponent {
     }
   }
 
-  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subcategory?: Subcategory | null, category?: Category){
+  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subcategory?: Subcategory | string, category?: Category){
     if($event.which === 3){
       this.rightPanelStyle = {
         'display': 'block',
@@ -69,15 +69,12 @@ export class CategoriesComponent {
   deleteSelectedItem() {
     console.log(this.currentRecord.toString());
     
-    if(this.currentRecord){
-      this.deleteSubcategory(this.selectedCategory.name, this.currentRecord.name);
-    }
-    // AQUI ES EL ERROR SI SE QUITA PODRAS ELIMINAR LAS SUBCATEGORIAS PERO NO LAS CATEGORIAS
-    // SI ESTA PODRAS ELIMINAR TODA LA CATEGORIA PERO NO SUS SUBCATEGORIAS
-    else if (this.selectedCategory) {
-      this.deleteCategory(this.selectedCategory.name);
-    }
     
+    if(!this.currentRecord){
+      this.deleteCategory(this.selectedCategory.name);
+    } else{
+      this.deleteSubcategory(this.selectedCategory.name, this.currentRecord.name);
+    }   
 
     this.closeContextMenu();
   }

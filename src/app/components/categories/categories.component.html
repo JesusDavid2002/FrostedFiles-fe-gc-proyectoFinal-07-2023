@@ -34,7 +34,7 @@
                     <ul class="tree-list">
                         <ng-container *ngFor="let category of categories | async" >
                             <li>
-                                <ul class="node my-2" (click)="desplegar(category)" (click)="update(category.name)" (mouseup)="detectRightMouseClick($event, null, category)">
+                                <ul class="node my-2" (click)="desplegar(category)" (click)="update(category.name)" (mouseup)="detectRightMouseClick($event, '', category)">
                                     <span [ngClass]="{ 'icon-open': category.open, 'icon-closed': !category.open }"></span>
                                     {{ category.name }}
                                     <!-- Cruz de borrar para cada categoría -->

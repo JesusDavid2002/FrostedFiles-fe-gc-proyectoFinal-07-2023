@@ -6,13 +6,13 @@
             <nav id="searchBotones" class="navbar navbar-expand-lg">
                 <div id="search" class="col py-2 ps-3 d-flex">
                     <input type="text" [value]="selectedCategory" placeholder=" public/multimedia" class="p-3 rounded" id="path" disabled>
-                    <button type="button" class="boton-Copiar"><img src="../../../assets/img/copy.png" alt=""></button>
+                    <button type="button" class="boton-Copiar ms-3"><img src="../../../assets/img/copy.png" alt=""></button>
                     <button type="button" class="boton-Copiar"  (click)="cambiarVista()"><img src="../../../assets/img/icons/table.png" alt="" id="imagenVista"></button>
-                    <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler ms-auto me-2"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                <div class="col ms-md-5 py-2 rounded cl-btns"> 
+                <div class="col-6 py-2 rounded cl-btns"> 
                         <div class="collapse navbar-collapse navbar-expand-lg" id="navbarNavDropdown">
                             <div class="verticalLine"><button type="button" class="boton-Naranja" (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png" alt=""><span class="TextoEsconder">Crear</span></button></div>
                             <div class="verticalLine"><button type="button" class="boton-Naranja" routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png" alt=""><span class="TextoEsconder">Subir</span></button></div>
@@ -27,8 +27,8 @@
             <div class="col-lg-3">
                 <app-categories></app-categories>
             </div>
-            <div id="ArchivosContainerRoot" class="col-md-6 mt-3">
-                <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-6 my-3 mx-2">
+            <div id="ArchivosContainerRoot" class="col-lg-6 mt-3">
+                <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 my-3 mx-2">
                     <div class="col" *ngFor="let file of fileList; let i = index">
                         <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
                             <img [src]="getIconSource(file.type)" class="card-img-top" alt="">
