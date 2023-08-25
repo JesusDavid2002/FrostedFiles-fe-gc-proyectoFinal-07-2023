@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category.model';
 import { Subcategory } from 'src/app/models/subcategory.model';
@@ -13,7 +13,8 @@ import { SwalService } from 'src/app/services/swal.service';
 export class CategoriesComponent {
   rightPanelStyle: any = {};
   selectedCategory: any;
-  currentRecord: any;
+  selectedSubCategory: any;
+  selectedSubSubCategory: any;
   categoriesList: Category[] = [];
   categories: Observable<Category[]> | undefined;
 
@@ -53,22 +54,17 @@ export class CategoriesComponent {
   }
 
   
-  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subcategory?: Subcategory | string, category?: Category){
+  detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subsub?:string,  subcategory?: Subcategory | string, category?: Category){
     if($event.which === 3){
-
-
-
-//   detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, user: any) {
-//     if ($event.which === 3) {
-
       this.rightPanelStyle = {
         'display': 'block',
         'position': 'absolute',
-        'left.px': $event.clientX,
-        'top.px': $event.clientY
+        'left.px': $event.clientX - 30,
+        'top.px': $event.clientY - 50
       };
 
-      this.currentRecord = subcategory;
+      this.selectedSubSubCategory = subsub;
+      this.selectedSubCategory = subcategory;
       this.selectedCategory = category;
     }
   }
@@ -81,12 +77,17 @@ export class CategoriesComponent {
 
 
   deleteSelectedItem() {   
-    if(!this.currentRecord){
-      this.deleteCategory(this.selectedCategory.name);
+    if(!this.selectedSubCategory){
+        this.deleteCategory(this.selectedCategory.name);
+      
+    } else if (this.selectedSubSubCategory){
+        this.deleteSubSubcategory(this.selectedCategory.name, this.selectedSubCategory.name, this.selectedSubSubCategory);
+
     } else{
-      this.deleteSubcategory(this.selectedCategory.name, this.currentRecord.name);
-      this.selectedCategory.subSubcategoryName
-    }   
+        this.deleteSubcategory(this.selectedCategory.name, this.selectedSubCategory.name);
+      
+      
+    }
 
     this.closeContextMenu();
   }
@@ -124,4 +125,43 @@ export class CategoriesComponent {
     });
   }
 
+
+  pressing: boolean = false;
+
+  startPress($event: TouchEvent, subsub?:string,  subcategory?: Subcategory | string, category?: Category) {
+    this.pressing = true;
+    let position = $event.touches[0];
+    let positionX = position.clientX;
+    let positionY = position.clientY;
+
+    console.log('Pulsando...');
+
+    if($event instanceof TouchEvent){
+      this.rightPanelStyle = {
+        'display': 'block',
+        'position': 'absolute',
+        'left.px': positionX + 50,
+        'top.px': positionY - 50
+      };
+
+    }
+      this.selectedSubSubCategory = subsub;
+      this.selectedSubCategory = subcategory;
+      this.selectedCategory = category;
+    // Aquí puedes llamar a tu método o ejecutar la lógica que deseas mientras se mantenga pulsado.
+  }
+
+  endPress() {
+    this.pressing = false;
+    console.log('Soltado.');
+    // Aquí puedes realizar tareas adicionales al soltar el dedo.
+  }
+
+  @HostListener('window:mouseup', ['$event'])
+  @HostListener('window:touchend', ['$event'])
+  onMouseUp(event: MouseEvent) {
+    if (this.pressing) {
+      this.endPress();
+    }
+  }
 }
