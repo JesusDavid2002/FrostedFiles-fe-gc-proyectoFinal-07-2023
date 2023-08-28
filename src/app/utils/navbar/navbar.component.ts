@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -5,7 +6,24 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  animations: [
+    trigger('expandCollapse', [
+      state('open', style({
+        opacity: 1,
+        height: '*',
+        visibility: 'visible',
+      })),
+      state('closed', style({
+        opacity: 0,
+        height: '0',
+        visibility: 'hidden',
+      })),
+      transition('closed <=> open', [
+        animate('0.6s linear'),
+      ]),
+    ]),
+  ],
 })
 
 export class NavbarComponent {
