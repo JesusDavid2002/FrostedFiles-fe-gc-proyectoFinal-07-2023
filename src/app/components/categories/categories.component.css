@@ -1,4 +1,5 @@
 /* Estilos para los nodos */
+
 .containerRoot{
     position: relative;
     top: 0;
@@ -10,7 +11,6 @@
     overflow-x: hidden;    
     border: 5px groove rgb(99, 129, 194);
     background: linear-gradient(90deg,rgba(199,228,255,1) 95%, rgb(229, 238, 250) 100%);   
-    /* background: linear-gradient(to left, rgb(195, 214, 235), transparent), url(../../../assets/img/662277.jpg); */
     background-size: cover;  
 }
 
@@ -30,8 +30,14 @@
 
 .sub-tree {
     list-style-type: none;
-    padding-left: 20px;
+    padding-left: 40px;
 }
+.sub-sub-tree{
+
+    list-style-type: none;
+    padding-left: 60px;
+} 
+
 
 .sub-node {
     cursor: pointer;
@@ -96,10 +102,12 @@
 .context-menu{
     position: absolute;
 }
+
 button {
     width: 100px;
     height: 50px;
-  }
+}
+
 .menu{
     list-style: none;
     display: flex;
@@ -108,7 +116,9 @@ button {
     border-radius: 10px;
     box-shadow: 0 10px 20px rgb(64 64 64 / 5%);
     padding: 10px 0;
+    transition: 0.4s;
 }
+
 
 .menu li a {
     font: inherit;
