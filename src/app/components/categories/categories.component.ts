@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category.model';
@@ -9,9 +10,27 @@ import { SwalService } from 'src/app/services/swal.service';
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
+  animations: [
+    trigger('expandCollapse', [
+      state('open', style({
+        opacity: 1,
+        height: '*',
+        visibility: 'visible',
+      })),
+      state('closed', style({
+        opacity: 0,
+        height: '0',
+        visibility: 'hidden',
+      })),
+      transition('closed <=> open', [
+        animate('0.5s ease-in-out'),
+      ]),
+    ]),
+  ],
 })
 export class CategoriesComponent {
   rightPanelStyle: any = {};
+  contextMenu:string =  'closed';
   selectedCategory: any;
   selectedSubCategory: any;
   selectedSubSubCategory: any;
@@ -55,17 +74,20 @@ export class CategoriesComponent {
 
   
   detectRightMouseClick($event: { which: number; clientX: any; clientY: any; }, subsub?:string,  subcategory?: Subcategory | string, category?: Category){
+  
     if($event.which === 3){
       this.rightPanelStyle = {
         'display': 'block',
         'position': 'absolute',
         'left.px': $event.clientX - 30,
         'top.px': $event.clientY - 50
+        
       };
-
+      
       this.selectedSubSubCategory = subsub;
       this.selectedSubCategory = subcategory;
       this.selectedCategory = category;
+      this.contextMenu = this.rightPanelStyle ? 'open' : 'closed';
     }
   }
 
