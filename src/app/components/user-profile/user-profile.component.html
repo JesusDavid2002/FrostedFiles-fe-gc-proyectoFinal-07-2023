@@ -1,37 +1,40 @@
 <app-navbar></app-navbar>
-<div class="perfil-contenedor">
-    <div class="fondo" (click)="handleBackgroundClick()" (drop)="handleBackgroundDrop($event)" (dragover)="allowDrop($event)">
-        <div class="overlay" *ngIf="showOverlay">Introduce un nuevo fondo de imagen</div>
-        <button class="btn btn-primary editar-perfil-btn" [class.btn-green]="buttonClicked" (click)="toggleEditMode($event)">{{ showOverlay ? 'Guardar cambios' : 'Editar perfil' }}</button>
+<div class="container perfil-contenedor mt-4">
+    <div class="fondo position-relative" (click)="handleBackgroundClick()" (drop)="handleBackgroundDrop($event)" (dragover)="allowDrop($event)">
+        <div class="overlay overlay-text d-flex align-items-center justify-content-center" *ngIf="showOverlay">Introduce un nuevo fondo de imagen</div>
+        <button class="boton-Naranja editar-perfil-btn position-absolute bottom-0 end-0 {{ buttonClicked ? 'btn-green' : '' }}" (click)="toggleEditMode($event)">{{ showOverlay ? 'Guardar cambios' : 'Editar perfil' }}</button>
     </div>
-    <div class="perfil-foto-contenedor" (drop)="handleProfilePhotoDrop($event)" (dragover)="allowDrop($event)">
+    <div class="perfil-foto-contenedor position-relative" (drop)="handleProfilePhotoDrop($event)" (dragover)="allowDrop($event)">
         <div class="perfil-outline">
-            <div class="overlay-2" *ngIf="showOverlay">Introduce una foto de perfil nueva</div>
+            <div class="overlay-2 overlay-text d-flex align-items-center justify-content-center" *ngIf="showOverlay">Introduce una foto de perfil nueva</div>
             <img [src]="profilePhoto" alt="Foto perfil" class="foto-perfil" (click)="openImagePicker('profile')">
         </div>
     </div>
-    <div class="perfil-informacion">
-        <div class="perfil-detalles">
-            <div class="perfil-campo">
-                <label>Usuario:</label><br><br>
-                <span>Nombre usuario</span>
-            </div>
-            <div class="perfil-campo">
-                <label>Rol:</label><br><br>
-                <span>Rol usuario</span>
-            </div>
-            <div class="perfil-campo">
-                <label>Fecha de entrada:</label><br><br>
-                <span>Fecha cuando se unio</span>
-            </div>
-            <div class="perfil-campo">
-                <label>Descripcion:</label><br><br>
-                <span>Descripcion</span>
+    <div class="row detalles">
+        <div class="col-md-3">
+            <div class="perfil-detalles border p-3 mb-1">
+                <div class="perfil-campo mb-3">
+                    <label>Usuario:</label>
+                    <span>Nombre usuario</span>
+                </div>
+                <div class="perfil-campo mb-3">
+                    <label>Rol:</label>
+                    <span>Rol usuario</span>
+                </div>
+                <div class="perfil-campo mb-3">
+                    <label>Fecha de entrada:</label>
+                    <span>Fecha cuando se unio</span>
+                </div>
+                <div class="perfil-campo mb-3">
+                    <label>Descripcion:</label>
+                    <span>Descripcion</span>
+                </div>
             </div>
         </div>
-        <div class="perfil-dashboard">
-            <h2>Archivos subidos / comentarios - Dashboard del usuario</h2>
+        <div class="col-md-9">
+            <div class="perfil-dashboard border p-3 mb-3 flex-column">
+                <h2>Archivos subidos / comentarios - Dashboard del usuario</h2>
+            </div>
         </div>
     </div>
-
 </div>
