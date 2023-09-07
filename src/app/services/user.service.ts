@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private auth: Auth) { }
+  // URL real del back, una vez tengamos el railway funcionando esta dirección debería cambiar
+  private API_URL = 'https://localhost:8080';
 
-  register({email, password}: any){
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  constructor(private http: HttpClient) { }
+
+  register(userData: any) {
+    return this.http.post(`${this.API_URL}/register`, userData).pipe(
+      tap((res: any) => {
+        localStorage.setItem('token', res.token);
+      })
+    );
   }
 
-  login({email, password}: any){
-    return signInWithEmailAndPassword(this.auth, email, password);
+  login(userData: any) {
+    return this.http.post(`${this.API_URL}/login`, userData).pipe(
+      tap((res: any) => {
+        localStorage.setItem('token', res.token);
+      })
+    );
   }
 
-  loginWithGoogle(){
-    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  logout() {
+    localStorage.removeItem('token');
   }
 
-  logout(){
-    return signOut(this.auth);
+  getToken() {
+    return localStorage.getItem('token');
   }
 }
