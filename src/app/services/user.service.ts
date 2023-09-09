@@ -1,26 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private auth: Auth) { }
+  // URL real del back, una vez tengamos el railway funcionando esta dirección debería cambiar
+  private API_URL = 'http://localhost:8080';
 
-  register({email, password}: any){
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  constructor(private http: HttpClient) { }
+
+  setSession(authResult: any) {
+    console.log(authResult);
+    //const expiresAt = authResult.expiresIn * 1000 + Date.now();
+    sessionStorage.setItem('token', authResult.token);
+    //sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
-  login({email, password}: any){
-    return signInWithEmailAndPassword(this.auth, email, password);
+  register(userData: any) {
+    return this.http.post(`${this.API_URL}/auth/register`, userData).pipe(
+      tap((res: any) => {
+        this.setSession(res);
+      })
+    );
   }
 
-  loginWithGoogle(){
-    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  login(userData: any) {
+    console.log(userData);
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json',   
+    });
+    return this.http.post(`${this.API_URL}/auth/login`, userData).pipe(
+      tap((res: any) => {
+        this.setSession(res);
+      })
+    );
   }
 
-  logout(){
-    return signOut(this.auth);
+  logout() {
+    sessionStorage.removeItem('token');
+    //sessionStorage.removeItem('expires_at');
+  }
+
+  getToken() {
+    return sessionStorage.getItem('token');
   }
 }

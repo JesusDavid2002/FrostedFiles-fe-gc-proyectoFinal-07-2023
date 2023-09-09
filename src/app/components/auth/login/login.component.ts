@@ -8,12 +8,13 @@ import { UserService } from '../../../services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
+
   formLogin: FormGroup;
 
   constructor(private userService: UserService, private router: Router) {
     this.formLogin = new FormGroup({
-      email: new FormControl(''),
+      username: new FormControl(''),
       password: new FormControl(''),
     });
   }
@@ -22,24 +23,14 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit() {
-    this.userService.login(this.formLogin.value)
-    .then((res) => {
-      console.log(res);
-      this.router.navigate(['/home']);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-
-  onClick(){
-    this.userService.loginWithGoogle()
-    .then((res) => {
-      console.log(res);
-      this.router.navigate(['/home']);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this.userService.login(this.formLogin.value).subscribe(
+      res => {
+        // console.log(res);
+        this.router.navigate(['/home']);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }

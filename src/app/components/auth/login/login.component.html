@@ -11,7 +11,7 @@
                         <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
                             <div class="form-group">
                                 <label for="email">Mail:</label>
-                                <input type="text" class="form-control my-3" id="email" placeholder="Enter your email" formControlName="email">
+                                <input type="text" class="form-control my-3" id="email" placeholder="Enter your username" formControlName="username">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
@@ -19,7 +19,6 @@
                             </div>
                             <div class="my-3">
                                 <button type="submit" class="boton">Login</button> 
-                                <button class="boton" (click)="onClick()">Login with Google</button>
                             </div>
                             <div>
                                 <small><a routerLink="/register">Create an account →</a></small>

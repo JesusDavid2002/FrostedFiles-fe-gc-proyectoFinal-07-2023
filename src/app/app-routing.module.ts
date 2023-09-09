@@ -17,20 +17,21 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuard } from './session.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'home', component: HomeComponent, canActivate : [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'about', component: AboutComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'dashboard', component: DashboardComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'home/details', component: DetailsComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'home/update-file', component: UpdateFileComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'home/upload-file', component: UploadFileComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'home/categories/:id', component: CategoriesComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'page404', component: Page404Component, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'user-profile', component: UserProfileComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
-  { path: 'users-list', component: UsersListComponent, ...canActivate(() => redirectUnauthorizedTo(['/welcome']))},
+  { path: 'about', component: AboutComponent, canActivate : [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate : [AuthGuard] },
+  { path: 'home/details', component: DetailsComponent, canActivate : [AuthGuard] },
+  { path: 'home/update-file', component: UpdateFileComponent, canActivate : [AuthGuard] },
+  { path: 'home/upload-file', component: UploadFileComponent, canActivate : [AuthGuard] },
+  { path: 'home/categories/:id', component: CategoriesComponent, canActivate : [AuthGuard] },
+  { path: 'page404', component: Page404Component, canActivate : [AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate : [AuthGuard] },
+  { path: 'users-list', component: UsersListComponent, canActivate : [AuthGuard] },
   { path: 'welcome', component: WelcomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/page404', pathMatch: 'full' }

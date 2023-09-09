@@ -33,16 +33,11 @@ export class NavbarComponent {
 
   constructor(private userService: UserService, private router: Router) {}
   
-  onClick(){
-    this.userService.logout()
-    .then((res) => {
-      console.log(res);
-      this.router.navigate(['/welcome']);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  onClick() {
+    this.userService.logout();
+    this.router.navigate(['/welcome']);
   }
+  
 
   toggleMenu(): void {
     this.menuBtnActive = !this.menuBtnActive;

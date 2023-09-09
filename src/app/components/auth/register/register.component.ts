@@ -16,7 +16,9 @@ export class RegisterComponent implements OnInit {
     this.formReg = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
-      passwordValidation: new FormControl('')
+      passwordValidation: new FormControl(''),
+      fechaCreacion: new FormControl(new Date().toISOString()),
+      username: new FormControl('123456789'),
     });
   }
 
@@ -29,14 +31,15 @@ export class RegisterComponent implements OnInit {
       let passwordValidation = this.formReg.get('passwordValidation')?.value;
   
       if (password === passwordValidation) {
-        this.userService.register(this.formReg.value)
-          .then((res) => {
-            console.log(res);
+        this.userService.register(this.formReg.value).subscribe(
+          res => {
+            // console.log(res);
             this.router.navigate(['/home']);
-          })
-          .catch((err) => {
+          },
+          err => {
             console.log(err);
-          });
+          }
+        );
       } else {
         alert('Las contraseñas no son iguales.');
       }
