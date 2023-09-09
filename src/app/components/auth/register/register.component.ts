@@ -16,7 +16,9 @@ export class RegisterComponent implements OnInit {
     this.formReg = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
-      passwordValidation: new FormControl('')
+      passwordValidation: new FormControl(''),
+      fechaCreacion: new FormControl(new Date().toISOString()),
+      username: new FormControl('123456789'),
     });
   }
 
@@ -31,7 +33,7 @@ export class RegisterComponent implements OnInit {
       if (password === passwordValidation) {
         this.userService.register(this.formReg.value).subscribe(
           res => {
-            console.log(res);
+            // console.log(res);
             this.router.navigate(['/home']);
           },
           err => {

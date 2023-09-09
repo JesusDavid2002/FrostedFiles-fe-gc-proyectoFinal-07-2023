@@ -33,6 +33,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PermissionsComponent } from './components/home/permissions/permissions.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ModalCategoriaComponent } from './components/home/modal_categoria/modal-categoria.component';
+import { AuthGuard } from './session.guard';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { ModalCategoriaComponent } from './components/home/modal_categoria/modal
     CompartirComponent,
     PermissionsComponent,
     WelcomeComponent,
-    ModalCategoriaComponent
+    ModalCategoriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,10 +69,10 @@ import { ModalCategoriaComponent } from './components/home/modal_categoria/modal
     BrowserAnimationsModule,
     NgxChartsModule,
     NgbModule,
-    DragDropModule
+    DragDropModule,
   ],
   exports: [NavbarComponent],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

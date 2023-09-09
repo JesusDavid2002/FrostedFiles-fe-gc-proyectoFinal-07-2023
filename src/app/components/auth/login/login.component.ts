@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {
     this.formLogin = new FormGroup({
-      email: new FormControl(''),
+      username: new FormControl(''),
       password: new FormControl(''),
     });
   }
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.userService.login(this.formLogin.value).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.router.navigate(['/home']);
       },
       err => {
