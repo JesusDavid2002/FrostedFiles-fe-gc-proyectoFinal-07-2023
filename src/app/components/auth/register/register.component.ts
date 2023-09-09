@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
       password: new FormControl(''),
       passwordValidation: new FormControl(''),
       fechaCreacion: new FormControl(new Date().toISOString()),
-      username: new FormControl('123456789'),
+      username: new FormControl(''),
     });
   }
 
