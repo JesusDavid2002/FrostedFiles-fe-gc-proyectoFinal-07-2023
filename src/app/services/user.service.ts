@@ -13,10 +13,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   setSession(authResult: any) {
-    console.log(authResult);
-    //const expiresAt = authResult.expiresIn * 1000 + Date.now();
     sessionStorage.setItem('token', authResult.token);
-    //sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
   register(userData: any) {
@@ -41,7 +38,6 @@ export class UserService {
 
   logout() {
     sessionStorage.removeItem('token');
-    //sessionStorage.removeItem('expires_at');
   }
 
   getToken() {
