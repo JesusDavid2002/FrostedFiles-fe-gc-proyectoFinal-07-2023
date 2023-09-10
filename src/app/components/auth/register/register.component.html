@@ -10,6 +10,10 @@
                     <div class="card-body">
                         <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
                             <div class="form-group">
+                                <label for="email">Username:</label>
+                                <input type="text" class="form-control my-3" id="username" placeholder="Enter your username" formControlName="username"/>
+                            </div>
+                            <div class="form-group">
                                 <label for="email">Mail:</label>
                                 <input type="email" class="form-control my-3" id="email" placeholder="Enter your email" formControlName="email" />
                             </div>
