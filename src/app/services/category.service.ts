@@ -3,6 +3,9 @@ import { Category } from '../models/category.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Subcategory } from '../models/subcategory.model';
 import { SubcategoryService } from './subcategory.service';
+import { HttpClient } from '@angular/common/http';
+
+let API_URL = 'http://localhost:8080/api/categories';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +13,24 @@ import { SubcategoryService } from './subcategory.service';
 export class CategoryService {
   private data: Category[] = [];
   categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([
-    {
-      name: 'Category 1',
-      subcategories: [
-        {'name': 'Subcategoria1',
-                  'subsubcategories': [{
-                    'name': 'subsubcategoria1'
-                  }]},
-        {'name': 'Subcategory 1.2' }
-      ]},
-        { name: 'Category 2' },
-        { name: 'Category 3' },
-        { name: 'Category 4' }
+    // {
+    //   name: 'Category 1',
+    //   subcategories: [
+    //     {'name': 'Subcategoria1',
+    //               'subsubcategories': [{
+    //                 'name': 'subsubcategoria1'
+    //               }]},
+    //     {'name': 'Subcategory 1.2' }
+    //   ]},
+    //     { nombre: 'Category 2' },
+    //     { nombre: 'Category 3' },
+    //     { nombre: 'Category 4' }
     ]);
   
-  constructor(private subcategoryService: SubcategoryService) { }
+  constructor(private subcategoryService: SubcategoryService, private http: HttpClient) { }
 
-  getData(): Observable<Category[]> {
-    // return this.data;
-    return this.categories.asObservable();
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${API_URL}`);
   }
 
   setData(data: Category[]) {
@@ -52,7 +54,7 @@ export class CategoryService {
 
   deleteCategory(categoryName: string) {
     console.log("Categorías antes de eliminar:", this.categories.value);
-    const updatedCategories = this.categories.value.filter(category => category.name !== categoryName);
+    const updatedCategories = this.categories.value.filter(category => category.nombre !== categoryName);
     console.log("Categorías después de eliminar:", updatedCategories);
     this.categories.next(updatedCategories);
   }
@@ -60,7 +62,7 @@ export class CategoryService {
 
   deleteSubcategory(categoryName: string, subcategoryName: string | null) {
     this.categories.next(this.categories.value.map(category => {
-      if (category.name === categoryName && category.subcategories) {
+      if (category.nombre === categoryName && category.subcategories) {
         let updateSubcategories = category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         return {
           ...category,
@@ -76,7 +78,7 @@ export class CategoryService {
   deleteSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string): void {
     this.categories.next(
       this.categories.value.map(category => {
-        if (category.name === categoryName && category.subcategories) {
+        if (category.nombre === categoryName && category.subcategories) {
           return {
             ...category,
             subcategories: category.subcategories.map(subcategory => {
@@ -97,7 +99,7 @@ export class CategoryService {
 
   addSubcategory(categoryName: string, subcategoryName: string) {
     const updatedCategories = this.categories.value.map(category => {
-      if (category.name === categoryName) {
+      if (category.nombre === categoryName) {
         return {
           ...category,
           subcategories: [...(category.subcategories || []), { name: subcategoryName }]
@@ -111,7 +113,7 @@ export class CategoryService {
 
   addSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string) {
     this.categories.next(this.categories.value.map(category => {
-      if (category.name === categoryName && category.subcategories) {
+      if (category.nombre === categoryName && category.subcategories) {
         return {
           ...category,
           subcategories: category.subcategories.map(subcategory => {

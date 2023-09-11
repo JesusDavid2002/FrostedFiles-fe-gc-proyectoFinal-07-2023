@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
+import { Files } from 'src/app/models/files.model';
 import { CategoryService } from 'src/app/services/category.service';  
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -11,10 +14,40 @@ export class UploadFileComponent {
   categoriesList: Category[] = [];
   selectedFiles: File[] = [];
 
-  constructor(private categoryService: CategoryService) {
-    this.categoryService.getData().subscribe(categories => {
-      this.categoriesList = categories;
-     });
+  constructor(private categoryService: CategoryService, private fileService: FileService, private router: Router) {
+    this.categoryService.getAllCategories().subscribe(result => {
+      this.categoriesList = result;
+    });
+  }
+  
+  createFile(): void{
+    if (this.selectedFiles.length === 0) {
+      console.error('No se han seleccionado archivos.');
+      return;
+    }
+    
+
+    this.selectedFiles.forEach((file) => {
+      let fileData: Files = new Files();
+      let fileExtension = file.name.split('.').pop();
+      let fileDate = new Date();
+
+      fileData.nombre = file.name;
+      fileData.extension = fileExtension ? fileExtension : '';
+      fileData.tamano = file.size;
+      fileData.fechaSubida = fileDate.toISOString();
+      fileData.visibilidad = true;
+
+      this.fileService.postFiles(fileData, file).subscribe({
+        next: (response) => {
+          console.log('Archivo subido: ', response);
+        },
+        error: (error) => {
+          console.error('Error al subir archivo: ', error);
+        },
+      });
+    });
+    this.router.navigateByUrl("/home");
   }
 
   // Utilizando el metodo onFileDropped y el evento dragEvent (arrastrar y soltar).

@@ -17,9 +17,10 @@ export class UpdateFileComponent {
   categoriesList: Category[] = [];
 
   constructor(private categoryService: CategoryService, private fileService: FileService, private route: ActivatedRoute) {
-    this.categoryService.getData().subscribe(categories => {
-      this.categoriesList = categories;
-});  }
+    this.categoryService.getAllCategories().subscribe(result => {
+      this.categoriesList = result;
+    });
+  }
 
   ngOnInit(): void{
     this.route.params.subscribe(params =>{
