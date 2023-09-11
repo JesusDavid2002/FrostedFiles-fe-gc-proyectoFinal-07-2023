@@ -37,13 +37,11 @@ export class CategoriesComponent {
   categoriesList: Category[] = [];
   categories: Observable<Category[]> | undefined;
 
-  constructor(private categoryService: CategoryService, private swalService: SwalService) {
-    this.categories = this.categoryService.getData();
-  }
+  constructor(private categoryService: CategoryService, private swalService: SwalService) {}
 
   ngOnInit(): void {
-    this.categoryService.getData().subscribe(categories => {
-      this.categoriesList = categories;
+    this.categoryService.getAllCategories().subscribe(result => {
+      this.categoriesList = result;
     });
     
     this.rightPanelStyle = {
@@ -57,7 +55,7 @@ export class CategoriesComponent {
 
   handleClickOnCategory(category: Category): void {
     this.desplegar(category);
-    this.update(category.name);
+    this.update(category.nombre);
   }
 
   update(categoryName?: string, subcategoryName?: string, subsubcategoryName?: string) {

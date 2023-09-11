@@ -26,8 +26,8 @@ export class ModalCategoriaComponent {
 
   ngOnInit(): void {
     // this.categoriesList = this.categoryService.getData();
-    this.categoryService.getData().subscribe((categories) => {
-      this.categoriesList = categories;
+    this.categoryService.getAllCategories().subscribe(result => {
+      this.categoriesList = result;
     });
   }
 
@@ -63,7 +63,7 @@ export class ModalCategoriaComponent {
     } else {
       // Si no se seleccionó ninguna categoría o subcategoría, agregamos una nueva categoría principal
       let category = new Category();
-      category.name = newCategoryName;
+      category.nombre = newCategoryName;
       this.categoryService.addCategory(category);
     }
     this.activeModal.close('Close click');

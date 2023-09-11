@@ -11,6 +11,7 @@ import { ModalCategoriaComponent } from './modal_categoria/modal-categoria.compo
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { SwalService } from 'src/app/services/swal.service';
 import { id } from '@swimlane/ngx-charts';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -32,59 +33,8 @@ import { id } from '@swimlane/ngx-charts';
   ]
 })
 export class HomeComponent {
-  fileList: Files[] = [
-    {
-      id: 1,
-      name: 'CV Ejemplo',
-      type: '.pdf',
-      size: 600,
-      date: '20/08/2020',
-      isVisible: false
-    }, 
-    {
-      id: 2,
-      name: 'Texto de compra',
-      type: '.txt',
-      size: 200,
-      date: '21/08/2020',    
-      isVisible: false
-    },
-    {
-      id: 3,
-      name: 'Musica3',
-      type: '.mp3',
-      size: 700,
-      date: '21/08/2021',    
-      isVisible: false
-    },
-    {
-      id: 4,
-      name: 'Extension rara',
-      type: '.cir',
-      size: 700,
-      date: '21/08/2021',    
-      isVisible: false
-    },
-    {
-      id: 5,
-      name: 'CV 2',
-      type: '.pdf',
-      size: 800,
-      date: '21/08/2022',    
-      isVisible: false
-    },
-    {
-      id: 6,
-      name: 'Video',
-      type: '.mp3',
-      size: 2200,
-      date: '11/01/2023',    
-      isVisible: false
-    },
-  ];
-  
-  
-
+  fileList: Files[] = [];
+  categoriesList: Category[] = [];
   selectedCategory: string = '';
   visitCount: number = 0;
   selectedFileIndex: number | null = null; 
@@ -94,10 +44,13 @@ export class HomeComponent {
 
 
   ngOnInit(): void{
-    this.fileService.setData(this.fileList);
-    this.categoryService.selectedCategory$.subscribe(category => {
-      this.selectedCategory = category;
-    });
+      this.fileService.getAllFiles().subscribe(result => {
+        this.fileList = result;
+      });
+    
+      this.categoryService.getAllCategories().subscribe(result => {
+        this.categoriesList = result;
+      });
   }
 
   getIconSource(fileType: string | undefined): string {
@@ -126,31 +79,31 @@ export class HomeComponent {
     console.log('Archivo seleccionado con índice:', this.selectedFileIndex);
     this.fileList.forEach((file, i) => {
       if (i === index) {
-        file.isVisible = !file.isVisible;
+        file.visibilidad = !file.visibilidad;
 
         let elements = document.getElementsByClassName('btn-files');
         for (let i = 0; i < elements.length; i++) {
-          if (file.isVisible) {
+          if (file.visibilidad) {
             elements[i].removeAttribute('disabled');
           } else{
             elements[i].setAttribute('disabled', 'true');
           }
         }
       } else {
-        file.isVisible = false;
+        file.visibilidad = false;
       }
     });
   }
 
   sortDirection: string = 'asc';
-  currentSortColumn: keyof Files = 'name';
+  currentSortColumn: keyof Files = 'nombre';
 
   sortTable(column: keyof Files): void {
     this.fileList.sort((a, b) => {
         const aValue = a[column as keyof Files];
         const bValue = b[column as keyof Files];
 
-        if (column === 'date') {
+        if (column === 'fechaSubida') {
             const aDate = this.convertToDate(aValue as string);
             const bDate = this.convertToDate(bValue as string);
 

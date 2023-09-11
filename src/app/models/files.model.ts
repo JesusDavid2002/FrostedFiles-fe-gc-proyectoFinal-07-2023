@@ -1,8 +1,14 @@
+import { Category } from "./category.model";
+import { Subcategory } from "./subcategory.model";
+
 export class Files {
     id: any;
-    name?: string;
-    type?: string;
-    size?: number;
-    date?: string;
-    isVisible?: boolean;
+    nombre: string = '';
+    extension: string = '';
+    tamano: number = 0;
+    fechaSubida: string = '';
+    visibilidad: boolean = true;
+    contenido?: any;
+    categories?: Category;
+    subcategories?: Subcategory;
 }

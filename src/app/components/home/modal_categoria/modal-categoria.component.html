@@ -10,7 +10,7 @@
             <select class="form-control" id="existingCategory" formControlName="existingCategory">
                 <option value="">-- Nueva o existente categoría --</option>
                 <ng-container *ngFor="let category of categoriesList">
-                    <option [value]="category.name">{{ category.name }}</option>
+                    <option [value]="category.nombre">{{ category.nombre }}</option>
 
                   <!-- <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
                         <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
@@ -19,9 +19,9 @@
                     </optgroup> -->
 
                     <ng-container *ngFor="let subcategory of category.subcategories">
-                        <option [value]="category.name + '/' + subcategory.name">{{ category.name }} > {{ subcategory.name }}</option>
+                        <option [value]="category.nombre + '/' + subcategory.name">{{ category.nombre }} > {{ subcategory.name }}</option>
                         <!-- Aquí incluimos una opción para añadir una nueva sub-subcategoría -->
-                        <option [value]="category.name + '/' + subcategory.name + '/newSubSubcategory'">-- {{ category.name }} > {{ subcategory.name }} > Nueva Sub-Subcategoría</option>
+                        <option [value]="category.nombre + '/' + subcategory.name + '/newSubSubcategory'">-- {{ category.nombre }} > {{ subcategory.name }} > Nueva Sub-Subcategoría</option>
                     </ng-container>
 
                 </ng-container>
