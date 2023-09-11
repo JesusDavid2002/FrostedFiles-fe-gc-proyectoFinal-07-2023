@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category.model';
 import { Subcategory } from 'src/app/models/subcategory.model';
@@ -31,6 +31,7 @@ import { SwalService } from 'src/app/services/swal.service';
 export class CategoriesComponent {
   rightPanelStyle: any = {};
   contextMenu:string =  'closed';
+  @Output() categorySelected = new EventEmitter<string>();
   selectedCategory: any;
   selectedSubCategory: any;
   selectedSubSubCategory: any;
@@ -49,6 +50,10 @@ export class CategoriesComponent {
     };
   }
 
+  onCategoryClick(category: string){
+    this.categorySelected.emit(category);
+  }
+
   desplegar(category: Category) {
     category.open = !category.open;
   }
@@ -56,6 +61,7 @@ export class CategoriesComponent {
   handleClickOnCategory(category: Category): void {
     this.desplegar(category);
     this.update(category.nombre);
+    this.onCategoryClick(category.nombre);
   }
 
   update(categoryName?: string, subcategoryName?: string, subsubcategoryName?: string) {

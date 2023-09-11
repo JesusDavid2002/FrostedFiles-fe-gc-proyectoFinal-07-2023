@@ -31,6 +31,10 @@ export class FileService {
     return this.http.get<Files[]>(`${API_URL}`);
   }
 
+  getFilesByCategory(category: string): Observable<Files[]>{
+    return this.http.get<Files[]>(`${API_URL}/categories/${category}`);
+  }
+
   postFiles(fileData: Files, file: File): Observable<any> {
     let formData = new FormData();
     formData.append('file', file);
@@ -42,6 +46,10 @@ export class FileService {
     formData.append('categories', JSON.stringify(fileData.categories));
     formData.append('subcategories', JSON.stringify(fileData.subcategories));
     return this.http.post(`${API_URL}/add`, formData);
+  }
+
+  postCompartir(formData: FormData): Observable<any>{
+    return this.http.post(`${API_URL}/compartir`, formData);
   }
 
   getById(id: number): Observable<Files>{

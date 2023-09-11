@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Files } from 'src/app/models/files.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -35,22 +35,34 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent {
   fileList: Files[] = [];
   categoriesList: Category[] = [];
-  selectedCategory: string = '';
+  category: string = '';
   visitCount: number = 0;
   selectedFileIndex: number | null = null; 
 
     
-  constructor(private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
 
 
   ngOnInit(): void{
-      this.fileService.getAllFiles().subscribe(result => {
-        this.fileList = result;
-      });
-    
+      // this.fileService.getAllFiles().subscribe(result => {
+      //   this.fileList = result;
+      // });
       this.categoryService.getAllCategories().subscribe(result => {
         this.categoriesList = result;
       });
+  }
+
+  onCategorySelected(category: string){
+    this.category = category;
+    
+    this.fileService.getFilesByCategory(this.category).subscribe({
+      next: (data) => {
+        this.fileList = data;
+      }, 
+      error: (error) => {
+        console.error('Error al obtener archivos por categoria ', error);
+      }
+    });
   }
 
   getIconSource(fileType: string | undefined): string {
