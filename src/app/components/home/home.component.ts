@@ -73,6 +73,9 @@ export class HomeComponent {
         '.png': 'img.png',
         '.jpg': 'img.png',
         '.mp3': 'mp3.png',
+        '.sql': 'sql.png',
+        'sql': 'sql.png',
+        'pdf': 'pdf.png'
     };
 
     const defaultIcon = 'text.png'; // Icono por defecto
