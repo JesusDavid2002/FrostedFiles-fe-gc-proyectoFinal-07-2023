@@ -30,7 +30,7 @@
             <div id="ArchivosContainerRoot" class="col-lg-6 mt-3">
                 <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 my-3 mx-2">
                     <div class="col" *ngFor="let file of fileList; let i = index">
-                        <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
+                        <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" [ngClass]="{'cartaSeleccionada': i === selectedFileIndex}">
                             <img [src]="getIconSource(file.extension)" class="card-img-top" alt="">
                             <div class="card-body">
                                 <h5 class="card-title text-center">{{ file.nombre }}{{ file.extension }}</h5>
