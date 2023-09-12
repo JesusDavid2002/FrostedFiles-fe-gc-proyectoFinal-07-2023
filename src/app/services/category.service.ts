@@ -3,9 +3,12 @@ import { Category } from '../models/category.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Subcategory } from '../models/subcategory.model';
 import { SubcategoryService } from './subcategory.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { UserService } from './user.service';
+
 
 let API_URL = 'http://localhost:8080/api/categories';
+let API_URLSUB = 'http://localhost:8080/api/subcategories';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +19,7 @@ export class CategoryService {
   categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
   categoryService: any;
 
-  constructor(private subcategoryService: SubcategoryService, private http: HttpClient) {
+  constructor(private subcategoryService: SubcategoryService, private http: HttpClient, private userService: UserService) {
     this.getAllCategories().subscribe(
       (data: Category[]) => {
         this.categories.next(data);
@@ -26,7 +29,6 @@ export class CategoryService {
       }
     );
   }
-
 
   getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${API_URL}`);
@@ -44,13 +46,29 @@ export class CategoryService {
   }
 
   addCategory(category: Category) {
-    if (category.subcategories) {
-      category.subcategories.forEach((element) =>
-        this.subcategoryService.addSubcategories(element)
+    console.log(category);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      })
+    };
+    this.http.post(`${API_URL}/add`, { nombre: category.nombre}, httpOptions)  // <-- añadido httpOptions
+      .subscribe(
+        (response) => {
+          if (category.subcategories) {
+            category.subcategories.forEach((element) =>
+              this.subcategoryService.addSubcategories(element)
+            );
+          }
+          this.categories.next([...this.categories.value, category]);
+          console.log('Categorías después de agregar:', this.categories.value);
+        },
+        (error) => {
+          console.error('Error al crear la subcategoría:', error);
+        }
       );
-    }
-    this.categories.next([...this.categories.value, category]);
-    console.log('Categorías después de agregar:', this.categories.value);
+    
   }
 
   addSubcategory(categoryName: string, subcategoryName: string) {
@@ -61,8 +79,20 @@ export class CategoryService {
       );
       return;
     }
+
+    // Preparando las opciones del encabezado HTTP con el token
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      })
+    };
+
     // Realizar una petición POST al backend para crear la subcategoría
-    this.http.post(`${API_URL}/${categoryName}/subcategories`, { nombre: subcategoryName })
+    this.http.post(`${API_URLSUB}/add`, { nombre: subcategoryName,
+      "categories": {
+          "nombre": categoryName
+      }}, httpOptions)  // <-- añadido httpOptions
       .subscribe(
         (response) => {
           // Si la categoría existe, actualizar las categorías con la nueva subcategoría
@@ -82,7 +112,6 @@ export class CategoryService {
         }
       );
   }
-
 
   addSubSubcategory(
     categoryName: string,

@@ -43,4 +43,13 @@ export class UserService {
   getToken() {
     return sessionStorage.getItem('token');
   }
+  
+  getHttpOptionsWithToken(): any {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.getToken()
+      })
+    };
+  }
 }
