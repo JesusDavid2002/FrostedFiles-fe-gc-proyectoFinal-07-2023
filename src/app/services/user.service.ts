@@ -12,6 +12,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getUsers() {
+    return this.http.get<any[]>(`${this.API_URL}/api/admin/users`);
+  }
+
   setSession(authResult: any) {
     sessionStorage.setItem('token', authResult.token);
   }
@@ -42,5 +46,9 @@ export class UserService {
 
   getToken() {
     return sessionStorage.getItem('token');
+  }
+
+  deleteUser(email: string) {
+    return this.http.delete(`${this.API_URL}/api/admin/users/${email}`);
   }
 }

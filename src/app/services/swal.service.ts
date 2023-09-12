@@ -176,6 +176,28 @@ export class SwalService {
       });
   }
 
+  showDeleteUserConfirmation(user: any, callback: Function) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-warning'
+      },
+      buttonsStyling: true,
+    });
+    Swal.fire({
+      title: '¿Estás seguro de borrar al usuario?',
+      text: `Estás a punto de eliminar al usuario ${user.nombre}. Esta acción no se puede deshacer.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        callback();
+      }
+    });
+  }
+
   showSuccessToast(title: string, typeIcon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'success', timerProgressBar: boolean = false) {
     Swal.fire({
       toast: true,
