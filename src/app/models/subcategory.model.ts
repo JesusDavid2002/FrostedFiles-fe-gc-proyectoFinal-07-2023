@@ -1,10 +1,10 @@
 export class Subcategory {
-    name?: string;
+    nombre: string = '';
     subsubcategories?: SubSubcategory[];
     open?: boolean;
 }
 
 export class SubSubcategory {
-    name?: string;
+    nombre: string = '';
     open?: boolean;
 }

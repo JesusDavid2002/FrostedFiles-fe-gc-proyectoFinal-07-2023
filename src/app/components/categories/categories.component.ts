@@ -105,16 +105,11 @@ export class CategoriesComponent {
   deleteSelectedItem() {   
     if(!this.selectedSubCategory){
         this.deleteCategory(this.selectedCategory.name);
-      
     } else if (this.selectedSubSubCategory){
         this.deleteSubSubcategory(this.selectedCategory.name, this.selectedSubCategory.name, this.selectedSubSubCategory);
-
     } else{
         this.deleteSubcategory(this.selectedCategory.name, this.selectedSubCategory.name);
-      
-      
     }
-
     this.closeContextMenu();
   }
 
@@ -190,4 +185,13 @@ export class CategoriesComponent {
       this.endPress();
     }
   }
+
+
+  addSubcategoryToCategory(category: Category) {
+    const subcategoryName = prompt('Ingrese el nombre de la nueva subcategoría:');
+    if (subcategoryName && subcategoryName.trim() !== '') {
+      this.categoryService.addSubcategory(category.nombre, subcategoryName);
+    }
+  }
+
 }
