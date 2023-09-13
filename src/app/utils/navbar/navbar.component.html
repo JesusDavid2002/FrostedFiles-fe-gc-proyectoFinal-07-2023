@@ -13,10 +13,10 @@
         Frosted Files
     </div>
     <div class="nav-items" [class.active]="menuBtnActive">
-        <li><a class="nav-link" href="/home">Inicio</a></li>
-        <li><a class="nav-link" href="/dashboard">Dashboard</a></li>
-        <li><a class="nav-link" href="/about">About</a></li>
-        <li><a class="nav-link" href="/users-list">User List</a></li>
+        <li><a class="nav-link" routerLink="/home">Inicio</a></li>
+        <li><a class="nav-link" routerLink="/dashboard">Dashboard</a></li>
+        <li><a class="nav-link" routerLink="/about">About</a></li>
+        <li><a class="nav-link" routerLink="/users-list">User List</a></li>
     </div>
     <div class="search-icon" (click)="toggleSearchForm()">
         <span class="fas fa-search" [class.hide]="searchFormActive"></span>
@@ -33,7 +33,7 @@
         <div class="profile-popup" [class.active]="profileWindowActive" [@expandCollapse]="profileWindowActive ? 'open' : 'closed'">
             <li style="list-style-type: none" class="pt-2 text-center"><p>Usuario</p></li>
             <hr>
-            <li style="list-style-type: none" class="my-4 text-center"><a class="btn btn-primary p-1 " href="/user-profile">Ver perfil</a></li>
+            <li style="list-style-type: none" class="my-4 text-center"><a class="btn btn-primary p-1 " routerLink="/user-profile">Ver perfil</a></li>
             <li style="list-style-type: none" class="my-4 text-center"><button (click)="onClick()" class="btn btn-danger p-1">Logout</button></li>
         </div>
     </div>
