@@ -63,6 +63,7 @@ export class HomeComponent {
     });
   }  
 
+
   getIconSource(fileType: string | undefined): string {
     // Mapa de extension de archivo por imagen
     const iconMappings: Record<string, string> = {
