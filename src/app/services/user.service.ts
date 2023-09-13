@@ -10,6 +10,7 @@ export class UserService {
   // URL real del back, una vez tengamos el railway funcionando esta dirección debería cambiar
   private API_URL = 'http://localhost:8080';
   private userEmail: string | null = null;
+  private userEmailKey = 'userEmail';
 
   constructor(private http: HttpClient) { }
 
@@ -22,11 +23,11 @@ export class UserService {
   }
 
   setUserEmail(email: string) {
-    this.userEmail = email;
+    localStorage.setItem(this.userEmailKey, email);
   }
 
   getUserEmail(): string | null {
-    return this.userEmail;
+    return localStorage.getItem(this.userEmailKey);
   }
 
   setSession(authResult: any) {
@@ -36,21 +37,20 @@ export class UserService {
 
   setAuthenticatedUser(email: string) {
     this.userEmail = email;
+    this.setUserEmail(email)
   }
 
   register(userData: any) {
     return this.http.post(`${this.API_URL}/auth/register`, userData).pipe(
       tap((res: any) => {
+        console.log("userData"+userData)
         this.setSession(res);
-        this.setAuthenticatedUser(userData.username);
+        this.setAuthenticatedUser(userData.email);
       })
     );
   }
 
-  
-
   login(userData: any) {
-    // console.log(userData); Solo para debuggar
     const headers = new HttpHeaders({
       'Content-Type':'application/json',   
     });

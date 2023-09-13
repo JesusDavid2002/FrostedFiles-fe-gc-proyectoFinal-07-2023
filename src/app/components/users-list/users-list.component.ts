@@ -33,18 +33,18 @@ export class UsersListComponent {
   }
 
   deleteUser(user: any) {
-    this.userService.deleteUser(user.username).subscribe(
-      () => {
-        this.swalService.showDeleteUserConfirmation(user, () =>
-          this.userService.deleteUser(user)
-        );
-        this.loadUsers(); // actualizar la lista de usuarios al eliminarlo.
-      },
-      (error) => {
-        console.error('Error deleting user:', error);
-      }
-    );
+    this.swalService.showDeleteUserConfirmation(user, () => {
+      this.userService.deleteUser(user.username).subscribe(
+        () => {
+          this.loadUsers(); // Actualiza la lista de usuarios después de eliminarlo
+        },
+        (error) => {
+          console.error('Error deleting user:', error);
+        }
+      );
+    });
   }
+  
 
   
 }
