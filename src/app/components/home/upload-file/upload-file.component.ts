@@ -13,6 +13,8 @@ import { FileService } from 'src/app/services/file.service';
 export class UploadFileComponent {
   categoriesList: Category[] = [];
   selectedFiles: File[] = [];
+  selectedVisibility: number = 1; 
+  selectedCategory: string = '';
 
   constructor(private categoryService: CategoryService, private fileService: FileService, private router: Router) {
     this.categoryService.getAllCategories().subscribe(result => {
@@ -29,14 +31,26 @@ export class UploadFileComponent {
 
     this.selectedFiles.forEach((file) => {
       let fileData: Files = new Files();
-      let fileExtension = file.name.split('.').pop();
+      let fileNameComplete = file.name.split('.');
+      let fileName = fileNameComplete.slice(0, -1).join('.');
+      let fileExtension = fileNameComplete.pop();
       let fileDate = new Date();
 
-      fileData.nombre = file.name;
-      fileData.extension = fileExtension ? fileExtension : '';
+      fileData.nombre = fileName;
+      fileData.extension = '.'+(fileExtension ? fileExtension : '');
       fileData.tamano = file.size;
       fileData.fechaSubida = fileDate.toISOString();
-      fileData.visibilidad = true;
+      fileData.visibilidad = this.selectedVisibility === 1;
+
+      let selectedCategory = this.categoriesList.find(c => c.nombre === this.selectedCategory);
+      if (!selectedCategory) {
+        console.log(`La categoría ${this.selectedCategory} no se encontró en la lista de categorías.`);
+        return;
+      }
+    
+      // Aquí asignamos la categoría seleccionada de la lista, en vez de una nueva instancia
+      fileData.categories = selectedCategory; 
+      
 
       this.fileService.postFiles(fileData, file).subscribe({
         next: (response) => {
@@ -68,7 +82,7 @@ export class UploadFileComponent {
   }
 
   // Utilizando un input de tipo file y el event podemos subir archivos en vez de arrastrandolos de forma manual
-  onFileSelected(event: Event){
+  onFileSelected(event: any){
     let elements = event.target as HTMLInputElement;
     if(elements.files && elements.files.length > 0){
       let files: FileList = elements.files;
@@ -77,4 +91,5 @@ export class UploadFileComponent {
       }
     }
   }
+
 } 

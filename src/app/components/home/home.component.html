@@ -16,7 +16,7 @@
                         <div class="collapse navbar-collapse navbar-expand-lg" id="navbarNavDropdown">
                             <div class="verticalLine"><button type="button" class="boton-Naranja" (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png" alt=""><span class="TextoEsconder">Crear</span></button></div>
                             <div class="verticalLine"><button type="button" class="boton-Naranja" routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png" alt=""><span class="TextoEsconder">Subir</span></button></div>
-                            <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" routerLink="/home/update-file" disabled><img src="../../../assets/img/edit-file.png" alt=""><span class="TextoEsconder">Modificar</span></button></div>
+                            <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled (click)="onSelectFile()"><img src="../../../assets/img/edit-file.png" alt=""><span class="TextoEsconder">Modificar</span></button></div>
                             <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled (click)=" onDeleteFile()"><img src="../../../assets/img/delete-file.png" alt=""><span class="TextoEsconder">Eliminar</span></button></div>
                             <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled (click)="openModalShare()"><img src="../../../assets/img/share-file.png" alt=""><span class="TextoEsconder">Compartir</span></button></div>
                         </div>
@@ -30,8 +30,8 @@
             <div id="ArchivosContainerRoot" class="col-lg-6 mt-3">
                 <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 my-3 mx-2">
                     <div class="col" *ngFor="let file of fileList; let i = index">
-                        <div class="card" (dblclick)="navigateDetails()" (click)="details(i)" >
-                            <img [src]="getIconSource(file.extension)" class="card-img-top" alt="">
+                        <div class="card" (dblclick)="navigateDetails()" (click)="details(i)">
+                            <img [src]="getIconSource(file.extension)" class="card-img-top" alt="" >
                             <div class="card-body">
                                 <h5 class="card-title text-center">{{ file.nombre }}{{ file.extension }}</h5>
                             </div>

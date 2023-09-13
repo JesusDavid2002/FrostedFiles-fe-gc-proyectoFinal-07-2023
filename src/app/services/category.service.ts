@@ -63,7 +63,7 @@ export class CategoryService {
   deleteSubcategory(categoryName: string, subcategoryName: string | null) {
     this.categories.next(this.categories.value.map(category => {
       if (category.nombre === categoryName && category.subcategories) {
-        let updateSubcategories = category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
+        let updateSubcategories = category.subcategories.filter(subcategory => subcategory.nombre !== subcategoryName)
         return {
           ...category,
           subcategories: updateSubcategories
@@ -82,7 +82,7 @@ export class CategoryService {
           return {
             ...category,
             subcategories: category.subcategories.map(subcategory => {
-              if (subcategory.name === subcategoryName && subcategory.subsubcategories) {
+              if (subcategory.nombre === subcategoryName && subcategory.subsubcategories) {
                 return {
                   ...subcategory,
                   subsubcategories: subcategory.subsubcategories.filter(subSubcategory => subSubcategory.name !== subSubcategoryName)
@@ -107,7 +107,7 @@ export class CategoryService {
       }
       return category;
     });
-    this.categories.next(updatedCategories);
+    //this.categories.next(updatedCategories);
   }
 
 
@@ -117,7 +117,7 @@ export class CategoryService {
         return {
           ...category,
           subcategories: category.subcategories.map(subcategory => {
-            if (subcategory.name === subcategoryName) {
+            if (subcategory.nombre === subcategoryName) {
               return {
                 ...subcategory,
                 subsubcategories: [...(subcategory.subsubcategories || []), { name: subSubcategoryName }]

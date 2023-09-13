@@ -1,5 +1,6 @@
 export class Subcategory {
-    name?: string;
+    id?: number;
+    nombre: string = '';
     subsubcategories?: SubSubcategory[];
     open?: boolean;
 }

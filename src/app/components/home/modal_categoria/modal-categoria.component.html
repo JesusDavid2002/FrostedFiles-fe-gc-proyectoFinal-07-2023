@@ -19,9 +19,9 @@
                     </optgroup> -->
 
                     <ng-container *ngFor="let subcategory of category.subcategories">
-                        <option [value]="category.nombre + '/' + subcategory.name">{{ category.nombre }} > {{ subcategory.name }}</option>
+                        <option [value]="category.nombre + '/' + subcategory.nombre">{{ category.nombre }} > {{ subcategory.nombre }}</option>
                         <!-- Aquí incluimos una opción para añadir una nueva sub-subcategoría -->
-                        <option [value]="category.nombre + '/' + subcategory.name + '/newSubSubcategory'">-- {{ category.nombre }} > {{ subcategory.name }} > Nueva Sub-Subcategoría</option>
+                        <option [value]="category.nombre + '/' + subcategory.nombre + '/newSubSubcategory'">-- {{ category.nombre }} > {{ subcategory.nombre }} > Nueva Sub-Subcategoría</option>
                     </ng-container>
 
                 </ng-container>

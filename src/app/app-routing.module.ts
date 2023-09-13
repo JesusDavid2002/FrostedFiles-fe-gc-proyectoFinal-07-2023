@@ -15,7 +15,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
-import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './session.guard';
 
