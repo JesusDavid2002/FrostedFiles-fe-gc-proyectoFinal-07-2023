@@ -20,6 +20,7 @@ export class UserProfileComponent {
   constructor(private userService: UserService,private router: Router) {}
 
   ngOnInit(): void {
+    // El user-profile html puede tener problemas si el userService.getUserEmail no va y devuelve undefinied
     var userEmail = this.userService.getUserEmail();
     //console.log(userEmail);
     if (userEmail !== null && userEmail !== undefined) {

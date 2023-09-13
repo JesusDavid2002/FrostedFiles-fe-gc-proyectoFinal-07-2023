@@ -9,7 +9,6 @@ export class UserService {
 
   // URL real del back, una vez tengamos el railway funcionando esta dirección debería cambiar
   private API_URL = 'http://localhost:8080';
-  private isAuthenticated = false;
   private userEmail: string | null = null;
 
   constructor(private http: HttpClient) { }
@@ -36,7 +35,6 @@ export class UserService {
   }
 
   setAuthenticatedUser(email: string) {
-    this.isAuthenticated = true;
     this.userEmail = email;
   }
 
