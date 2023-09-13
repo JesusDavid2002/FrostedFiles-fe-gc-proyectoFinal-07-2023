@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl,AbstractControl,ValidationErrors,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 
@@ -11,19 +11,30 @@ import { UserService } from '../../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   formReg: FormGroup;
+  passwordsMatch: boolean = false;
+  formError: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {
-    this.formReg = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
-      passwordValidation: new FormControl(''),
-      fechaCreacion: new FormControl(new Date().toISOString()),
-      username: new FormControl(''),
+  emailValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value && typeof value === 'string' && !value.includes('@')) {
+      return { invalidEmail: true };
+    }
+    return null;
+  }
+
+  constructor(private fb: FormBuilder,private userService: UserService, private router: Router) {
+    
+    this.formReg = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, this.emailValidator]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      passwordValidation: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
   }
+
 
   onSubmit() {
     if (this.formReg.valid) {
@@ -31,20 +42,45 @@ export class RegisterComponent implements OnInit {
       let passwordValidation = this.formReg.get('passwordValidation')?.value;
   
       if (password === passwordValidation) {
-        this.userService.register(this.formReg.value).subscribe(
-          res => {
-            // console.log(res);
-            this.router.navigate(['/home']);
-          },
-          err => {
-            console.log(err);
-          }
-        );
+        const fechaCreacion = new Date().toISOString();
+        const userData = {
+          username: this.formReg.get('username')?.value,
+          email: this.formReg.get('email')?.value,
+          password: this.formReg.get('password')?.value,
+          fechaCreacion: fechaCreacion,
+        };
+        if (password.length < 8) {
+          alert('La contraseña debe tener al menos 8 caracteres.');
+        } else {
+          this.userService.register(userData).subscribe(
+            res => {
+              // console.log(res);
+              this.router.navigate(['/home']);
+            },
+            err => {
+              console.log(err);
+            }
+          );
+        }
       } else {
-        alert('Las contraseñas no son iguales.');
+        this.passwordsMatch = true;
       }
     } else {
-      alert('Por favor, rellene todos los campos obligatorios.');
+      if (this.formReg.get('username')?.hasError('minlength')) {
+        alert('El nombre de usuario debe tener al menos 6 caracteres.');
+      }
+      if (this.formReg.get('email')?.hasError('required')) {
+        alert('El correo electrónico es obligatorio.');
+      }
+      if (this.formReg.get('email')?.hasError('invalidEmail')) {
+        alert('El correo electrónico debe ser válido (contener "@").');
+      }
+      if (this.formReg.get('password')?.hasError('minlength')) {
+        alert('La contraseña debe tener al menos 8 caracteres.');
+      }
+      if (this.formReg.get('passwordValidation')?.hasError('required')) {
+        alert('La contraseña tiene que coincidir.');
+      }
     }
   }
 }

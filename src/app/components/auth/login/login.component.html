@@ -17,6 +17,7 @@
                                 <label for="password">Password:</label>
                                 <input type="password" class="form-control my-3" id="password" placeholder="Enter your password" formControlName="password">
                             </div>
+                            <div *ngIf="passwordError" class="text-danger">Incorrect password</div>
                             <div class="my-3">
                                 <button type="submit" class="boton">Login</button> 
                             </div>
