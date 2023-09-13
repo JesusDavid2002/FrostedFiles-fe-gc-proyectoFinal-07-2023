@@ -4,11 +4,9 @@ import { Category } from 'src/app/models/category.model';
 import { Files } from 'src/app/models/files.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
-import * as pdfjsLib from 'pdfjs-dist';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'D:\Bootcamp\Proyecto Final\FrostedFiles-fe-gc-proyectoFinal-07-2023\node_modules\ng2-pdf-viewer\node_modules\pdfjs-dist\lib\pdf.worker.js'; 
 
 @Component({
   selector: 'app-update-file',
