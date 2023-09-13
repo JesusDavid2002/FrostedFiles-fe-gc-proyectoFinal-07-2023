@@ -53,7 +53,7 @@ export class CategoryService {
         'Authorization': `Bearer ${this.userService.getToken()}`
       })
     };
-    this.http.post(`${API_URL}/add`, { nombre: category.nombre}, httpOptions)  // <-- añadido httpOptions
+    this.http.post(`${API_URL}/add`, { nombre: category.nombre}, httpOptions)
       .subscribe(
         (response) => {
           if (category.subcategories) {
