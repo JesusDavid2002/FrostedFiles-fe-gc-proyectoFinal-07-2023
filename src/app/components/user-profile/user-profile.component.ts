@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,10 +10,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent {
+  userEmail: string | null = null;
+  usuario: any = {};
   profilePhoto: string = 'https://cdn.discordapp.com/attachments/598612400031268878/1138873238445891624/default-avatar-3014646752.png';
   backgroundPhoto: string = 'https://cdn.discordapp.com/attachments/598612400031268878/1138873345291595806/CubesBlue.jpg';
   showOverlay: boolean = false;
   buttonClicked: boolean = false;
+
+  constructor(private userService: UserService,private router: Router) {}
+
+  ngOnInit(): void {
+    var userEmail = this.userService.getUserEmail();
+    //console.log(userEmail);
+    if (userEmail !== null && userEmail !== undefined) {
+      this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
+        //console.log(data);
+        this.usuario = data;
+      });
+    }
+  }
 
   toggleEditMode(event: MouseEvent) {
     event.stopPropagation();
