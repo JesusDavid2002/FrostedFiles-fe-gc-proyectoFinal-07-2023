@@ -3,24 +3,22 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="form">
+    <form *ngIf="file">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
-            <input type="email" class="form-control" formControlName="email" placeholder="name@example.com">
+            <label for="destinatario">Email address</label>
+            <input type="email" class="form-control" placeholder="name@example.com">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput2">Asunto</label>
-            <input type="text" class="form-control" formControlName="subject" placeholder="asunto">
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" formControlName="message"
-                placeholder="Escribe el contenido del mensaje" rows="3"></textarea>
+            <label for="asunto">Asunto</label>
+            <input type="text" class="form-control"  placeholder="asunto">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput2">Archivo:</label>
-            <p>{{ name }}</p>
+            <label for="mensaje">Mensaje</label>
+            <textarea class="form-control" placeholder="Escribe el contenido del mensaje" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="archivo">Archivo:</label>
+            <p>{{ file.nombre }}</p>
         </div>
     </form>
 </div>

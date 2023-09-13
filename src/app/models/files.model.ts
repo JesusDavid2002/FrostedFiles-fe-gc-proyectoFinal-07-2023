@@ -8,7 +8,7 @@ export class Files {
     tamano: number = 0;
     fechaSubida: string = '';
     visibilidad: boolean = true;
-    contenido?: any;
-    categories?: Category;
-    subcategories?: Subcategory;
+    contenido!: Uint8Array;
+    categories: Category = new Category();
+    subcategories: Subcategory = new Subcategory();
 }

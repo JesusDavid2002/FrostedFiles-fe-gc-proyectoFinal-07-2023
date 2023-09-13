@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { GlobalGraphic, MonthlyGraphic } from '../models/graphic.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+let API_URL = 'http://localhost:8080/api/moder/acciones';
 
 @Injectable({
   providedIn: 'root'
@@ -8,26 +11,27 @@ import { BehaviorSubject } from 'rxjs';
 export class GraphicService {
 
   private data: MonthlyGraphic[] = [
-    {
-      name: "Upload Files",
-      value: 600
-    },
-    {
-      name: "Download Files",
-      value: 450
-    },
-    {
-      name: "Share Files",
-      value: 860
-    },
-    {
-      name: "Visualization Files",
-      value: 1500
-    }
+    // {
+    //   name: "Upload Files",
+    //   value: 600
+    // },
+    // {
+    //   name: "Download Files",
+    //   value: 450
+    // },
+    // {
+    //   name: "Share Files",
+    //   value: 860
+    // },
+    // {
+    //   name: "Visualization Files",
+    //   value: 1500
+    // }
   ];
+  constructor(private http: HttpClient) {}
 
-  getMonthlyDataGraphic(){
-    return this.data;
+  getMonthlyDataGraphic(): Observable<MonthlyGraphic[]>{
+    return this.http.get<MonthlyGraphic[]>(`${API_URL}/estadisticas`);
   }
 
   private dataGlobal: GlobalGraphic[]  = [
