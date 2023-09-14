@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Users } from '../models/users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers() {
-    return this.http.get<any[]>(`${this.API_URL}/api/admin/users`);
+  getAllUsers(): Observable<Users[]>{
+    return this.http.get<Users[]>(`${this.API_URL}/api/admin/users`);
   }
 
   getUserDetailsByEmail(email: string) {

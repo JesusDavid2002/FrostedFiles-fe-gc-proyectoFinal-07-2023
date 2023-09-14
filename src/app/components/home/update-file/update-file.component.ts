@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category } from 'src/app/models/category.model';
 import { Files } from 'src/app/models/files.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,21 +15,12 @@ export class UpdateFileComponent {
 
   fileNombre: string = '';
   file: Files = new Files;
-  categoriesList: Category[] = [];
-  extractedPages: Uint8Array[] = [];
-  pdfurl = '';
-  pdfSrc: SafeResourceUrl | null = null;
+  pdfurl = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
 
-  constructor(private categoryService: CategoryService, private fileService: FileService, private route: ActivatedRoute, private router: Router, private http: HttpClient,
-    private sanitizer: DomSanitizer) {
-    // this.categoryService.getAllCategories().subscribe(result => {
-    //   this.categoriesList = result;
-    // });
-  }
+  constructor(private fileService: FileService, private route: ActivatedRoute, private router: Router, private http: HttpClient,) {}
 
   ngOnInit(): void{
-    
     this.fileNombre = this.fileService.getSelectedFileName();
     this.fileService.getFilesByName(this.fileNombre).subscribe(
       (archivo: Files) => {
@@ -41,14 +30,15 @@ export class UpdateFileComponent {
         this.file.fechaSubida = archivo.fechaSubida;
         this.file.visibilidad = archivo.visibilidad;
         this.file.categories = archivo.categories;
+        this.file.subcategories = archivo.subcategories;
         
       }
     );    
-    this.fetchPdfFromDatabase();
+    this.fetchPdfFromDatabase(this.fileNombre);
   }
 
-  fetchPdfFromDatabase() {
-      this.fileService.getPDF(this.fileNombre).subscribe({
+  fetchPdfFromDatabase(nombre: string) {
+      this.fileService.getPDF(nombre).subscribe({
         next: (pdfBytes: any) => {
           let pdfUrl = URL.createObjectURL(pdfBytes);
           this.pdfurl = pdfUrl;
