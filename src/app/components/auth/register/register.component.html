@@ -10,23 +10,23 @@
                     <div class="card-body">
                         <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
                             <div class="form-group">
-                                <label for="email">Username:</label>
-                                <input type="text" class="form-control my-3" id="username" placeholder="Enter your username" formControlName="username"/>
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control my-3" id="username" placeholder="Enter your username" formControlName="username" required />
                             </div>
                             <div class="form-group">
                                 <label for="email">Mail:</label>
-                                <input type="email" class="form-control my-3" id="email" placeholder="Enter your email" formControlName="email" />
+                                <input type="email" class="form-control my-3" id="email" placeholder="Enter your email" formControlName="email" required />
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" class="form-control my-3" id="password"
-                                    placeholder="Enter your password" formControlName="password"/> 
+                                <input type="password" class="form-control my-3" id="password" placeholder="Enter your password" formControlName="password" required /> 
                             </div>
                             <div class="form-group">
-                                <label for="password">Repeat Password:</label>
-                                <input type="password" class="form-control my-3" id="passwordValidation"
-                                    placeholder="Repeat your password" formControlName="passwordValidation"/>
+                                <label for="passwordValidation">Repeat Password:</label>
+                                <input type="password" class="form-control my-3" id="passwordValidation" placeholder="Repeat your password" formControlName="passwordValidation" required />
                             </div>
+                            
+                            <div *ngIf="passwordsMatch" class="text-danger">Passwords doesn't match</div>
                             <button type="submit" class="boton">Sign up</button>
                             <div class="TextBottom" style="margin-top: 10px">
                                 <small>* Already have an account?

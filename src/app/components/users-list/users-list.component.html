@@ -11,14 +11,14 @@
     </thead>
     <tbody>
         <tr *ngFor="let user of users; let i = index;">
-            <th scope="row">{{ i+1 }}</th>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}t</td>
-            <td>{{ user.role }}</td>
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ user.nombre }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.roles.nombre }}</td>
             <td class="text-center w-25">
                 <div class="btn btn-outline-info mx-4" (click)="modifyUser()">Modify User</div>
-                <div class="btn btn-outline-danger" (click)="deleteUser()">Delete User</div>
+                <div class="btn btn-outline-danger" (click)="deleteUser(user)">Delete User</div>
             </td>
         </tr>
-    </tbody>
+    </tbody>      
 </table>

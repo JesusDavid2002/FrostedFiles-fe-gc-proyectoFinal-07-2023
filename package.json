@@ -26,6 +26,8 @@
     "bootstrap-icons": "^1.10.5",
     "d3-shape": "^3.2.0",
     "firebase": "^9.23.0",
+    "ng2-pdf-viewer": "^10.0.0",
+    "ngx-extended-pdf-viewer": "^18.0.0-beta.6",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.7.23",
     "tslib": "^2.3.0",

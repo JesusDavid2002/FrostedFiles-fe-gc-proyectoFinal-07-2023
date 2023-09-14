@@ -11,6 +11,7 @@ import { UserService } from '../../../services/user.service';
 export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
+  passwordError: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {
     this.formLogin = new FormGroup({
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.passwordError = true;
       }
     );
   }

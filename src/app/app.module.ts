@@ -34,6 +34,7 @@ import { PermissionsComponent } from './components/home/permissions/permissions.
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ModalCategoriaComponent } from './components/home/modal_categoria/modal-categoria.component';
 import { AuthGuard } from './session.guard';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AuthGuard } from './session.guard';
     CompartirComponent,
     PermissionsComponent,
     WelcomeComponent,
-    ModalCategoriaComponent,
+    ModalCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +71,7 @@ import { AuthGuard } from './session.guard';
     NgxChartsModule,
     NgbModule,
     DragDropModule,
+    NgxExtendedPdfViewerModule
   ],
   exports: [NavbarComponent],
   providers: [AuthGuard],

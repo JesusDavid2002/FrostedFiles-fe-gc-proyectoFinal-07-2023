@@ -1,9 +1,10 @@
 <app-navbar></app-navbar>
 <div class="containerRoot">
 <div class="container-fluid">
+    <form (ngSubmit)="createFile()">
     <div class="row mt-3">
         <div class="col-12 col-md-9 my-1">            
-            <select class="form-control p-3 rounded" id="selectElement">
+            <select class="form-control p-3 rounded" id="selectElement" [(ngModel)]="selectedCategory" name="selectedCategory">
                 <option value="">Open one category</option>
                 <ng-container *ngFor="let category of categoriesList">
                     <option [value]="category.nombre">{{ category.nombre }}</option>
@@ -16,7 +17,7 @@
             </select>
         </div>
         <div class="col-12 col-md-3 my-1">
-            <select class="form-control p-3">
+            <select class="form-control p-3" [(ngModel)]="selectedVisibility" name="selectedVisibility">
                 <option value="1">Visibility: Public</option>
                 <option value="2">Visibility: Private</option>
             </select>
@@ -24,9 +25,9 @@
     </div>
     <div class="row mt-4">
         <div class="col-12 col-md-9">
-            <div (drop)="onFileDropped($event)" (dragover)="onDragOver($event)" id="drag-drop">
+            <div (drop)="onFileDropped($event)" (dragover)="onDragOver($event)" id="drag-drop" form="fileData">
                 <p>Drag and Drop</p>
-                <input type="file" (change)="onFileSelected($event)">
+                <input type="file" (change)="onFileSelected($event)" form="fileData">
             </div>
         </div> 
         <div class="col">
@@ -50,4 +51,6 @@
             <button routerLink="/home" class="btn btn-dark">Go back to home</button>
         </div>
     </div>
-</div></div>
+</form>
+</div>
+</div>

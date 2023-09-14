@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Files } from 'src/app/models/files.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -34,19 +34,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent {
   fileList: Files[] = [];
+  selectedFile: Files|null = null;
   categoriesList: Category[] = [];
   category: string = '';
   visitCount: number = 0;
   selectedFileIndex: number | null = null; 
+  @Output() fileSelected = new EventEmitter<Files>();
 
     
   constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
 
-
   ngOnInit(): void{
-      // this.fileService.getAllFiles().subscribe(result => {
-      //   this.fileList = result;
-      // });
       this.categoryService.getAllCategories().subscribe(result => {
         this.categoriesList = result;
       });
@@ -63,7 +61,8 @@ export class HomeComponent {
         console.error('Error al obtener archivos por categoria ', error);
       }
     });
-  }
+  }  
+
 
   getIconSource(fileType: string | undefined): string {
     // Mapa de extension de archivo por imagen
@@ -73,6 +72,9 @@ export class HomeComponent {
         '.png': 'img.png',
         '.jpg': 'img.png',
         '.mp3': 'mp3.png',
+        '.sql': 'sql.png',
+        'sql': 'sql.png',
+        'pdf': 'pdf.png'
     };
 
     const defaultIcon = 'text.png'; // Icono por defecto
@@ -137,16 +139,16 @@ export class HomeComponent {
     this.currentSortColumn = column;
 }
 
-// Helper para convertir cadena a objeto tipo Date
-convertToDate(dateString: string): Date {
-    const [day, month, year] = dateString.split('/').map(part => parseInt(part, 10));
-    return new Date(year, month - 1, day);
-}
+  // Helper para convertir cadena a objeto tipo Date
+  convertToDate(dateString: string): Date {
+      const [day, month, year] = dateString.split('/').map(part => parseInt(part, 10));
+      return new Date(year, month - 1, day);
+  }
 
 
   openModalShare() {
     let modalRef = this.modalService.open(CompartirComponent);
-    modalRef.componentInstance.name = 'nombre archivo que se compartirá';
+    modalRef.componentInstance.name = this.selectedFile;
   }
 
   openModalPermissions(){
@@ -177,17 +179,36 @@ convertToDate(dateString: string): Date {
     }
   }
 
-  onDeleteFile() {
-    console.log('Método onDeleteFile llamado');
-    console.log("this es:", this);
-    console.log("this.selectedFileIndex es:", this.selectedFileIndex);
-  
+  onDeleteFile(): void {  
     if (this.selectedFileIndex !== null) {
+      let fileSelected = this.fileList[this.selectedFileIndex];
+      let fileName = fileSelected.nombre;
+
       this.swalService.showDeleteAlertFile(this.selectedFileIndex, () => {
         console.log('Callback de Swal ejecutado');
-        this.fileList.splice(this.selectedFileIndex!, 1);
-        this.selectedFileIndex = null;
+        this.fileService.deleteFiles(fileName).subscribe(
+          () => {
+            console.log('Archivo eliminado correctamente');
+            this.fileList.splice(this.selectedFileIndex!, 1);
+            this.selectedFileIndex = null;
+          },
+          (error) => {
+            console.error('Error al eliminar el archivo:', error);
+            // Maneja el error de acuerdo a tus necesidades
+          }
+        );
       });
+    }
+  }
+
+  onSelectFile(): void{
+    if (this.selectedFileIndex !== null) {
+      let fileSelected = this.fileList[this.selectedFileIndex];
+      let fileName = fileSelected.nombre;
+
+      this.fileService.setSelectedFileName(fileName);
+      this.router.navigate(['/home/update-file']);
+      
     }
   }
 }

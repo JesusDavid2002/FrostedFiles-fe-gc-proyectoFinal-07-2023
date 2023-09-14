@@ -1,4 +1,5 @@
 export class Subcategory {
+    id?: number;
     nombre: string = '';
     subsubcategories?: SubSubcategory[];
     open?: boolean;

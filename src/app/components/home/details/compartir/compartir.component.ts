@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Files } from 'src/app/models/files.model';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
@@ -10,34 +12,56 @@ import { FileService } from 'src/app/services/file.service';
 })
 export class CompartirComponent {
 
-  @Input() name: any;
-  form: FormGroup;
+  file: Files = new Files;
+  fileName: string = '';
+  selectedFile: any;
 
-  constructor(public activeModal: NgbActiveModal, private fileService: FileService) {
-    this.form = new FormGroup({
-      email: new FormControl(''),
-      subject: new FormControl(''),
-      message: new FormControl(''),
-      fileName: new FormControl('')
-    });
-  }
-
-
-  compartir() {
-    console.log(this.name);
-    console.log(this.form.value);
-
-    this.fileService.compartirArchivo(this.form.value).subscribe(
-      (response) => {
-        console.log("Solicitud mandada: ", response);
-        
-      },
-      (error) =>{
-        console.log("Solicitud rechazada:", error);
+  constructor(public activeModal: NgbActiveModal, private fileService: FileService, private route: ActivatedRoute) {}
+  
+  ngOnInit():void{
+    this.route.params.subscribe(
+      params => {
+        this.fileName = params['nombre'];
       }
     );
 
-    this.activeModal.close('Close click');
+    this.fileService.getFilesByName(this.fileName).subscribe(
+      result => {
+        this.file = result;
+      }
+    );
+    console.log(this.file);
+    
   }
+
   
+  compartir() {    
+    
+    console.log(this.file);
+    console.log(this.fileName);
+    console.log(this.file.contenido);
+    
+      let formData = new FormData();
+      // formData.append('destinatario', destinatario);
+      // formData.append('asunto', this.form.get('destinatario')?.value);
+      // formData.append('mensaje', this.form.get('destinatario')?.value);
+      
+      if(this.file){
+        formData.append('file', this.selectedFile);
+      }
+      console.log(this.selectedFile);
+      
+    this.fileService.compartirArchivo(formData).subscribe({
+      next: (response) => {
+        console.log("Solicitud mandada: ", response);
+        
+      },
+      error: (error) =>{
+        console.log("Solicitud rechazada:", error);
+      }
+    });
+  
+    this.activeModal.close('Close click');
+    
+  }
 }

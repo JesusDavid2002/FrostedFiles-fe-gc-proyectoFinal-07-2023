@@ -30,6 +30,7 @@ export class NavbarComponent {
   menuBtnActive: boolean = false;
   searchFormActive: boolean = false;
   profileWindowActive: boolean = false;
+  usuario: any = {};
 
   constructor(private userService: UserService, private router: Router) {}
   
@@ -37,7 +38,16 @@ export class NavbarComponent {
     this.userService.logout();
     this.router.navigate(['/welcome']);
   }
-  
+
+  ngOnInit(): void {
+    // El user-profile html puede tener problemas si el userService.getUserEmail no va y devuelve undefinied
+    var userEmail = this.userService.getUserEmail();
+    if (userEmail !== null && userEmail !== undefined) {
+      this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
+        this.usuario = data;
+      });
+    }
+  }
 
   toggleMenu(): void {
     this.menuBtnActive = !this.menuBtnActive;
