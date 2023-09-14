@@ -1,330 +1,328 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .containerRoot {
-    position: relative;
-    height: 92.6vh;
-    color: white;
-    overflow-x: hidden;
-    background-color: #f0f7ff;
+  position: relative;
+  height: auto;
+  color: white;
+  overflow-x: hidden;
+  background-color: #f0f7ff;
 }
 
-nav  {
-    background-color: #5079a5;
+nav {
+  background-color: #5079a5;
 }
 
 input {
-    border: none;
-    width: 45vw;
-    height: 50px;
-    border-left: 4px solid #95d5ff;
-    background-color: #95d5ff3d;
-    color: white;
+  border: none;
+  width: 45vw;
+  height: 50px;
+  border-left: 4px solid #95d5ff;
+  background-color: #95d5ff3d;
+  color: white;
 }
 
 input::placeholder {
-    color: rgba(255, 255, 255, 0.884);
-    opacity: 1;
+  color: rgba(255, 255, 255, 0.884);
+  opacity: 1;
 }
 
-input[type=text]:focus {
-    background-color: #4a87af;
-    color: rgba(255, 255, 255, 0.884);
+input[type="text"]:focus {
+  background-color: #4a87af;
+  color: rgba(255, 255, 255, 0.884);
 }
 
-.boton-Copiar{
-    margin-left: 10px;
+.boton-Copiar {
+  margin-left: 10px;
 }
 
 button {
-    padding: 6px;
-    height: 50px;
-    width: 150px;
-    margin-left: 5px;
-    margin-right: 5px;
+  padding: 6px;
+  height: 50px;
+  width: 150px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-.cl-btns{
-    text-align: center;
-    margin-left: 5vw;
-}
-
-.card{
-    margin-top: 15px;
-    display: flex;
-    border: 1px solid rgb(0, 153, 255);
-    margin-left: 3px;
-    margin-right: 3px;
-    background-color: white;
-}
-
-.card:hover{
-    border: 1px solid rgb(255, 136, 0);
-}
-
-.cartaSeleccionada{
-    background-color: lightgrey;
-}
-
-.card-title {
-    font-weight: 500;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 100%;
-}
-
-#ArchivosContainerCard img {
-    height: 65px;
-    width: 60px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-hr {
-    height: 2px;
-    background-color: #303030;
-    border: none;
-}
-
-#categoriasYfichero {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    height: 85.5vh;
-}
-
-#navbarNavDropdown img {
-    padding-bottom: 5px;
-    margin-right: 5px;
-    height: 35px;
-    width: 30px;
-    visibility: visible;
-}
-
-#ArchivosContainerRoot{
-    margin-left: 70px;
-}
-
-#ArchivosContainerCard{
-    gap: 1vw;
-}
-
-#ArchivosContainerList.col, #ArchivosContainerCard.col  {
-    margin: 15px;
-}
-
-.search img {
-    height: 65px;
-    width: 60px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-#search img {
-    padding-bottom: 5px;
-    margin-right: 5px;
-    height: 35px;
-    width: 30px;
-    visibility: visible;
-}
-
-#search button {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 45px;
+.cl-btns {
+  text-align: center;
+  margin-left: 5vw;
 }
 
 .card {
-    margin-left: 3px;
-    margin-right: 3px;
+  margin-top: 15px;
+  display: flex;
+  border: 1px solid rgb(0, 153, 255);
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: white;
+}
+
+.card:hover {
+  border: 1px solid rgb(255, 136, 0);
+}
+
+.cartaSeleccionada {
+  background-color: lightgrey;
 }
 
 .card-title {
-    font-weight: 500;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 100%;
+  font-weight: 500;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+#ArchivosContainerCard img {
+  height: 65px;
+  width: 60px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+hr {
+  height: 2px;
+  background-color: #303030;
+  border: none;
+}
+
+#categoriasYfichero {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 84.5vh;
+}
+
+#navbarNavDropdown img {
+  padding-bottom: 5px;
+  margin-right: 5px;
+  height: 35px;
+  width: 30px;
+  visibility: visible;
+}
+
+#ArchivosContainerRoot {
+  margin-left: 70px;
+}
+
+#ArchivosContainerCard {
+  gap: 1vw;
+}
+
+#ArchivosContainerList.col,
+#ArchivosContainerCard.col {
+  margin: 15px;
+}
+
+.search img {
+  height: 65px;
+  width: 60px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+#search img {
+  padding-bottom: 5px;
+  margin-right: 5px;
+  height: 35px;
+  width: 30px;
+  visibility: visible;
+}
+
+#search button {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 45px;
+}
+
+.card {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.card-title {
+  font-weight: 500;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .TextoEsconder {
-    display: inline-block;
+  display: inline-block;
 }
 
-.fileTitle{
-    text-align: center;
-    font-weight: bold;
-    color: black;
+.fileTitle {
+  text-align: center;
+  font-weight: bold;
+  color: black;
 }
 
-.cl-img{
-    background: linear-gradient(to left, rgb(195, 232, 255), transparent);
-    background-size: cover;
+.cl-img {
+  background: linear-gradient(to left, rgb(195, 232, 255), transparent);
+  background-size: cover;
 }
 
 .cl-detail,
 .cl-perms {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #000;
-    border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #000;
+  border: 1px solid black;
 }
 
 .cl-detail {
-    position: relative;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.418);
+  position: relative;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.418);
 }
 
 .cl-perms {
-    padding-left: 20px;
-    padding-right: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 15vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
 }
 
-#ArchivosContainerList, #ArchivosDetalles,#ArchivosContainerRoot {
-    color: black;
+#ArchivosContainerList,
+#ArchivosDetalles,
+#ArchivosContainerRoot {
+  color: black;
 }
 
 .verticalLine {
-    border-left: solid #a2d5ff;
+  border-left: solid #a2d5ff;
 }
 
 #ArchivoPermisos {
-    border: 1px solid rgb(255, 0, 0);
+  border: 1px solid rgb(255, 0, 0);
 }
 
 #ArchivosContainerList {
-    margin-top: 10px;
-    background-color: #ffffff;
+  margin-top: 10px;
+  background-color: #ffffff;
 }
 
 .file-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .file-table th,
 .file-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 .file-table th:not(:first-child),
 .file-table td:not(:first-child) {
-    text-align: center;
+  text-align: center;
 }
 
 .file-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
+  background-color: #fafafa;
 }
 
 .file-icon {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .file-table th:first-child,
 .file-table td:first-child {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 .file-table td:nth-child(2) {
-    text-align: left;
+  text-align: left;
 }
 
 .file-table th:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 /* Sorting indicators */
 .sort-icon {
-    margin-left: 5px;
-    font-size: 0.75rem;
-    opacity: 0.5;
-    transition: transform 0.2s;
+  margin-left: 5px;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  transition: transform 0.2s;
 }
 
 .sort-icon.asc {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .sort-icon:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .icon-small {
-    font-size: 16px;
+  font-size: 16px;
 }
 
+@media (max-width: 1850px) {
+  .TextoEsconder {
+    color: transparent;
+    width: 0%;
+    height: 0%;
+  }
 
-@media (max-width: 1850px)  {
-    
-    .TextoEsconder {
-        color: transparent;
-        width: 0%;
-        height: 0%; 
-    } 
-    
-    button {
-        width: 80px; 
-    }
+  button {
+    width: 80px;
+  }
 
-    .cl-btns{
-        margin-left: 20%;
-    }
+  .cl-btns {
+    margin-left: 20%;
+  }
 }
 
 @media (max-width: 1700px) {
-
-    .cl-btns{
-        margin-left: 15%;
-    }
+  .cl-btns {
+    margin-left: 15%;
+  }
 }
 
 @media (max-width: 1500px) {
+  .navbar-collapse.navbar-expand-lg.collapse.show {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 20px;
+  }
 
-    .navbar-collapse.navbar-expand-lg.collapse.show{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin-left: 20px;
-    } 
-
-    .cl-btns{
-        margin-left: 10%;
-    }
+  .cl-btns {
+    margin-left: 10%;
+  }
 }
 
 @media (max-width: 990px) {
-    
-    #categoriasYfichero{
-        height: auto;
-    }
+  #categoriasYfichero {
+    height: auto;
+  }
 
-    #ArchivosContainerCard{
-        gap: 0;
-    }
-    
-    #ArchivosContainerRoot{
-        margin-left: 0;
-    }
-    .cl-detail{
-        height: auto;
-    }
+  #ArchivosContainerCard {
+    gap: 0;
+  }
 
-    .cl-img{
-        width: 100%;
-        background: linear-gradient(to top, rgb(195, 232, 255), transparent);
-    }
+  #ArchivosContainerRoot {
+    margin-left: 0;
+  }
+  .cl-detail {
+    height: auto;
+  }
+
+  .cl-img {
+    width: 100%;
+    background: linear-gradient(to top, rgb(195, 232, 255), transparent);
+  }
 }
