@@ -2,8 +2,8 @@
 <div class="containerRoot">
     <div class="container-fluid">
         <div class="row mt-3">
-            <div class="col-12 col-md-9 my-1">            
-                <select class="form-control p-3 rounded" id="selectElement" *ngIf="file" disabled> 
+            <div class="col-12 col-md-9 my-1">
+                <select class="form-control p-3 rounded" id="selectElement" *ngIf="file" disabled>
                     <option value="1"> {{ file.categories.nombre }} </option>
                     <option value="2"> {{ file.subcategories.nombre }} </option>
                 </select>
@@ -15,9 +15,9 @@
                 </select>
             </div>
         </div>
-        <div class="row mt-3" *ngIf="file">
+        <div class="row mt-3">
             <div class="col-12 col-md-9 my-1 ">
-                <input type="text" class="w-100 ps-2" [(ngModel)]="file.nombre" placeholder="{{file.nombre}}" >
+                <input type="text" class="w-100 ps-2" [(ngModel)]="file.nombre" placeholder="{{file.nombre}}">
             </div>
             <div class="col-11 col-md-3 my-1 ps-3 rounded p-2 cl-type">
                 {{file.extension}}
@@ -25,8 +25,8 @@
         </div>
         <div class="row mt-3">
             <div class="col-12 col-md-9">
-                <div class="rounded cl-vst-prev text-center">  
-                        <ngx-extended-pdf-viewer [src]="pdfurl" [textLayer]="true"></ngx-extended-pdf-viewer>
+                <div class="rounded cl-vst-prev text-center">
+                    <ngx-extended-pdf-viewer [src]="pdfurl" [textLayer]="true"></ngx-extended-pdf-viewer>
                 </div>
             </div>
             <div class="col">
@@ -40,15 +40,15 @@
                     Visibilidad: {{ file.visibilidad }}
                 </div>
             </div>
-            </div> 
-            
         </div>
-        <div class="row text-center my-4">
-            <div class="col">
-                <button type="submit" class="btn btn-dark" (click)="modifyFile()">Upload</button>
-            </div>
-            <div class="col">
-                <button routerLink="/home" class="btn btn-dark">Go back to home</button>
-            </div>
+
+    </div>
+    <div class="row text-center my-4">
+        <div class="col">
+            <button type="submit" class="btn btn-dark" (click)="modifyFile()">Upload</button>
+        </div>
+        <div class="col">
+            <button routerLink="/home" class="btn btn-dark">Go back to home</button>
         </div>
     </div>
+</div>

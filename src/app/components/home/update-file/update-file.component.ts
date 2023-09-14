@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class UpdateFileComponent {
 
   fileNombre: string = '';
-  file: Files = new Files;
+  file: Files = new Files();
   pdfurl = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
 
@@ -31,6 +31,7 @@ export class UpdateFileComponent {
         this.file.visibilidad = archivo.visibilidad;
         this.file.categories = archivo.categories;
         this.file.subcategories = archivo.subcategories;
+        
         
       }
     );    
