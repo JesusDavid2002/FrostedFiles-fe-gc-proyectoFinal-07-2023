@@ -1,14 +1,14 @@
-<div class="chart mx-3" *ngIf="estadisticaGuardada">
+<div class="chart mx-3">
         <ngx-charts-advanced-pie-chart
                 [view]="view"
                 scheme="cool"
-                [results]="estadisticaGuardada"
+                [results]="getData()"
                 [gradient]="gradient"
                 >
         </ngx-charts-advanced-pie-chart>
 </div>
 <!-- Mostrar los datos -->
-<div *ngIf="estadisticaGuardada">
+<!-- <div *ngIf="estadisticaGuardada">
         <h3>Datos de estadísticas mensuales:</h3>
         <ul>
           <li *ngFor="let mesData of estadisticaGuardada">
@@ -20,4 +20,4 @@
             </ul>
           </li>
         </ul>
-      </div>
+      </div> -->

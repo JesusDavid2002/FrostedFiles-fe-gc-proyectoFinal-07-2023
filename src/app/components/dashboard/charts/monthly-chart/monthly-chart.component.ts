@@ -23,25 +23,25 @@ export class MonthlyChartComponent {
   constructor(private graphicService: GraphicService) {}
 
   ngOnInit(): void {
-    let fecha = new Date();
-    let formato = {month: 'long' as const};
-    this.mesActual = fecha.toLocaleDateString('es-ES', formato);
+    // let fecha = new Date();
+    // let formato = {month: 'long' as const};
+    // this.mesActual = fecha.toLocaleDateString('es-ES', formato);
 
-    this.graphicService.getMonthlyDataGraphic().subscribe(data => {
-      if (typeof data === 'object') {
-        // Si data es un objeto, extraer información directamente (ajusta esto según tu estructura de datos)
-        this.estadisticaMensual = this.extractData(data);
-        this.estadisticaMensual = this.estadisticaMensual.filter(item => item.mes === this.mesActual);
-        this.estadisticaGuardada = this.estadisticaMensual;
+    // this.graphicService.getMonthlyDataGraphic().subscribe(data => {
+    //   if (typeof data === 'object') {
+    //     // Si data es un objeto, extraer información directamente (ajusta esto según tu estructura de datos)
+    //     this.estadisticaMensual = this.extractData(data);
+    //     this.estadisticaMensual = this.estadisticaMensual.filter(item => item.mes === this.mesActual);
+    //     this.estadisticaGuardada = this.estadisticaMensual;
         
-      console.log(this.estadisticaMensual);
-      } else {
-        console.error('Los datos recibidos no son de un tipo válido.');
-        this.estadisticaMensual = []; // O proporciona un valor predeterminado
-      }
-      console.log(data);
+    //   console.log(this.estadisticaMensual);
+    //   } else {
+    //     console.error('Los datos recibidos no son de un tipo válido.');
+    //     this.estadisticaMensual = []; // O proporciona un valor predeterminado
+    //   }
+    //   console.log(data);
       
-  });
+  // });
 }
   extractData(data: any): any[] {
     const estadisticaMensual: any[] = [];
@@ -65,5 +65,7 @@ export class MonthlyChartComponent {
   return estadisticaMensual;
   }
 
- 
+  getData(){
+    return this.graphicService.getMonthlyDataGraphic();
+  }
 }
