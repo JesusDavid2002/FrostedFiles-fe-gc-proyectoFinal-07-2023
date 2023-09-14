@@ -41,13 +41,10 @@ export class CategoriesComponent {
   constructor(private categoryService: CategoryService, private swalService: SwalService) {}
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe(result => {
+    // Escuchar cambios en el BehaviorSubject de CategoryService y actualizar la lista de categorías
+    this.categoryService.categories.subscribe(result => {
       this.categoriesList = result;
     });
-    
-    this.rightPanelStyle = {
-      'display': 'none',
-    };
   }
 
   onCategoryClick(category: string){
@@ -105,16 +102,11 @@ export class CategoriesComponent {
   deleteSelectedItem() {   
     if(!this.selectedSubCategory){
         this.deleteCategory(this.selectedCategory.name);
-      
     } else if (this.selectedSubSubCategory){
         this.deleteSubSubcategory(this.selectedCategory.name, this.selectedSubCategory.name, this.selectedSubSubCategory);
-
     } else{
         this.deleteSubcategory(this.selectedCategory.name, this.selectedSubCategory.name);
-      
-      
     }
-
     this.closeContextMenu();
   }
 
@@ -190,4 +182,21 @@ export class CategoriesComponent {
       this.endPress();
     }
   }
+
+
+  addSubcategoryToCategory(category: Category) {
+    const subcategoryName = prompt('Ingrese el nombre de la nueva subcategoría:');
+    if (subcategoryName && subcategoryName.trim() !== '') {
+      this.categoryService.addSubcategory(category.nombre, subcategoryName);
+    }
+  }
+
+
+  addSubSubcategoryToSubcategory(categoryName: string, subcategoryName: string) {
+    const subSubcategoryName = prompt('Ingrese el nombre de la nueva sub-subcategoría:');
+    if (subSubcategoryName && subSubcategoryName.trim() !== '') {
+      this.categoryService.addSubSubcategory(categoryName, subcategoryName, subSubcategoryName);
+    }
+  }
+
 }

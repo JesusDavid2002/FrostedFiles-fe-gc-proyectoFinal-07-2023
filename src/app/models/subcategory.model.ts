@@ -6,6 +6,6 @@ export class Subcategory {
 }
 
 export class SubSubcategory {
-    name?: string;
+    nombre: string = '';
     open?: boolean;
 }
