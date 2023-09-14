@@ -83,6 +83,7 @@ export class UserService {
         'Authorization': 'Bearer ' + this.getToken()
       })
     };
+  }
 
   getSessionEmail() {
     return sessionStorage.getItem('email');

@@ -75,10 +75,10 @@
                                                     (mouseup)="detectRightMouseClick($event, subsubcategory.nombre, subcategory, category)"
                                                     (touchstart)="startPress($event, subsubcategory.nombre, subcategory,category)">
                                                     {{ subsubcategory.nombre }} -->
-                                                <div class="node sub-sub-node" (click)="update(category.nombre, subcategory.nombre, subsubcategory.name)"
-                                                (mouseup)="detectRightMouseClick($event, subsubcategory.name, subcategory, category)"
-                                                (touchstart)="startPress($event, subsubcategory.name, subcategory,category)">  
-                                                    {{ subsubcategory.name }}
+                                                <div class="node sub-sub-node" (click)="update(category.nombre, subcategory.nombre, subsubcategory.nombre)"
+                                                (mouseup)="detectRightMouseClick($event, subsubcategory.nombre, subcategory, category)"
+                                                (touchstart)="startPress($event, subsubcategory.nombre, subcategory,category)">  
+                                                    {{ subsubcategory.nombre }}
                                                 </div>
                                             </li>
                                         </ul>

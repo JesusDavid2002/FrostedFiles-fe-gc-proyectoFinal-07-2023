@@ -222,15 +222,15 @@ export class CategoryService {
 //               return {
 //                 ...subcategory,
 //                 subsubcategories: [...(subcategory.subsubcategories || []), { name: subSubcategoryName }]
-//               }
-//               return subcategory;
-//             }),
-//           };
-//         }
-//         return category;
-//       })
-//     );
-//   }
+              }
+              return subcategory;
+            }),
+          };
+        }
+        return category;
+      })
+    );
+  }
 
   
 }
