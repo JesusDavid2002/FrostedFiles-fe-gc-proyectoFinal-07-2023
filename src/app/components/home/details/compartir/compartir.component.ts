@@ -41,14 +41,12 @@ export class CompartirComponent {
     console.log(this.fileName);
     console.log(this.file.contenido);
     
-    
-    
       let formData = new FormData();
       // formData.append('destinatario', destinatario);
       // formData.append('asunto', this.form.get('destinatario')?.value);
       // formData.append('mensaje', this.form.get('destinatario')?.value);
       
-      if(this.selectedFile){
+      if(this.file){
         formData.append('file', this.selectedFile);
       }
       console.log(this.selectedFile);

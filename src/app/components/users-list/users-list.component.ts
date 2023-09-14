@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { SwalService } from 'src/app/services/swal.service';
+import { Users } from 'src/app/models/users.model';
 
 @Component({
   selector: 'app-users-list',
@@ -9,7 +10,8 @@ import { SwalService } from 'src/app/services/swal.service';
 })
 export class UsersListComponent {
   currentRecord: any;
-  users: any[] = [];
+  users: Users[] = [];
+  
   constructor(private userService: UserService,private swalService: SwalService) {}
 
   ngOnInit(){
@@ -18,7 +20,7 @@ export class UsersListComponent {
   }
 
   loadUsers() {
-    this.userService.getUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       (data: any[]) => {
         this.users = data;
       },

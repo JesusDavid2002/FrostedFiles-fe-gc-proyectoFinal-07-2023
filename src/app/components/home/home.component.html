@@ -99,7 +99,7 @@
                         <p class="my-2">Size: {{file.tamano}}</p>
                         <p class="my-2">Creation date: {{file.fechaSubida}}</p>
                     </div>
-                    <div class="rounded text-center cl-perms pt-2" id="details" *ngFor="let file of fileList" [ngClass]="{'d-none': !file.visibilidad}">
+                    <div class="rounded text-center cl-perms pt-2" id="details" [ngClass]="{'d-none': !file.visibilidad}">
                         <h4>Permisos</h4>
                         <div class="btn btn-dark mt-3 p-2"(click)="openModalPermissions()">Acceder Permisos</div>
                     </div>

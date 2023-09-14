@@ -57,7 +57,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     CompartirComponent,
     PermissionsComponent,
     WelcomeComponent,
-    ModalCategoriaComponent,
+    ModalCategoriaComponent
   ],
   imports: [
     BrowserModule,

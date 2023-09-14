@@ -4,13 +4,8 @@
         <div class="row mt-3">
             <div class="col-12 col-md-9 my-1">            
                 <select class="form-control p-3 rounded" id="selectElement" *ngIf="file" disabled> 
-                    <option value="1"> {{ file.categories.nombre }}</option>
-                    <option value="2"></option>
-                        <!-- <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.nombre">
-                            <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
-                                &nbsp;&nbsp;&nbsp;{{ subcategory.nombre }}
-                            </option>
-                        </optgroup> -->
+                    <option value="1"> {{ file.categories.nombre }} </option>
+                    <option value="2"> {{ file.subcategories.nombre }} </option>
                 </select>
             </div>
             <div class="col-12 col-md-3 my-1">
@@ -24,8 +19,8 @@
             <div class="col-12 col-md-9 my-1 ">
                 <input type="text" class="w-100 ps-2" [(ngModel)]="file.nombre" placeholder="{{file.nombre}}" >
             </div>
-            <div class="col-11 col-md-3 my-1 rounded p-1 cl-type">
-                {{ file.extension}}
+            <div class="col-11 col-md-3 my-1 ps-3 rounded p-2 cl-type">
+                {{file.extension}}
             </div>
         </div>
         <div class="row mt-3">
