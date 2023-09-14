@@ -14,6 +14,8 @@ export class DetailsComponent {
   comment : any;
   comments : any = [];
   visitCount: number = 0;
+  pdfurl = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+
 
   constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService) {
     this.comments = this.commentService.getComments();

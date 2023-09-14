@@ -6,15 +6,15 @@
         <!-- <div>
             Visitas: {{visitCount}}
         </div> -->
-        <div class="col border border-primary">
-            Vista previa del archivo
+        <div class="col-10 border border-primary">
+            <ngx-extended-pdf-viewer [src]="pdfurl" [textLayer]="true"></ngx-extended-pdf-viewer>
         </div>
         <div class="col border border-primary">
             Vista detalles del archivo
         </div>
-        
+
     </div>
-    <div class="row rowRight mt-3">
+    <div class="row rowRight my-5">
         <div class="col">
             <button type="submit" class="btn btn-info itemDownload">
                 <span class="material-symbols-outlined">
@@ -77,7 +77,8 @@
                                         {{ comment.text }}
                                     </div>
                                     <div class="action">
-                                        <button type="button" class="btn btn-danger btn-xs" title="Delete" (click)="onDeleteComment(comment.id)">
+                                        <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            (click)="onDeleteComment(comment.id)">
                                             <span class="material-symbols-outlined">
                                                 delete
                                             </span>
