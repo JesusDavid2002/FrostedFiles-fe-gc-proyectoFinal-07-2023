@@ -92,7 +92,7 @@ export class CategoryService {
     this.http.post(`${API_URLSUB}/add`, { nombre: subcategoryName,
       "categories": {
           "nombre": categoryName
-      }}, httpOptions)  // <-- añadido httpOptions
+      }}, httpOptions)
       .subscribe(
         (response) => {
           // Si la categoría existe, actualizar las categorías con la nueva subcategoría
