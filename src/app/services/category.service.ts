@@ -31,7 +31,7 @@ export class CategoryService {
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${API_URL}`);
+    return this.http.get<Category[]>(`${API_URLSUB}`);
   }
 
   setData(data: Category[]) {
@@ -90,7 +90,7 @@ export class CategoryService {
 
     // Realizar una petición POST al backend para crear la subcategoría
     this.http.post(`${API_URLSUB}/add`, { nombre: subcategoryName,
-      "categories": {
+      "category": {
           "nombre": categoryName
       }}, httpOptions)
       .subscribe(
