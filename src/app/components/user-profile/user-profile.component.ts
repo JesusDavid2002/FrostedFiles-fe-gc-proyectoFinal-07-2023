@@ -57,7 +57,7 @@ export class UserProfileComponent {
       this.editMode = true;
     }
   }
-
+  // Faltaria añadir un aviso al usuario que los cambios se han guardado!
   saveProfile() {
     const formData = new FormData();
   
@@ -90,7 +90,6 @@ export class UserProfileComponent {
     ) {
       this.userService.updateUser(formData).subscribe(
         (data: any) => {
-          console.log(data);
           this.usuario = data;
         },
         (error) => {
