@@ -6,5 +6,6 @@ export class Users {
     password: string = '';
     username: string = '';
     fechaCreacion: string = '';
+    descripcion: string = '';
     roles!: Roles;
 }

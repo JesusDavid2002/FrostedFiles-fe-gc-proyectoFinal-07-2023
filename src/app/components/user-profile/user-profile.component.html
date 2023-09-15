@@ -1,13 +1,14 @@
 <app-navbar></app-navbar>
 <div class="container perfil-contenedor mt-4">
-    <div class="fondo position-relative" (click)="handleBackgroundClick()" (drop)="handleBackgroundDrop($event)" (dragover)="allowDrop($event)">
+    <div class="fondo position-relative" (click)="handleBackgroundClick()" (drop)="handleBackgroundDrop($event)" (dragover)="allowDrop($event)" *ngIf="fotoPortadaUrl">
         <div class="overlay overlay-text d-flex align-items-center justify-content-center" *ngIf="showOverlay">Introduce un nuevo fondo de imagen</div>
+        <img [src]="fotoPortadaUrl" class="fondo">
         <button class="boton-Naranja editar-perfil-btn position-absolute bottom-0 end-0 {{ buttonClicked ? 'btn-green' : '' }}" (click)="toggleEditMode($event)">{{ showOverlay ? 'Guardar cambios' : 'Editar perfil' }}</button>
     </div>
     <div class="perfil-foto-contenedor position-relative" (drop)="handleProfilePhotoDrop($event)" (dragover)="allowDrop($event)">
-        <div class="perfil-outline">
+        <div class="perfil-outline" *ngIf="fotoPerfilUrl">
             <div class="overlay-2 overlay-text d-flex align-items-center justify-content-center" *ngIf="showOverlay">Introduce una foto de perfil nueva</div>
-            <img [src]="profilePhoto" alt="Foto perfil" class="foto-perfil" (click)="openImagePicker('profile')">
+            <img [src]="fotoPerfilUrl" alt="Foto perfil" class="foto-perfil" (click)="openImagePicker('profile')">
         </div>
     </div>
     <div class="row detalles">
@@ -15,19 +16,19 @@
             <div class="perfil-detalles border p-3 mb-1">
                 <div class="perfil-campo mb-3">
                     <label>Usuario:</label>
-                    <span>{{ usuario?.nombre }}</span>
+                    <span>{{ usuario.nombre }}</span>
                 </div>
                 <div class="perfil-campo mb-3">
                     <label>Rol:</label>
-                    <span>{{ usuario?.roles?.nombre }}</span>
+                    <span>{{ usuario.roles.nombre }}</span>
                 </div>
                 <div class="perfil-campo mb-3">
                     <label>Fecha de entrada:</label>
-                    <span>{{ usuario?.fechaCreacion }}</span>
+                    <span>{{ usuario.fechaCreacion }}</span>
                 </div>
                 <div class="perfil-campo mb-3">
                     <label>Descripcion:</label>
-                    <span>Descripcion</span>
+                    <span>{{ usuario.descripcion }}</span>
                 </div>                
             </div>
         </div>
