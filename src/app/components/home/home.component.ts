@@ -39,8 +39,6 @@ export class HomeComponent {
   category: string = '';
   visitCount: number = 0;
   selectedFileIndex: number | null = null; 
-  @Output() fileSelected = new EventEmitter<Files>();
-
     
   constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
 
@@ -82,11 +80,6 @@ export class HomeComponent {
     return `../../../assets/img/icons/${iconMappings[fileType || ''] || defaultIcon}`;
   }
 
-  navigateDetails() {
-    this.router.navigate(['home/details']);
-    this.fileService.increaseVisitCount();
-    this.visitCount = this.fileService.getVisitCount();
-  }
 
   details(index: number): void{
     this.selectedFileIndex = index;
@@ -146,9 +139,17 @@ export class HomeComponent {
   }
 
 
-  openModalShare() {
-    let modalRef = this.modalService.open(CompartirComponent);
-    modalRef.componentInstance.name = this.selectedFile;
+  openModalShare() { 
+    if (this.selectedFileIndex !== null) {
+      let fileSelected = this.fileList[this.selectedFileIndex];
+      let fileName = fileSelected.nombre;
+
+      this.fileService.setSelectedFileName(fileName);
+      
+      let modalRef = this.modalService.open(CompartirComponent);
+      modalRef.componentInstance.name = this.selectedFile;
+      modalRef.componentInstance.selectedFile = fileSelected;      
+    }
   }
 
   openModalPermissions(){
@@ -177,6 +178,19 @@ export class HomeComponent {
         }
       }
     }
+  }
+
+  navigateDetails() {
+    if (this.selectedFileIndex !== null) {
+      let fileSelected = this.fileList[this.selectedFileIndex];
+      let fileName = fileSelected.nombre;
+
+      this.fileService.setSelectedFileName(fileName);
+      this.router.navigate(['home/details']);
+      
+    }
+    // this.fileService.increaseVisitCount();
+    // this.visitCount = this.fileService.getVisitCount();
   }
 
   onDeleteFile(): void {  
@@ -211,4 +225,5 @@ export class HomeComponent {
       
     }
   }
+
 }

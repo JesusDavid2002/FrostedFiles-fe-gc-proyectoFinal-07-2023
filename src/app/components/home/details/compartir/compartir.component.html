@@ -3,25 +3,26 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
-    <form *ngIf="file">
+    <form (ngSubmit)="compartir()" #compartirForm="ngForm" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="destinatario">Email address</label>
-            <input type="email" class="form-control" placeholder="name@example.com">
+            <label for="destinatario">Destinatario:</label>
+            <input type="email" class="form-control" placeholder="name@example.com" name="destinatario" [(ngModel)]="modelo.destinatario">
         </div>
         <div class="form-group">
             <label for="asunto">Asunto</label>
-            <input type="text" class="form-control"  placeholder="asunto">
+            <input type="text" class="form-control" placeholder="asunto" id="asunto" name="asunto" [(ngModel)]="modelo.asunto">
         </div>
         <div class="form-group">
             <label for="mensaje">Mensaje</label>
-            <textarea class="form-control" placeholder="Escribe el contenido del mensaje" rows="3"></textarea>
+            <textarea class="form-control" placeholder="Escribe el contenido del mensaje" rows="3"  id="mensaje" name="mensaje" [(ngModel)]="modelo.mensaje"></textarea>
         </div>
         <div class="form-group">
-            <label for="archivo">Archivo:</label>
-            <p>{{ file.nombre }}</p>
+            <label for="file">Archivo:</label>
+            <p>{{ modelo.archivo | json}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-dark">Compartir</button>
         </div>
     </form>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="compartir()">Compartir</button>
-</div>
+
