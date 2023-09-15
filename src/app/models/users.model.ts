@@ -7,5 +7,7 @@ export class Users {
     username: string = '';
     fechaCreacion: string = '';
     descripcion: string = '';
+    fotoPerfil: string | File = '';
+    fotoPortada: string | File = '';
     roles!: Roles;
 }

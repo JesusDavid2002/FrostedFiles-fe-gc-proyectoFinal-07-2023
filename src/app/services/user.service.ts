@@ -89,6 +89,11 @@ export class UserService {
     return sessionStorage.getItem('email');
   }
 
+  updateUser(formData: FormData): Observable<any> {
+    const userEmail = this.getUserEmail();  
+    return this.http.patch(`${this.API_URL}/api/users/${userEmail}`, formData);
+  }
+
   deleteUser(email: string) {
     return this.http.delete(`${this.API_URL}/api/admin/users/${email}`);
   }
