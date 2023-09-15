@@ -68,7 +68,7 @@
 }
 
 .detalles {
-    transform: translateY(-5%);
+    transform: translateY(-10%);
 }
 
 .perfil-detalles {
@@ -94,4 +94,9 @@
 
 .perfil-campo span {
     margin-left: 10px;
+}
+
+.editar-perfil {
+    margin-bottom: 55px;
+    transform: translateY(-15%);
 }
