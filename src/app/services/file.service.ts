@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Files } from '../models/files.model';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ModeloCompartir } from '../models/modelo-compartir.model';
 import { UserService } from './user.service';
 
@@ -50,7 +50,15 @@ export class FileService {
   }
 
   getPDF(nombre: string): Observable<Blob>{
-    return this.http.get(`${API_URL}/pdf/${nombre}`,{responseType:'blob'});
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/pdf',
+      'Accept': 'application/pdf'
+    });
+    const encodedNombre = encodeURIComponent(nombre); // Codifica el nombre del archivo
+    const url = `${API_URL}/pdf/${nombre}`;
+    console.log(url);
+    
+    return this.http.get(url,{headers: headers, responseType: 'blob'});
   }
 
   postFiles(fileData: Files, file: File): Observable<any> {
@@ -67,12 +75,16 @@ export class FileService {
   }
 
   postCompartir(modelo: ModeloCompartir): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
     let formData = new FormData();
     formData.append('destinatario', modelo.destinatario);
     formData.append('asunto', modelo.asunto);
     formData.append('mensaje', modelo.mensaje);
     formData.append('archivo', modelo.archivo);
-    return this.http.post(`${API_URL}/compartir`, formData, this.userService.getHttpOptionsWithToken());
+    return this.http.post(`${API_URL}/compartir`, formData, {headers: headers});
   }
 
   updateFiles(nombre: string, file: any): Observable<any>{

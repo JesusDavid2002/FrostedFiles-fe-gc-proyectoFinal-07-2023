@@ -80,11 +80,6 @@ export class HomeComponent {
     return `../../../assets/img/icons/${iconMappings[fileType || ''] || defaultIcon}`;
   }
 
-  navigateDetails() {
-    this.router.navigate(['home/details']);
-    this.fileService.increaseVisitCount();
-    this.visitCount = this.fileService.getVisitCount();
-  }
 
   details(index: number): void{
     this.selectedFileIndex = index;
@@ -185,6 +180,19 @@ export class HomeComponent {
     }
   }
 
+  navigateDetails() {
+    if (this.selectedFileIndex !== null) {
+      let fileSelected = this.fileList[this.selectedFileIndex];
+      let fileName = fileSelected.nombre;
+
+      this.fileService.setSelectedFileName(fileName);
+      this.router.navigate(['home/details']);
+      
+    }
+    // this.fileService.increaseVisitCount();
+    // this.visitCount = this.fileService.getVisitCount();
+  }
+
   onDeleteFile(): void {  
     if (this.selectedFileIndex !== null) {
       let fileSelected = this.fileList[this.selectedFileIndex];
@@ -217,6 +225,5 @@ export class HomeComponent {
       
     }
   }
- 
 
 }

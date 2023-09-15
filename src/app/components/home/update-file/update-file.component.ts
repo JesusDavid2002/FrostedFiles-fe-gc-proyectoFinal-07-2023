@@ -4,7 +4,7 @@ import { Files } from 'src/app/models/files.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -16,8 +16,7 @@ export class UpdateFileComponent {
 
   fileNombre: string = '';
   file: Files = new Files();
-  pdfdata: any = null;
-  pdfurl: any = null;
+  pdfUrl: any;
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
 
   constructor(private fileService: FileService, private route: ActivatedRoute,private sanitizer: DomSanitizer, private router: Router, private http: HttpClient,) {}
@@ -33,40 +32,18 @@ export class UpdateFileComponent {
         this.file.visibilidad = archivo.visibilidad;
         this.file.categories = archivo.categories;
         this.file.subcategories = archivo.subcategories;
+        this.file.contenido = archivo.contenido;
         
-        // this.pdfdata = archivo.contenido;
-        // this.pdfurl = this.sanitizer.bypassSecurityTrustResourceUrl(
-        //   'data:application/pdf;base64,' + this.pdfdata
-        // )
-        // console.log(this.pdfurl);
-        
+        this.fetchPdfFromDatabase(this.file.nombre);
       }
     );    
-    this.fetchPdfFromDatabase(this.fileNombre);
+    
   }
 
   fetchPdfFromDatabase(nombre: string) {
-      // this.fileService.getPDF(nombre).subscribe({
-      //   next: (pdfBytes: any) => {
-      //     let pdfUrl = URL.createObjectURL(pdfBytes);
-      //     this.pdfurl = pdfUrl;
-      //     console.log(pdfUrl);
-          
-      //   },
-      //   error: (error: any) => {
-      //     console.error('Error al obtener el PDF desde la base de datos:', error);
-      //   }
-      // });
-      this.fileService.getPDF(nombre).subscribe({
-        next: (pdfBytes: any) => {
-          const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-          this.pdfurl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
-          console.log(this.pdfurl);
-          
-        },
-        error: (error: any) => {
-          console.error('Error al obtener el PDF desde la base de datos:', error);
-        }
+    this.fileService.getPDF(nombre).subscribe(
+      (blob) => {
+        this.pdfUrl = blob
       });
   }
   
@@ -75,9 +52,8 @@ export class UpdateFileComponent {
     if(this.file.visibilidad == true){
       datosNuevos = {
         nombre: this.file.nombre,
-        visibilidad: true
+        visibilidad: this.file.visibilidad
       };
-      
     } else {
       datosNuevos = {
         nombre: this.file.nombre,
