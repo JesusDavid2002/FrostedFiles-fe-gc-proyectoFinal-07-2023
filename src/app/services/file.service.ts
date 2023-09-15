@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Files } from '../models/files.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ModeloCompartir } from '../models/modelo-compartir.model';
+import { UserService } from './user.service';
 
 let API_URL = 'http://localhost:8080/api/files';
 
@@ -10,11 +12,11 @@ let API_URL = 'http://localhost:8080/api/files';
 })
 export class FileService {
 
-  private data: Files[] = [];
   private lastVisit: number = 0;
   private visitCount: number = 0;
+  selectedFileName: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     // const savedLastVisit = localStorage.getItem('lastVisit');
     // const savedVisitCount = localStorage.getItem('visitCount');
 
@@ -26,7 +28,6 @@ export class FileService {
     //   this.visitCount = +savedVisitCount;
     // }
   }
-  selectedFileName: string = '';
 
   setSelectedFileName(name: string) {
     this.selectedFileName = name;
@@ -35,7 +36,7 @@ export class FileService {
   getSelectedFileName() {
     return this.selectedFileName;
   }
-    
+
   getAllFiles(): Observable<Files[]>{
     return this.http.get<Files[]>(`${API_URL}`);
   }
@@ -65,8 +66,13 @@ export class FileService {
     return this.http.post(`${API_URL}/add`, formData);
   }
 
-  postCompartir(formData: FormData): Observable<any>{
-    return this.http.post(`${API_URL}/compartir`, formData);
+  postCompartir(modelo: ModeloCompartir): Observable<any>{
+    let formData = new FormData();
+    formData.append('destinatario', modelo.destinatario);
+    formData.append('asunto', modelo.asunto);
+    formData.append('mensaje', modelo.mensaje);
+    formData.append('archivo', modelo.archivo);
+    return this.http.post(`${API_URL}/compartir`, formData, this.userService.getHttpOptionsWithToken());
   }
 
   updateFiles(nombre: string, file: any): Observable<any>{

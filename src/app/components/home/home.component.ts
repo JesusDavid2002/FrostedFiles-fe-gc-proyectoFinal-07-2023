@@ -39,8 +39,6 @@ export class HomeComponent {
   category: string = '';
   visitCount: number = 0;
   selectedFileIndex: number | null = null; 
-  @Output() fileSelected = new EventEmitter<Files>();
-
     
   constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
 
@@ -146,9 +144,17 @@ export class HomeComponent {
   }
 
 
-  openModalShare() {
-    let modalRef = this.modalService.open(CompartirComponent);
-    modalRef.componentInstance.name = this.selectedFile;
+  openModalShare() { 
+    if (this.selectedFileIndex !== null) {
+      let fileSelected = this.fileList[this.selectedFileIndex];
+      let fileName = fileSelected.nombre;
+
+      this.fileService.setSelectedFileName(fileName);
+      
+      let modalRef = this.modalService.open(CompartirComponent);
+      modalRef.componentInstance.name = this.selectedFile;
+      modalRef.componentInstance.selectedFile = fileSelected;      
+    }
   }
 
   openModalPermissions(){
@@ -211,4 +217,6 @@ export class HomeComponent {
       
     }
   }
+ 
+
 }

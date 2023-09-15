@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Files } from 'src/app/models/files.model';
+import { ModeloCompartir } from 'src/app/models/modelo-compartir.model';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
@@ -11,57 +12,30 @@ import { FileService } from 'src/app/services/file.service';
   styleUrls: ['./compartir.component.css']
 })
 export class CompartirComponent {
-
-  file: Files = new Files;
-  fileName: string = '';
-  selectedFile: any;
+  modelo = new ModeloCompartir();
+  @Input() selectedFile!: File; 
 
   constructor(public activeModal: NgbActiveModal, private fileService: FileService, private route: ActivatedRoute) {}
-  
-  ngOnInit():void{
-    this.route.params.subscribe(
-      params => {
-        this.fileName = params['nombre'];
-      }
-    );
-
-    this.fileService.getFilesByName(this.fileName).subscribe(
-      result => {
-        this.file = result;
-      }
-    );
-    console.log(this.file);
     
+  ngOnInit(){
+    this.modelo.archivo = this.selectedFile;
   }
 
-  
-  compartir() {    
+  compartir() {        
+    console.log(this.modelo.archivo);
     
-    console.log(this.file);
-    console.log(this.fileName);
-    
-    
-      let formData = new FormData();
-      // formData.append('destinatario', destinatario);
-      // formData.append('asunto', this.form.get('destinatario')?.value);
-      // formData.append('mensaje', this.form.get('destinatario')?.value);
-      
-      if(this.file){
-        formData.append('file', this.selectedFile);
-      }
-      console.log(this.selectedFile);
-      
-    this.fileService.compartirArchivo(formData).subscribe({
+    this.fileService.postCompartir(this.modelo).subscribe({
       next: (response) => {
-        console.log("Solicitud mandada: ", response);
-        
+        console.log('compartido', response);
       },
-      error: (error) =>{
-        console.log("Solicitud rechazada:", error);
+      error: (error) => {
+        console.log('error', error);
+        
       }
     });
-  
-    this.activeModal.close('Close click');
-    
-  }
+      
+    this.activeModal.close('Close click'); 
+    }
+
 }
+
