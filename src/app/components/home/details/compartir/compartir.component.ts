@@ -39,7 +39,7 @@ export class CompartirComponent {
     
     console.log(this.file);
     console.log(this.fileName);
-    console.log(this.file.contenido);
+    
     
       let formData = new FormData();
       // formData.append('destinatario', destinatario);

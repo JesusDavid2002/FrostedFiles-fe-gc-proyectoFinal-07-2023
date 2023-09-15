@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { UntypedFormBuilder } from '@angular/forms';
+import { Users } from 'src/app/models/users.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,13 +13,15 @@ import { UntypedFormBuilder } from '@angular/forms';
 })
 export class UserProfileComponent {
   userEmail: string | null = null;
-  usuario: any = {};
-  profilePhoto: string = 'https://cdn.discordapp.com/attachments/598612400031268878/1138873238445891624/default-avatar-3014646752.png';
-  backgroundPhoto: string = 'https://cdn.discordapp.com/attachments/598612400031268878/1138873345291595806/CubesBlue.jpg';
+  usuario: Users = new Users();
+  fotoPerfilData: any = null;
+  fotoPortadaData: any = null;
+  fotoPerfilUrl: any = null;
+  fotoPortadaUrl: any = null;
   showOverlay: boolean = false;
   buttonClicked: boolean = false;
 
-  constructor(private userService: UserService,private router: Router) {}
+  constructor(private userService: UserService,private router: Router, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     // El user-profile html puede tener problemas si el userService.getUserEmail no va y devuelve undefinied
@@ -25,6 +29,16 @@ export class UserProfileComponent {
     //console.log(userEmail);
     if (userEmail !== null && userEmail !== undefined) {
       this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
+        this.fotoPerfilData = data.fotoPerfil;
+        this.fotoPerfilUrl = this.sanitizer.bypassSecurityTrustUrl(
+          'data:image/jpeg;base64,' + this.fotoPerfilData
+        );
+
+        this.fotoPortadaData = data.fotoPortada;
+        this.fotoPortadaUrl = this.sanitizer.bypassSecurityTrustUrl(
+          'data:image/jpeg;base64,' + this.fotoPortadaData
+        );
+        
         //console.log(data);
         this.usuario = data;
       });
@@ -68,10 +82,10 @@ export class UserProfileComponent {
         const reader = new FileReader();
         reader.onload = () => {
           if (imageType === 'profile') {
-            this.profilePhoto = reader.result as string;
+            this.fotoPerfilUrl = reader.result as string;
           } else if (imageType === 'fondo') {
-            this.backgroundPhoto = reader.result as string;
-            this.updateBackgroundImage(this.backgroundPhoto);
+            this.fotoPortadaUrl = reader.result as string;
+            this.updateBackgroundImage(this.fotoPortadaUrl);
           }
         };
         reader.readAsDataURL(file);

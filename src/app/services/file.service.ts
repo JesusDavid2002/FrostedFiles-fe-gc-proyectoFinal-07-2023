@@ -48,8 +48,8 @@ export class FileService {
     return this.http.get<Files[]>(`${API_URL}/categories/${category}`);
   }
 
-  getPDF(nombre: string): Observable<Uint8Array>{
-    return this.http.get<Uint8Array>(`${API_URL}/pdf/${nombre}`);
+  getPDF(nombre: string): Observable<Blob>{
+    return this.http.get(`${API_URL}/pdf/${nombre}`,{responseType:'blob'});
   }
 
   postFiles(fileData: Files, file: File): Observable<any> {
