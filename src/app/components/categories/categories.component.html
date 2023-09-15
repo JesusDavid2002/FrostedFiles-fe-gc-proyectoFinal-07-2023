@@ -60,7 +60,7 @@
                                             (touchstart)="startPress($event, '', subcategory,category)">
                                             <span
                                                 [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }"></span> -->
-                                        <div class="node sub-node"(click)="handleClickOnCategory(category)" (click)="update(category.nombre, subcategory.nombre)" 
+                                        <div class="node sub-node"(click)="handleClickOnCategory(subcategory)" (click)="update(category.nombre, subcategory.nombre)" 
                                         (mouseup)="detectRightMouseClick($event, '', subcategory, category)" (touchstart)="startPress($event, '', subcategory,category)">
                                             <span [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }" ></span>
                                             {{ subcategory.nombre }}
