@@ -40,6 +40,12 @@ export class UserService {
     this.setUserEmail(email)
   }
 
+  updateUserName(newName: string) {
+    const userEmail = this.getUserEmail();
+    console.log("userEmail:"+userEmail);
+    return this.http.patch(`${this.API_URL}/api/admin/users/${userEmail}`, newName);
+  }
+
   register(userData: any) {
     return this.http.post(`${this.API_URL}/auth/register`, userData).pipe(
       tap((res: any) => {

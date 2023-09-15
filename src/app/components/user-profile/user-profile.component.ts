@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { UntypedFormBuilder } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,6 +13,8 @@ import { UntypedFormBuilder } from '@angular/forms';
 export class UserProfileComponent {
   userEmail: string | null = null;
   usuario: any = {};
+  nombreInputValue: string = '';
+  editMode: boolean = false;
   profilePhoto: string = 'https://cdn.discordapp.com/attachments/598612400031268878/1138873238445891624/default-avatar-3014646752.png';
   backgroundPhoto: string = 'https://cdn.discordapp.com/attachments/598612400031268878/1138873345291595806/CubesBlue.jpg';
   showOverlay: boolean = false;
@@ -20,12 +23,10 @@ export class UserProfileComponent {
   constructor(private userService: UserService,private router: Router) {}
 
   ngOnInit(): void {
-    // El user-profile html puede tener problemas si el userService.getUserEmail no va y devuelve undefinied
+    this.editMode = false;
     var userEmail = this.userService.getUserEmail();
-    //console.log(userEmail);
     if (userEmail !== null && userEmail !== undefined) {
       this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
-        //console.log(data);
         this.usuario = data;
       });
     }
@@ -34,6 +35,7 @@ export class UserProfileComponent {
   toggleEditMode(event: MouseEvent) {
     event.stopPropagation();
     this.showOverlay = !this.showOverlay;
+    this.editMode = !this.editMode;
     if (this.buttonClicked) {
       this.buttonClicked = false;
     } else {
@@ -57,6 +59,19 @@ export class UserProfileComponent {
     input.accept = 'image/*';
     input.addEventListener('change', (event: any) => this.handleImageChange(event, imageType));
     input.click();
+  }
+
+  saveProfile() {
+    this.usuario.nombre = this.nombreInputValue;
+  
+    this.userService.updateUserName(this.usuario.nombre).subscribe((data: any) => {
+      if (data && data.success) {
+        this.editMode = false;
+        this.buttonClicked = false;
+      } else {
+        console.log("Error SaveProfile() user-profile.component")
+      }
+    });
   }
 
   handleImageChange(event: any, imageType: string) {
