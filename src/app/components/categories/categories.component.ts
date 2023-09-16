@@ -187,7 +187,7 @@ export class CategoriesComponent {
   ): Promise<void> {
     if (!categoryName || !subcategoryName || !subSubcategoryName) {
       console.error(
-        'El nombre de la categoría o subcategoría no puede estar vacío'
+        'El nombre de la subcategoría no puede estar vacío'
       );
       return;
     }

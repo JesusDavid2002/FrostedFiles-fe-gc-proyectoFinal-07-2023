@@ -34,6 +34,10 @@ export class CategoryService {
     return this.http.get<Category[]>(`${API_URLSUB}`);
   }
 
+  getAllCategoriesForSelect(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${API_URL}`);
+  }
+
   setData(data: Category[]) {
     this.data = data;
   }
@@ -63,12 +67,12 @@ export class CategoryService {
           }
           this.categories.next([...this.categories.value, category]);
           console.log('Categorías después de agregar:', this.categories.value);
+          location.reload();
         },
         (error) => {
           console.error('Error al crear la subcategoría:', error);
         }
       );
-    
   }
 
   addSubcategory(categoryName: string, subcategoryName: string) {
@@ -106,6 +110,7 @@ export class CategoryService {
             return category;
           });
           this.categories.next(updatedCategories);
+          location.reload();
         },
         (error) => {
           console.error('Error al crear la subcategoría:', error);

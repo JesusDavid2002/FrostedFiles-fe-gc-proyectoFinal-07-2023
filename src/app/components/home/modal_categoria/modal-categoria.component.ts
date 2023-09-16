@@ -13,6 +13,7 @@ export class ModalCategoriaComponent {
   @Input() name: any;
   formCategory: FormGroup;
   categoriesList: Category[] = [];
+  
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -26,7 +27,7 @@ export class ModalCategoriaComponent {
 
   ngOnInit(): void {
     // this.categoriesList = this.categoryService.getData();
-    this.categoryService.getAllCategories().subscribe(result => {
+    this.categoryService.getAllCategoriesForSelect().subscribe(result => {
       this.categoriesList = result;
     });
   }
