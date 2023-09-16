@@ -57,28 +57,32 @@ export class CategoriesComponent {
     // Escuchar cambios en el BehaviorSubject de CategoryService y actualizar la lista de categorías
     this.categoryService.categories.subscribe((result) => {
       const groupedByCategory: any = {};
-
       result.forEach((item: any) => {
-        const categoryId = item.category.id;
-        if (!groupedByCategory[categoryId]) {
-          groupedByCategory[categoryId] = {
-            id: item.category.id,
-            nombre: item.category.nombre,
-            subcategories: [],
-          };
+        if (item?.categories) { 
+          const categoryId = item.categories.id;
+          if (!groupedByCategory[categoryId]) {
+            groupedByCategory[categoryId] = {
+              id: item.categories.id,
+              nombre: item.categories.nombre,
+              subcategories: [],
+            };
+          }
+          groupedByCategory[categoryId].subcategories.push({
+            id: item.subcategoryId,
+            nombre: item.nombre,
+          });
+        } else {
+          console.warn('Item o item.categories son undefined:', item);
         }
-        groupedByCategory[categoryId].subcategories.push({
-          id: item.subcategoryId,
-          nombre: item.nombre,
-        });
       });
-
+  
       const transformedArray = Object.values(groupedByCategory);
-
       console.log(transformedArray);
       this.categoriesList = transformedArray as Category[];
     });
   }
+  
+  
 
   onCategoryClick(category: string) {
     this.categorySelected.emit(category);
