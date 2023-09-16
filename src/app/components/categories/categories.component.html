@@ -3,7 +3,7 @@
         <div class="row mx-3 my-4">
             <!-- ... (Parte móvil) ... -->
             <div class="col-12 col-md-12 col-lg-3 d-lg-none">
-                <button class="btn btn-info text-center w-100" type="button" data-bs-toggle="collapse"
+                <button class="btn btn-info text-center w-100" type="ºn" data-bs-toggle="collapse"
                     data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
                     <span class="">Categorias</span>
                 </button>
@@ -21,7 +21,8 @@
                                 <ul *ngIf="category.open && category.subcategories && category.subcategories.length > 0"
                                     class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
-                                        <div class="node sub-node" (click)="update(category.nombre, subcategory.nombre)">
+                                        <div class="node sub-node"
+                                            (click)="update(category.nombre, subcategory.nombre)">
                                             {{ subcategory.nombre }}
                                         </div>
                                     </li>
@@ -31,8 +32,6 @@
                     </ul>
                 </div>
             </div>
-
-
             <div class="col cl-categories">
                 <div class="d-none d-lg-block mx-4">
                     <h2>Categories</h2>
@@ -53,16 +52,12 @@
                                     *ngIf="category.subcategories && category.subcategories.length > 0"
                                     class="sub-tree">
                                     <li *ngFor="let subcategory of category.subcategories">
-                                        <!-- corregir el category para que sea subcategorie -->
-<!--                                         <div class="node sub-node" (click)="handleClickOnCategory(category)"
+                                        <div class="node sub-node" (click)="handleClickOnCategory(subcategory)"
                                             (click)="update(category.nombre, subcategory.nombre)"
                                             (mouseup)="detectRightMouseClick($event, '', subcategory, category)"
                                             (touchstart)="startPress($event, '', subcategory,category)">
                                             <span
-                                                [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }"></span> -->
-                                        <div class="node sub-node"(click)="handleClickOnCategory(subcategory)" (click)="update(category.nombre, subcategory.nombre)" 
-                                        (mouseup)="detectRightMouseClick($event, '', subcategory, category)" (touchstart)="startPress($event, '', subcategory,category)">
-                                            <span [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }" ></span>
+                                                [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }"></span>
                                             {{ subcategory.nombre }}
                                         </div>
                                         <!-- Aquí es donde mostramos las sub-subcategorías -->
@@ -70,14 +65,10 @@
                                             *ngIf="subcategory.subsubcategories && subcategory.subsubcategories.length > 0"
                                             class="sub-sub-tree">
                                             <li *ngFor="let subsubcategory of subcategory.subsubcategories">
-<!--                                                 <div class="node sub-sub-node"
+                                                <div class="node sub-sub-node"
                                                     (click)="update(category.nombre, subcategory.nombre, subsubcategory.nombre)"
                                                     (mouseup)="detectRightMouseClick($event, subsubcategory.nombre, subcategory, category)"
                                                     (touchstart)="startPress($event, subsubcategory.nombre, subcategory,category)">
-                                                    {{ subsubcategory.nombre }} -->
-                                                <div class="node sub-sub-node" (click)="update(category.nombre, subcategory.nombre, subsubcategory.nombre)"
-                                                (mouseup)="detectRightMouseClick($event, subsubcategory.nombre, subcategory, category)"
-                                                (touchstart)="startPress($event, subsubcategory.nombre, subcategory,category)">  
                                                     {{ subsubcategory.nombre }}
                                                 </div>
                                             </li>
@@ -93,7 +84,7 @@
     </div>
 </div>
 
-
+<!-- *ngIf="roles.includes('ADMIN')" -->
 <div id="contextmenu" class="contextmenu" [ngStyle]="rightPanelStyle" (clickOutside)="closeContextMenu()"
     (mouseleave)="closeContextMenu()" [@expandCollapse]="contextMenu">
     <ul class="menu">

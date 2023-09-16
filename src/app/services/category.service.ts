@@ -114,15 +114,6 @@ export class CategoryService {
         },
         (error) => {
           console.error('Error al crear la subcategoría:', error);
-//   deleteSubcategory(categoryName: string, subcategoryName: string | null) {
-//     this.categories.next(this.categories.value.map(category => {
-//       if (category.nombre === categoryName && category.subcategories) {
-//         let updateSubcategories = category.subcategories.filter(subcategory => subcategory.nombre !== subcategoryName)
-//         return {
-//           ...category,
-//           subcategories: updateSubcategories
-
-//           //subcategories: category.subcategories.filter(subcategory => subcategory.name !== subcategoryName)
         }
       );
   }
@@ -163,18 +154,6 @@ export class CategoryService {
     );
     console.log('Categorías después de eliminar:', updatedCategories);
     this.categories.next(updatedCategories);
-
-//   addSubcategory(categoryName: string, subcategoryName: string) {
-//     const updatedCategories = this.categories.value.map(category => {
-//       if (category.nombre === categoryName) {
-//         return {
-//           ...category,
-//           subcategories: [...(category.subcategories || []), { name: subcategoryName }]
-//         }
-//       }
-//       return category;
-//     });
-//     //this.categories.next(updatedCategories);
   }
 
   deleteSubcategory(categoryName: string, subcategoryName: string | null) {
@@ -216,17 +195,6 @@ export class CategoryService {
                       subSubcategory.nombre !== subSubcategoryName
                   ),
                 };
-
-//   addSubSubcategory(categoryName: string, subcategoryName: string, subSubcategoryName: string) {
-//     this.categories.next(this.categories.value.map(category => {
-//       if (category.nombre === categoryName && category.subcategories) {
-//         return {
-//           ...category,
-//           subcategories: category.subcategories.map(subcategory => {
-//             if (subcategory.nombre === subcategoryName) {
-//               return {
-//                 ...subcategory,
-//                 subsubcategories: [...(subcategory.subsubcategories || []), { name: subSubcategoryName }]
               }
               return subcategory;
             }),
