@@ -11,6 +11,7 @@ import { Category } from 'src/app/models/category.model';
 import { Subcategory } from 'src/app/models/subcategory.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SwalService } from 'src/app/services/swal.service';
+import { Roles } from 'src/app/models/roles.model';
 
 @Component({
   selector: 'app-categories',
@@ -47,6 +48,7 @@ export class CategoriesComponent {
   selectedSubSubCategory: any;
   categoriesList: Category[] = [];
   categories: Observable<Category[]> | undefined;
+  roles: Roles[] = [];
 
   constructor(
     private categoryService: CategoryService,
