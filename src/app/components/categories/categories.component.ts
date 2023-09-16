@@ -56,6 +56,8 @@ export class CategoriesComponent {
   ngOnInit(): void {
     // Escuchar cambios en el BehaviorSubject de CategoryService y actualizar la lista de categorías
     this.categoryService.categories.subscribe((result) => {
+      console.log(result);
+      
       const groupedByCategory: any = {};
       result.forEach((item: any) => {
         if (item?.categories) { 

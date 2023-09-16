@@ -6,28 +6,16 @@ import { ModeloCompartir } from '../models/modelo-compartir.model';
 import { UserService } from './user.service';
 
 let API_URL = 'http://localhost:8080/api/files';
+let API_URL_ACCIONES = 'http://localhost:8080/api/moder/acciones';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
 
-  private lastVisit: number = 0;
-  private visitCount: number = 0;
   selectedFileName: string = '';
 
-  constructor(private http: HttpClient, private userService: UserService) {
-    // const savedLastVisit = localStorage.getItem('lastVisit');
-    // const savedVisitCount = localStorage.getItem('visitCount');
-
-    // if (savedLastVisit) {
-    //   this.lastVisit = +savedLastVisit;
-    // }
-
-    // if (savedVisitCount) {
-    //   this.visitCount = +savedVisitCount;
-    // }
-  }
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   setSelectedFileName(name: string) {
     this.selectedFileName = name;
@@ -54,7 +42,6 @@ export class FileService {
       'Content-Type': 'application/pdf',
       'Accept': 'application/pdf'
     });
-    const encodedNombre = encodeURIComponent(nombre); // Codifica el nombre del archivo
     const url = `${API_URL}/pdf/${nombre}`;
     console.log(url);
     
@@ -87,6 +74,11 @@ export class FileService {
     return this.http.post(`${API_URL}/compartir`, formData, {headers: headers});
   }
 
+  postDownloadData(tipo: string, fecha: Date, file: any): Observable<any>{
+    let datos = [tipo, fecha, file];
+    return this.http.post(`${API_URL_ACCIONES}/add`, datos);
+  }
+
   updateFiles(nombre: string, file: any): Observable<any>{
     return this.http.patch(`${API_URL}/${nombre}`, file);
   }
@@ -97,20 +89,6 @@ export class FileService {
 
   getById(id: number): Observable<Files>{
     return this.http.get<Files>(''+id);
-  }
-  
-  increaseVisitCount(): void {
-    const currentTime = new Date().getTime();
-    if (currentTime - this.lastVisit >= 3600000) { 
-      this.visitCount++;
-      this.lastVisit = currentTime;
-      localStorage.setItem('lastVisit', this.lastVisit.toString());
-      localStorage.setItem('visitCount', this.visitCount.toString());
-    }
-  }
-
-  getVisitCount(): number {
-    return this.visitCount;
   }
     
   compartirArchivo(requestData: any){

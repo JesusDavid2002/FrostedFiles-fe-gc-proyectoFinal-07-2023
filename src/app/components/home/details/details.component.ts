@@ -14,8 +14,8 @@ import { Files } from 'src/app/models/files.model';
 export class DetailsComponent {
   comment : any;
   comments : any = [];
-  visitCount: number = 0;
   
+  fecha = new Date();
   fileNombre: string = '';
   file: Files = new Files();
   pdfUrl: any;
@@ -24,7 +24,6 @@ export class DetailsComponent {
 
   constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService) {
     this.comments = this.commentService.getComments();
-    this.visitCount = fileService.getVisitCount();
   }
 
   ngOnInit(): void{
@@ -59,6 +58,12 @@ export class DetailsComponent {
       document.body.appendChild(a);
       a.click();
 
+      this.fileService.postDownloadData('descargar', this.fecha, nombre).subscribe(
+        (result) => {
+          console.log('Añadido correctamente a las estadisticas', result);
+        }
+      );
+      
       // Liberar el objeto URL
       window.URL.revokeObjectURL(url);
     });

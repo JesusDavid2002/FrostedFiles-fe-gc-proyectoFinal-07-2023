@@ -2,14 +2,14 @@
     <ngx-charts-bar-vertical-2d
         [view]="view"
         scheme="cool"
-        [results]="getData()"
+        [results]="estadisticaAnuales"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
-        xAxisLabel="Month"
-        yAxisLabel="Value"
+        xAxisLabel="Mes"
+        yAxisLabel="Datos"
         (select)="onSelect($event)"
         (activate)="onActivate($event)"
         (deactivate)="onDeactivate($event)">
