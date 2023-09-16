@@ -12,3 +12,9 @@ export class Files {
     categories: Category = new Category();
     subcategories: Subcategory = new Subcategory();
 }
+
+export class Acciones {
+    tipoAccion: string = '';
+    fecha?: Date;
+    files: string = '';
+}
