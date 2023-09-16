@@ -1,6 +1,4 @@
 export interface MonthlyGraphic {
-    // tipoAccion: string;
-    // value: number;
     name: string;
     value: number;
 }
