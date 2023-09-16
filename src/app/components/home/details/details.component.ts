@@ -15,7 +15,6 @@ export class DetailsComponent {
   comment : any;
   comments : any = [];
   
-  fecha = new Date();
   fileNombre: string = '';
   file: Files = new Files();
   pdfUrl: any;
@@ -45,7 +44,7 @@ export class DetailsComponent {
     );    
   }
 
-  downloadPdfFromDatabase(nombre: string) {
+  downloadPdfFromDatabase(nombre: string, extension: string) {
     this.fileService.getPDF(nombre).subscribe(
     (blob) => {
       // Crear un objeto URL a partir del Blob
@@ -54,18 +53,14 @@ export class DetailsComponent {
       // Crear un enlace para descargar el PDF
       const a = document.createElement('a');
       a.href = url;
-      a.download = nombre; // Puedes establecer el nombre del archivo aquí
+      a.download = nombre + extension; // Puedes establecer el nombre del archivo aquí
       document.body.appendChild(a);
       a.click();
 
-      this.fileService.postDownloadData('descargar', this.fecha, nombre).subscribe(
-        (result) => {
-          console.log('Añadido correctamente a las estadisticas', result);
-        }
-      );
-      
       // Liberar el objeto URL
       window.URL.revokeObjectURL(url);
+      
+      this.registrarDescargar(nombre);
     });
   }
 
@@ -75,6 +70,25 @@ export class DetailsComponent {
         this.pdfUrl = blob
       });
   }
+
+  registrarDescargar(nombre: string) {
+    let accion = {
+      tipoAccion: 'descargar',
+      fecha: new Date(),
+      files: nombre
+    };
+
+    this.fileService.postDownloadData(accion).subscribe({
+      next: (response) => {
+        console.log('Descarga añadida a la grafica', response);
+      },
+      error: (error) => {
+        console.error('Error al añadir', error);
+        
+      }
+    });
+  }
+
 
   openModalShare() {
     const modalRef = this.modalService.open(CompartirComponent);

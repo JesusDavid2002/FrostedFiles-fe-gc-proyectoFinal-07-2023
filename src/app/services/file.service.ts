@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Files } from '../models/files.model';
+import { Acciones, Files } from '../models/files.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ModeloCompartir } from '../models/modelo-compartir.model';
 import { UserService } from './user.service';
 
 let API_URL = 'http://localhost:8080/api/files';
-let API_URL_ACCIONES = 'http://localhost:8080/api/moder/acciones';
+let API_URL_ACCIONES = 'http://localhost:8080/api/acciones';
 
 @Injectable({
   providedIn: 'root'
@@ -74,9 +74,8 @@ export class FileService {
     return this.http.post(`${API_URL}/compartir`, formData, {headers: headers});
   }
 
-  postDownloadData(tipo: string, fecha: Date, file: any): Observable<any>{
-    let datos = [tipo, fecha, file];
-    return this.http.post(`${API_URL_ACCIONES}/add`, datos);
+  postDownloadData(accion: Acciones): Observable<any>{
+    return this.http.post<any>(`${API_URL_ACCIONES}/add`, accion);
   }
 
   updateFiles(nombre: string, file: any): Observable<any>{

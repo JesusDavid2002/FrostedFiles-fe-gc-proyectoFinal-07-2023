@@ -3,7 +3,7 @@ import { GlobalGraphic, MonthlyGraphic } from '../models/graphic.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-let API_URL = 'http://localhost:8080/api/moder/acciones';
+let API_URL = 'http://localhost:8080/api/acciones';
 
 @Injectable({
   providedIn: 'root'
