@@ -142,16 +142,15 @@ export class CategoriesComponent {
   update(
     categoryName?: string,
     subcategoryName?: string,
-    subsubcategoryName?: string
   ) {
-    if (categoryName && !subcategoryName) {
-      let path = `public/multimedia/${categoryName}`;
-      this.categoryService.updateCategory(path);
-    } else if (categoryName && subcategoryName) {
-      let path = `public/multimedia/${categoryName}/${subcategoryName}`;
-      this.categoryService.updateCategory(path);
-      console.log(path);
-    }
+    // if (categoryName && !subcategoryName) {
+    //   let path = `public/multimedia/${categoryName}`;
+    //   this.categoryService.updateCategory(path);
+    // } else if (categoryName && subcategoryName) {
+    //   let path = `public/multimedia/${categoryName}/${subcategoryName}`;
+    //   this.categoryService.updateCategory(path);
+    //   console.log(path);
+    // }
   }
 
   detectRightMouseClick(
@@ -182,20 +181,13 @@ export class CategoriesComponent {
   }
 
   deleteSelectedItem() {
-    if (!this.selectedSubCategory) {
-      this.deleteCategory(this.selectedCategory.name);
-    } else if (this.selectedSubSubCategory) {
-      this.deleteSubSubcategory(
-        this.selectedCategory.name,
-        this.selectedSubCategory.name,
-        this.selectedSubSubCategory
-      );
-    } else {
-      this.deleteSubcategory(
-        this.selectedCategory.name,
-        this.selectedSubCategory.name
-      );
+    if (this.selectedSubCategory) {
+      this.deleteSubcategory(this.selectedCategory.nombre, this.selectedSubCategory.nombre);
+    } 
+    else {
+      this.deleteCategory(this.selectedCategory.nombre);
     }
+
     this.closeContextMenu();
   }
 
@@ -206,7 +198,11 @@ export class CategoriesComponent {
     }
     this.swalService.showDeleteAlertCategory(null, () => {
       console.log('Intentando borrar la categoría:', categoryName);
-      this.categoryService.deleteCategory(categoryName);
+      this.categoryService.deleteCategoryByName(categoryName).subscribe(
+        (result) => {
+          console.log(result);
+          location.reload();
+      });
     });
   }
 
@@ -218,35 +214,37 @@ export class CategoriesComponent {
       return;
     }
     this.swalService.showDeleteAlertSubcategory(null, () => {
-      console.log(
-        `Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`
-      );
-      this.categoryService.deleteSubcategory(categoryName, subcategoryName);
+      console.log(`Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`);
+      this.subcategoryService.deleteSubcategoryByName(subcategoryName).subscribe(
+        (result) => {
+          console.log(result);
+          location.reload();
+      });
     });
   }
 
-  async deleteSubSubcategory(
-    categoryName: string,
-    subcategoryName: string,
-    subSubcategoryName: string
-  ): Promise<void> {
-    if (!categoryName || !subcategoryName || !subSubcategoryName) {
-      console.error(
-        'El nombre de la subcategoría no puede estar vacío'
-      );
-      return;
-    }
-    this.swalService.showDeleteAlertSubSubcategory(null, () => {
-      console.log(
-        `Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`
-      );
-      this.categoryService.deleteSubSubcategory(
-        categoryName,
-        subcategoryName,
-        subSubcategoryName
-      );
-    });
-  }
+  // async deleteSubSubcategory(
+  //   categoryName: string,
+  //   subcategoryName: string,
+  //   subSubcategoryName: string
+  // ): Promise<void> {
+  //   if (!categoryName || !subcategoryName || !subSubcategoryName) {
+  //     console.error(
+  //       'El nombre de la subcategoría no puede estar vacío'
+  //     );
+  //     return;
+  //   }
+  //   this.swalService.showDeleteAlertSubSubcategory(null, () => {
+  //     console.log(
+  //       `Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`
+  //     );
+  //     this.categoryService.deleteSubSubcategory(
+  //       categoryName,
+  //       subcategoryName,
+  //       subSubcategoryName
+  //     );
+  //   });
+  // }
 
   pressing: boolean = false;
 
@@ -296,23 +294,23 @@ export class CategoriesComponent {
       'Ingrese el nombre de la nueva subcategoría:'
     );
     if (subcategoryName && subcategoryName.trim() !== '') {
-      this.categoryService.addSubcategory(category.nombre, subcategoryName);
+      this.subcategoryService.addSubcategories(subcategoryName);
     }
   }
 
-  addSubSubcategoryToSubcategory(
-    categoryName: string,
-    subcategoryName: string
-  ) {
-    const subSubcategoryName = prompt(
-      'Ingrese el nombre de la nueva sub-subcategoría:'
-    );
-    if (subSubcategoryName && subSubcategoryName.trim() !== '') {
-      this.categoryService.addSubSubcategory(
-        categoryName,
-        subcategoryName,
-        subSubcategoryName
-      );
-    }
-  }
+  // addSubSubcategoryToSubcategory(
+  //   categoryName: string,
+  //   subcategoryName: string
+  // ) {
+  //   const subSubcategoryName = prompt(
+  //     'Ingrese el nombre de la nueva sub-subcategoría:'
+  //   );
+  //   if (subSubcategoryName && subSubcategoryName.trim() !== '') {
+  //     this.categoryService.addSubSubcategory(
+  //       categoryName,
+  //       subcategoryName,
+  //       subSubcategoryName
+  //     );
+  //   }
+  // }
 }

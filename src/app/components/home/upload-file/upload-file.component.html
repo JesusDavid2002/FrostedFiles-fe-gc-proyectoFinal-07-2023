@@ -8,7 +8,7 @@
                 <option value="">Open one category</option>
                 <ng-container *ngFor="let category of categoriesList">
                     <option [ngValue]="category.nombre">{{ category.nombre }}</option>
-                    <optgroup *ngIf="subcategoriesByCategory[category.nombre] && subcategoriesByCategory[category.nombre].length > 0" [label]="category.nombre">
+                    <optgroup *ngIf="subcategoriesByCategory[category.nombre] && subcategoriesByCategory[category.nombre].length > 0" [label]="separacion">
                         <option *ngFor="let subcategory of subcategoriesByCategory[category.nombre]" [ngValue]="subcategory.nombre">
                         &nbsp;&nbsp;&nbsp;{{ subcategory.nombre }}
                         </option>

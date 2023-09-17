@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { SubcategoryService } from 'src/app/services/subcategory.service';
 
 @Component({
   selector: 'ngbd-modal-component',
@@ -17,7 +18,8 @@ export class ModalCategoriaComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService
   ) {
     this.formCategory = new FormGroup({
       existingCategory: new FormControl(''), // Para seleccionar categoría existente
@@ -27,7 +29,7 @@ export class ModalCategoriaComponent {
 
   ngOnInit(): void {
     // this.categoriesList = this.categoryService.getData();
-    this.categoryService.getAllCategoriesForSelect().subscribe(result => {
+    this.categoryService.getAllCategories().subscribe(result => {
       this.categoriesList = result;
     });
   }
@@ -37,37 +39,40 @@ export class ModalCategoriaComponent {
     const newCategoryName = this.formCategory.get('newCategoryName')?.value;
 
     if (selectedValue) {
-      const path = selectedValue.split('/');
-      if (path.length === 1) {
+      // const path = selectedValue.split('/');
+      
         // Se seleccionó solo una categoría, agregamos una subcategoría
-        this.categoryService.addSubcategory(path[0], newCategoryName);
-      } else if (path.length === 2) {
-        if (path[1] === "newSubSubcategory") {
-          // Se seleccionó "Nueva Sub-Subcategoría" bajo una categoría
-          this.categoryService.addSubcategory(path[0], newCategoryName);
-        } else {
-          // Se seleccionó una subcategoría, agregamos una sub-subcategoría
-          this.categoryService.addSubSubcategory(
-            path[0],
-            path[1],
-            newCategoryName
-          );
-        }
-      } else if (path.length === 3 && path[2] === "newSubSubcategory") {
-        // Se seleccionó "Nueva Sub-Subcategoría" bajo una subcategoría
-        this.categoryService.addSubSubcategory(
-          path[0],
-          path[1],
-          newCategoryName
-        );
-      }
+        this.subcategoryService.addSubcategories(newCategoryName);
+      
+      // else if (path.length === 2) {
+      //   if (path[1] === "newSubSubcategory") {
+      //     // Se seleccionó "Nueva Sub-Subcategoría" bajo una categoría
+      //     this.categoryService.addSubcategory(path[0], newCategoryName);
+      //   } else {
+      //     // Se seleccionó una subcategoría, agregamos una sub-subcategoría
+      //     this.categoryService.addSubSubcategory(
+      //       path[0],
+      //       path[1],
+      //       newCategoryName
+      //     );
+      //   }
+      // } else if (path.length === 3 && path[2] === "newSubSubcategory") {
+      //   // Se seleccionó "Nueva Sub-Subcategoría" bajo una subcategoría
+      //   this.categoryService.addSubSubcategory(
+      //     path[0],
+      //     path[1],
+      //     newCategoryName
+      //   );
+      // }
+        // }
     } else {
       // Si no se seleccionó ninguna categoría o subcategoría, agregamos una nueva categoría principal
-      let category = new Category();
-      category.nombre = newCategoryName;
-      this.categoryService.addCategory(category);
+      // let category = new Category();
+      // category.nombre = newCategoryName;
+      this.categoryService.addCategory(newCategoryName);
     }
     this.activeModal.close('Close click');
 }
 
 }
+

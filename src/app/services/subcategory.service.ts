@@ -13,9 +13,9 @@ export class SubcategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getSubcategories(): Observable<Subcategory[]>{
-    return this.subcategories.asObservable();
-  }
+  // getSubcategories(): Observable<Subcategory[]>{
+  //   return this.subcategories.asObservable();
+  // }
 
   getAllSubcategories(): Observable<Subcategory[]> {
     return this.http.get<Subcategory[]>(`${API_URLSUB}`);
@@ -25,7 +25,11 @@ export class SubcategoryService {
     return this.http.get<Subcategory[]>(`${API_URLSUB}/${category}`);
   } 
 
-  addSubcategories(subcategory: Subcategory){
-    this.subcategories.next([...this.subcategories.value, subcategory]);
+  addSubcategories(subcategory: string): Observable<any>{
+    return this.http.post(`${API_URLSUB}/add`, subcategory);
+  }
+
+  deleteSubcategoryByName(subcategoryName: string): Observable<any>{
+    return this.http.delete(`${API_URLSUB}/${subcategoryName}`);
   }
 }

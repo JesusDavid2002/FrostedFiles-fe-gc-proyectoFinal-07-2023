@@ -21,6 +21,7 @@ export class UploadFileComponent {
   selectedCategory: string = '';
   selectedSubcategory: string = '';
   selectedOption: string = '';
+  separacion: string = '----------------------------------------';
 
   constructor(private categoryService: CategoryService, private subcategoryService: SubcategoryService,private fileService: FileService, private router: Router) {}
 
@@ -78,9 +79,9 @@ export class UploadFileComponent {
       if (selectedCategory) {
         fileData.categories = selectedCategory;
       } else {
-        // console.error(`No se encontraron subcategorías para la categoría ${selectedCategory}.`);
         if (this.subcategoriesByCategory != null) {
           if (selectedCategory) {
+            console.error(`No se encontraron subcategorías para la categoría ${selectedCategory}.`);
           fileData.subcategories = selectedCategory;
           }
         }
