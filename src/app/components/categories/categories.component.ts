@@ -12,6 +12,7 @@ import { Subcategory } from 'src/app/models/subcategory.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { Roles } from 'src/app/models/roles.model';
+import { SubcategoryService } from 'src/app/services/subcategory.service';
 
 @Component({
   selector: 'app-categories',
@@ -43,57 +44,56 @@ export class CategoriesComponent {
   rightPanelStyle: any = {};
   contextMenu: string = 'closed';
   @Output() categorySelected = new EventEmitter<string>();
+  @Output() subcategorySelected = new EventEmitter<string>();
   selectedCategory: any;
   selectedSubCategory: any;
   selectedSubSubCategory: any;
   categoriesList: Category[] = [];
+  subcategoriesList: Subcategory[] = [];
   categories: Observable<Category[]> | undefined;
   roles: Roles[] = [];
+  subcategoriesByCategory: { [categoryName: string]: Subcategory[] } = {};
 
   constructor(
     private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService,
     private swalService: SwalService
   ) {}
 
   ngOnInit(): void {
-    // Escuchar cambios en el BehaviorSubject de CategoryService y actualizar la lista de categorías
-    this.categoryService.categories.subscribe((result) => {
-      console.log(result);
-      
-      const groupedByCategory: any = {};
-      result.forEach((item: any) => {
-        if (item?.categories) { 
-          const categoryId = item.categories.id;
-          if (!groupedByCategory[categoryId]) {
-            groupedByCategory[categoryId] = {
-              id: item.categories.id,
-              nombre: item.categories.nombre,
-              subcategories: [],
-            };
+    this.categoryService.getAllCategories().subscribe((result) => {
+      this.categoriesList = result;
+      this.categoriesList.forEach((category) => {
+        this.subcategoryService.getSubcategory(category.nombre).subscribe(
+          (subcategories) => {
+            this.subcategoriesByCategory[category.nombre] = subcategories;
+          },
+          (error) => {
+            console.error(
+              `Error al obtener subcategorías para ${category.nombre}:`,
+              error
+            );
           }
-          groupedByCategory[categoryId].subcategories.push({
-            id: item.subcategoryId,
-            nombre: item.nombre,
-          });
-        } else {
-          console.warn('Item o item.categories son undefined:', item);
-        }
+        );
       });
-  
-      const transformedArray = Object.values(groupedByCategory);
-      console.log(transformedArray);
-      this.categoriesList = transformedArray as Category[];
+      console.log(result);
     });
   }
-  
-  
 
   onCategoryClick(category: string) {
     this.categorySelected.emit(category);
   }
 
+  onSubcategoryClick(subcategory: string) {
+    this.subcategorySelected.emit(subcategory);
+  }
+
   desplegar(category: Category) {
     category.open = !category.open;
+  }
+
+  desplegarSub(subcategory: Subcategory) {
+    subcategory.open = !subcategory.open;
   }
 
   handleClickOnCategory(category: Category): void {
@@ -102,20 +102,13 @@ export class CategoriesComponent {
     this.onCategoryClick(category.nombre);
   }
 
-  update(
-    categoryName?: string,
-    subcategoryName?: string,
-    subsubcategoryName?: string
-  ) {
-    if (categoryName && !subcategoryName) {
-      let path = `public/multimedia/${categoryName}`;
-      this.categoryService.updateCategory(path);
-    } else if (categoryName && subcategoryName) {
-      let path = `public/multimedia/${categoryName}/${subcategoryName}`;
-      this.categoryService.updateCategory(path);
-      console.log(path);
-    }
+  handleClickOnSubcategory(subcategory: Subcategory): void {
+    this.desplegarSub(subcategory);
+    this.update(subcategory.nombre);
+    this.onSubcategoryClick(subcategory.nombre);
   }
+
+  update(categoryName?: string, subcategoryName?: string) {}
 
   detectRightMouseClick(
     $event: { which: number; clientX: any; clientY: any },
@@ -130,7 +123,6 @@ export class CategoriesComponent {
         'left.px': $event.clientX - 30,
         'top.px': $event.clientY - 50,
       };
-
       this.selectedSubSubCategory = subsub;
       this.selectedSubCategory = subcategory;
       this.selectedCategory = category;
@@ -145,19 +137,13 @@ export class CategoriesComponent {
   }
 
   deleteSelectedItem() {
-    if (!this.selectedSubCategory) {
-      this.deleteCategory(this.selectedCategory.name);
-    } else if (this.selectedSubSubCategory) {
-      this.deleteSubSubcategory(
-        this.selectedCategory.name,
-        this.selectedSubCategory.name,
-        this.selectedSubSubCategory
+    if (this.selectedSubCategory) {
+      this.deleteSubcategory(
+        this.selectedCategory.nombre,
+        this.selectedSubCategory.nombre
       );
     } else {
-      this.deleteSubcategory(
-        this.selectedCategory.name,
-        this.selectedSubCategory.name
-      );
+      this.deleteCategory(this.selectedCategory.nombre);
     }
     this.closeContextMenu();
   }
@@ -169,7 +155,12 @@ export class CategoriesComponent {
     }
     this.swalService.showDeleteAlertCategory(null, () => {
       console.log('Intentando borrar la categoría:', categoryName);
-      this.categoryService.deleteCategory(categoryName);
+      this.categoryService
+        .deleteCategoryByName(categoryName)
+        .subscribe((result) => {
+          console.log(result);
+          location.reload();
+        });
     });
   }
 
@@ -184,30 +175,12 @@ export class CategoriesComponent {
       console.log(
         `Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`
       );
-      this.categoryService.deleteSubcategory(categoryName, subcategoryName);
-    });
-  }
-
-  async deleteSubSubcategory(
-    categoryName: string,
-    subcategoryName: string,
-    subSubcategoryName: string
-  ): Promise<void> {
-    if (!categoryName || !subcategoryName || !subSubcategoryName) {
-      console.error(
-        'El nombre de la subcategoría no puede estar vacío'
-      );
-      return;
-    }
-    this.swalService.showDeleteAlertSubSubcategory(null, () => {
-      console.log(
-        `Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`
-      );
-      this.categoryService.deleteSubSubcategory(
-        categoryName,
-        subcategoryName,
-        subSubcategoryName
-      );
+      this.subcategoryService
+        .deleteSubcategoryByName(subcategoryName)
+        .subscribe((result) => {
+          console.log(result);
+          location.reload();
+        });
     });
   }
 
@@ -237,7 +210,6 @@ export class CategoriesComponent {
     this.selectedSubSubCategory = subsub;
     this.selectedSubCategory = subcategory;
     this.selectedCategory = category;
-    // Aquí puedes llamar a tu método o ejecutar la lógica que deseas mientras se mantenga pulsado.
   }
 
   endPress() {
@@ -259,23 +231,8 @@ export class CategoriesComponent {
       'Ingrese el nombre de la nueva subcategoría:'
     );
     if (subcategoryName && subcategoryName.trim() !== '') {
-      this.categoryService.addSubcategory(category.nombre, subcategoryName);
+      this.subcategoryService.addSubcategories(subcategoryName);
     }
   }
-
-  addSubSubcategoryToSubcategory(
-    categoryName: string,
-    subcategoryName: string
-  ) {
-    const subSubcategoryName = prompt(
-      'Ingrese el nombre de la nueva sub-subcategoría:'
-    );
-    if (subSubcategoryName && subSubcategoryName.trim() !== '') {
-      this.categoryService.addSubSubcategory(
-        categoryName,
-        subcategoryName,
-        subSubcategoryName
-      );
-    }
-  }
+  
 }

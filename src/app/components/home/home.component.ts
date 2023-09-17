@@ -12,6 +12,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { SwalService } from 'src/app/services/swal.service';
 import { id } from '@swimlane/ngx-charts';
 import { UserService } from 'src/app/services/user.service';
+import { SubcategoryService } from 'src/app/services/subcategory.service';
+import { Subcategory } from 'src/app/models/subcategory.model';
 
 
 @Component({
@@ -36,15 +38,22 @@ export class HomeComponent {
   fileList: Files[] = [];
   selectedFile: Files|null = null;
   categoriesList: Category[] = [];
+  subcategoriesList: Subcategory[] = [];
   category: string = '';
+  subcategory: string = '';
   visitCount: number = 0;
   selectedFileIndex: number | null = null; 
     
-  constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, private categoryService: CategoryService, private swalService: SwalService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, 
+    private categoryService: CategoryService, private subcategoryService: SubcategoryService, private swalService: SwalService) {}
 
   ngOnInit(): void{
       this.categoryService.getAllCategories().subscribe(result => {
         this.categoriesList = result;
+      });
+
+      this.subcategoryService.getAllSubcategories().subscribe(result => {
+        this.subcategoriesList = result;
       });
   }
 
@@ -61,6 +70,18 @@ export class HomeComponent {
     });
   }  
 
+  onSubcategorySelected(subcategory: string){
+    this.subcategory = subcategory;
+    
+    this.fileService.getFilesBySubcategory(this.subcategory).subscribe({
+      next: (data) => {
+        this.fileList = data;
+      }, 
+      error: (error) => {
+        console.error('Error al obtener archivos por categoria ', error);
+      }
+    });
+  }  
 
   getIconSource(fileType: string | undefined): string {
     // Mapa de extension de archivo por imagen

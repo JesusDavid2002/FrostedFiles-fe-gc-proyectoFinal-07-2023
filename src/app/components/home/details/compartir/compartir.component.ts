@@ -12,18 +12,16 @@ import { FileService } from 'src/app/services/file.service';
   styleUrls: ['./compartir.component.css']
 })
 export class CompartirComponent {
-  modelo = new ModeloCompartir();
-  @Input() selectedFile!: File; 
+  modelo: ModeloCompartir = new ModeloCompartir();
+  @Input() selectedFile!: Files; 
 
   constructor(public activeModal: NgbActiveModal, private fileService: FileService, private route: ActivatedRoute) {}
     
   ngOnInit(){
-    this.modelo.archivo = this.selectedFile;
+    this.modelo.setArchivoFromSelectedFile(this.selectedFile);
   }
 
-  compartir() {        
-    console.log(this.modelo.archivo);
-    
+  compartir() {         
     this.fileService.postCompartir(this.modelo).subscribe({
       next: (response) => {
         console.log('compartido', response);

@@ -36,6 +36,10 @@ export class FileService {
   getFilesByCategory(category: string): Observable<Files[]>{
     return this.http.get<Files[]>(`${API_URL}/categories/${category}`);
   }
+  
+  getFilesBySubcategory(subcategory: string): Observable<Files[]>{
+    return this.http.get<Files[]>(`${API_URL}/subcategories/${subcategory}`);
+  }
 
   getPDF(nombre: string): Observable<Blob>{
     const headers = new HttpHeaders({
@@ -62,16 +66,12 @@ export class FileService {
   }
 
   postCompartir(modelo: ModeloCompartir): Observable<any>{
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
     let formData = new FormData();
     formData.append('destinatario', modelo.destinatario);
     formData.append('asunto', modelo.asunto);
     formData.append('mensaje', modelo.mensaje);
     formData.append('archivo', modelo.archivo);
-    return this.http.post(`${API_URL}/compartir`, formData, {headers: headers});
+    return this.http.post<string>(`${API_URL}/compartir`, formData);
   }
 
   postDownloadData(accion: Acciones): Observable<any>{

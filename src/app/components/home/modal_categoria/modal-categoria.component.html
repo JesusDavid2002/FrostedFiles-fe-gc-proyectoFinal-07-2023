@@ -11,19 +11,6 @@
                 <option value="">-- Nueva o existente categoría --</option>
                 <ng-container *ngFor="let category of categoriesList">
                     <option [value]="category.nombre">{{ category.nombre }}</option>
-
-                  <!-- <optgroup *ngIf="category.subcategories && category.subcategories.length > 0" [label]="category.name">
-                        <option *ngFor="let subcategory of category.subcategories" [value]="subcategory">
-                            &nbsp;&nbsp;&nbsp;{{ subcategory.name }}
-                        </option>
-                    </optgroup> -->
-
-                    <ng-container *ngFor="let subcategory of category.subcategories">
-                        <option [value]="category.nombre + '/' + subcategory.nombre">{{ category.nombre }} > {{ subcategory.nombre }}</option>
-                        <!-- Aquí incluimos una opción para añadir una nueva sub-subcategoría -->
-                        <option [value]="category.nombre + '/' + subcategory.nombre + '/newSubSubcategory'">-- {{ category.nombre }} > {{ subcategory.nombre }} > Nueva Sub-Subcategoría</option>
-                    </ng-container>
-
                 </ng-container>
             </select>
         </div>

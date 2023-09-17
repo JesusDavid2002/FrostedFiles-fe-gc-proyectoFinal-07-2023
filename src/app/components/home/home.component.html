@@ -40,7 +40,7 @@
         </div>
         <div id="categoriasYfichero" class="row mx-auto cl-categories">
             <div class="col-lg-3">
-                <app-categories (categorySelected)="onCategorySelected($event)"></app-categories>
+                <app-categories (categorySelected)="onCategorySelected($event)" (subcategorySelected)="onSubcategorySelected($event)"></app-categories>
             </div>
             <div id="ArchivosContainerRoot" class="col-lg-6 mt-3">
                 <div id="ArchivosContainerCard" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 my-3 mx-2">
