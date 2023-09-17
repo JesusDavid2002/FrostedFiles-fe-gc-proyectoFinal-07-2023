@@ -86,9 +86,6 @@ export class UploadFileComponent {
         }
       }
 
-      
-      
-
       this.fileService.postFiles(fileData, file).subscribe({
         next: (response) => {
           console.log('Archivo subido: ', response);
