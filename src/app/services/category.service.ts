@@ -39,7 +39,7 @@ export class CategoryService {
 
   addSubcategory(categoryName: string, subcategoryName: string) {
     // Verificar primero si la categoría existe
-    if (!this.categories.value.some((cat) => cat.nombre === categoryName)) {
+    if (!this.categories.value.find((cat) => cat.nombre === categoryName)) {
       console.error(
         `La categoría ${categoryName} no existe. No se puede agregar subcategoría.`
       );

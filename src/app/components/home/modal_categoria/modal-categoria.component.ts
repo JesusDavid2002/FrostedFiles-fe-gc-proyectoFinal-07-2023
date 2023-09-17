@@ -37,10 +37,14 @@ export class ModalCategoriaComponent {
     const newCategoryName = this.formCategory.get('newCategoryName')?.value;
     if (selectedValue) {
       // Se seleccionó solo una categoría, agregamos una subcategoría
-      this.subcategoryService.addSubcategories(newCategoryName);
+      this.categoryService.addSubcategory(selectedValue, newCategoryName);
     } else {
       // Si no se seleccionó ninguna categoría o subcategoría, agregamos una nueva categoría principal
-      this.categoryService.addCategory(newCategoryName);
+      this.categoryService.addCategory(newCategoryName).subscribe(
+        (result) =>{
+          console.log(result);
+          
+        });
     }
     this.activeModal.close('Close click');
   }
