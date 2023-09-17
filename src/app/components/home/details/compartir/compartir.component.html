@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="file">Archivo:</label>
-            <p>{{ modelo.archivo | json}}</p>
+            <p>{{ modelo.archivo.name + modelo.archivo.type}}</p>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-outline-dark">Compartir</button>

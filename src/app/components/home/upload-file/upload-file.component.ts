@@ -14,11 +14,13 @@ import { SubcategoryService } from 'src/app/services/subcategory.service';
 })
 export class UploadFileComponent {
   categoriesList: Category[] = [];  
+  subcategoriesList: Subcategory[] = [];
   subcategoriesByCategory: { [categoryName: string]: Subcategory[] } = {};
   selectedFiles: File[] = [];
   selectedVisibility: number = 1; 
   selectedCategory: string = '';
   selectedSubcategory: string = '';
+  selectedOption: string = '';
 
   constructor(private categoryService: CategoryService, private subcategoryService: SubcategoryService,private fileService: FileService, private router: Router) {}
 
@@ -34,6 +36,7 @@ export class UploadFileComponent {
         // Inicializa subcategoriesByCategory con las categorías como claves vacías
         this.categoriesList.forEach((category) => {
           this.subcategoriesByCategory[category.nombre] = [];
+          
         });
 
         // Llena subcategoriesByCategory con las subcategorías correspondientes
@@ -72,20 +75,19 @@ export class UploadFileComponent {
       fileData.visibilidad = this.selectedVisibility === 1;
 
       let selectedCategory = this.categoriesList.find(c => c.nombre === this.selectedCategory);
-      if (!selectedCategory) {
-        console.log(`La categoría ${this.selectedCategory} no se encontró en la lista de categorías.`);
-        return;
+      if (selectedCategory) {
+        fileData.categories = selectedCategory;
+      } else {
+        // console.error(`No se encontraron subcategorías para la categoría ${selectedCategory}.`);
+        if (this.subcategoriesByCategory != null) {
+          if (selectedCategory) {
+          fileData.subcategories = selectedCategory;
+          }
+        }
       }
 
-      // let selectedSubcategory = this.subcategoriesList.find(c => c.nombre === this.selectedSubcategory);
-      // if (!selectedSubcategory) {
-      //   console.log(`La subcategoría ${this.selectedSubcategory} no se encontró en la lista de subcategorías.`);
-      //   return;
-      // }
-    
-      // Aquí asignamos la categoría seleccionada de la lista, en vez de una nueva instancia
-      fileData.categories = selectedCategory; 
-      // fileData.subcategories = selectedSubcategory; 
+      
+      
 
       this.fileService.postFiles(fileData, file).subscribe({
         next: (response) => {
