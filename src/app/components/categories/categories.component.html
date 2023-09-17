@@ -57,32 +57,6 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <!-- <ul [@expandCollapse]="category.open ? 'open' : 'closed'"
-                                    *ngIf="category.subcategories && category.subcategories.length > 0"
-                                    class="sub-tree">
-                                    <li *ngFor="let subcategory of category.subcategories">
-                                        <div class="node sub-node"
-                                            (click)="update(category.nombre, subcategory.nombre)"
-                                            (mouseup)="detectRightMouseClick($event, '', subcategory, category)"
-                                            (touchstart)="startPress($event, '', subcategory,category)">
-                                            <span
-                                                [ngClass]="{ 'icon-open': subcategory.open, 'icon-closed': !subcategory.open }"></span>
-                                            {{ subcategory.nombre }}
-                                        </div>Aquí es donde mostramos las sub-subcategorías -->
-                                        <!-- <ul [@expandCollapse]="subcategory.open ? 'open' : 'closed'"
-                                            *ngIf="subcategory.subsubcategories && subcategory.subsubcategories.length > 0"
-                                            class="sub-sub-tree">
-                                            <li *ngFor="let subsubcategory of subcategory.subsubcategories">
-                                                <div class="node sub-sub-node"
-                                                    (click)="update(category.nombre, subcategory.nombre, subsubcategory.nombre)"
-                                                    (mouseup)="detectRightMouseClick($event, subsubcategory.nombre, subcategory, category)"
-                                                    (touchstart)="startPress($event, subsubcategory.nombre, subcategory,category)">
-                                                    {{ subsubcategory.nombre }}
-                                                </div>
-                                            </li>
-                                        </ul> 
-                                    </li>
-                                </ul> -->
                             </li>
                         </ng-container>
                     </ul>

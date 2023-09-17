@@ -6,5 +6,3 @@ export class Category {
     subcategories: Subcategory[] = [];
     open?: boolean;
 }
-
-

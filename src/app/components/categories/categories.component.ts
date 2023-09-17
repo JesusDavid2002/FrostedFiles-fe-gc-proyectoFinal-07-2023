@@ -61,55 +61,24 @@ export class CategoriesComponent {
   ) {}
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe(
-      (result) => {
-        this.categoriesList = result;
-        this.categoriesList.forEach((category) => {
-          this.subcategoryService.getSubcategory(category.nombre).subscribe(
-            (subcategories) => {
-              this.subcategoriesByCategory[category.nombre] = subcategories;
-            },
-            (error) => {
-              console.error(`Error al obtener subcategorías para ${category.nombre}:`, error);
-            }
-          );
-        });
-        
-        
-        console.log(result);
-      }
-    );
-    // Escuchar cambios en el BehaviorSubject de CategoryService y actualizar la lista de categorías
-    // this.categoryService.categories.subscribe((result) => {
-    //   console.log(result);
-      
-    //   const groupedByCategory: any = {};
-    //   result.forEach((item: any) => {
-    //     if (item?.categories) { 
-    //       const categoryId = item.categories.id;
-    //       if (!groupedByCategory[categoryId]) {
-    //         groupedByCategory[categoryId] = {
-    //           id: item.categories.id,
-    //           nombre: item.categories.nombre,
-    //           subcategories: [],
-    //         };
-    //       }
-    //       groupedByCategory[categoryId].subcategories.push({
-    //         id: item.subcategoryId,
-    //         nombre: item.nombre,
-    //       });
-    //     } else {
-    //       console.warn('Item o item.categories son undefined:', item);
-    //     }
-    //   });
-  
-    //   const transformedArray = Object.values(groupedByCategory);
-    //   console.log(transformedArray);
-    //   this.categoriesList = transformedArray as Category[];
-    // });
+    this.categoryService.getAllCategories().subscribe((result) => {
+      this.categoriesList = result;
+      this.categoriesList.forEach((category) => {
+        this.subcategoryService.getSubcategory(category.nombre).subscribe(
+          (subcategories) => {
+            this.subcategoriesByCategory[category.nombre] = subcategories;
+          },
+          (error) => {
+            console.error(
+              `Error al obtener subcategorías para ${category.nombre}:`,
+              error
+            );
+          }
+        );
+      });
+      console.log(result);
+    });
   }
-  
-  
 
   onCategoryClick(category: string) {
     this.categorySelected.emit(category);
@@ -139,19 +108,7 @@ export class CategoriesComponent {
     this.onSubcategoryClick(subcategory.nombre);
   }
 
-  update(
-    categoryName?: string,
-    subcategoryName?: string,
-  ) {
-    // if (categoryName && !subcategoryName) {
-    //   let path = `public/multimedia/${categoryName}`;
-    //   this.categoryService.updateCategory(path);
-    // } else if (categoryName && subcategoryName) {
-    //   let path = `public/multimedia/${categoryName}/${subcategoryName}`;
-    //   this.categoryService.updateCategory(path);
-    //   console.log(path);
-    // }
-  }
+  update(categoryName?: string, subcategoryName?: string) {}
 
   detectRightMouseClick(
     $event: { which: number; clientX: any; clientY: any },
@@ -166,7 +123,6 @@ export class CategoriesComponent {
         'left.px': $event.clientX - 30,
         'top.px': $event.clientY - 50,
       };
-
       this.selectedSubSubCategory = subsub;
       this.selectedSubCategory = subcategory;
       this.selectedCategory = category;
@@ -182,12 +138,13 @@ export class CategoriesComponent {
 
   deleteSelectedItem() {
     if (this.selectedSubCategory) {
-      this.deleteSubcategory(this.selectedCategory.nombre, this.selectedSubCategory.nombre);
-    } 
-    else {
+      this.deleteSubcategory(
+        this.selectedCategory.nombre,
+        this.selectedSubCategory.nombre
+      );
+    } else {
       this.deleteCategory(this.selectedCategory.nombre);
     }
-
     this.closeContextMenu();
   }
 
@@ -198,11 +155,12 @@ export class CategoriesComponent {
     }
     this.swalService.showDeleteAlertCategory(null, () => {
       console.log('Intentando borrar la categoría:', categoryName);
-      this.categoryService.deleteCategoryByName(categoryName).subscribe(
-        (result) => {
+      this.categoryService
+        .deleteCategoryByName(categoryName)
+        .subscribe((result) => {
           console.log(result);
           location.reload();
-      });
+        });
     });
   }
 
@@ -214,37 +172,17 @@ export class CategoriesComponent {
       return;
     }
     this.swalService.showDeleteAlertSubcategory(null, () => {
-      console.log(`Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`);
-      this.subcategoryService.deleteSubcategoryByName(subcategoryName).subscribe(
-        (result) => {
+      console.log(
+        `Intentando borrar la subcategoría: ${subcategoryName} de la categoría: ${categoryName}`
+      );
+      this.subcategoryService
+        .deleteSubcategoryByName(subcategoryName)
+        .subscribe((result) => {
           console.log(result);
           location.reload();
-      });
+        });
     });
   }
-
-  // async deleteSubSubcategory(
-  //   categoryName: string,
-  //   subcategoryName: string,
-  //   subSubcategoryName: string
-  // ): Promise<void> {
-  //   if (!categoryName || !subcategoryName || !subSubcategoryName) {
-  //     console.error(
-  //       'El nombre de la subcategoría no puede estar vacío'
-  //     );
-  //     return;
-  //   }
-  //   this.swalService.showDeleteAlertSubSubcategory(null, () => {
-  //     console.log(
-  //       `Intentando borrar la sub-subcategoría: ${subSubcategoryName} de la subcategoría: ${subcategoryName} en la categoría: ${categoryName}`
-  //     );
-  //     this.categoryService.deleteSubSubcategory(
-  //       categoryName,
-  //       subcategoryName,
-  //       subSubcategoryName
-  //     );
-  //   });
-  // }
 
   pressing: boolean = false;
 
@@ -272,7 +210,6 @@ export class CategoriesComponent {
     this.selectedSubSubCategory = subsub;
     this.selectedSubCategory = subcategory;
     this.selectedCategory = category;
-    // Aquí puedes llamar a tu método o ejecutar la lógica que deseas mientras se mantenga pulsado.
   }
 
   endPress() {
@@ -297,20 +234,5 @@ export class CategoriesComponent {
       this.subcategoryService.addSubcategories(subcategoryName);
     }
   }
-
-  // addSubSubcategoryToSubcategory(
-  //   categoryName: string,
-  //   subcategoryName: string
-  // ) {
-  //   const subSubcategoryName = prompt(
-  //     'Ingrese el nombre de la nueva sub-subcategoría:'
-  //   );
-  //   if (subSubcategoryName && subSubcategoryName.trim() !== '') {
-  //     this.categoryService.addSubSubcategory(
-  //       categoryName,
-  //       subcategoryName,
-  //       subSubcategoryName
-  //     );
-  //   }
-  // }
+  
 }
