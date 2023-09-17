@@ -30,8 +30,34 @@ export class UsersListComponent {
     );
   }
 
-  modifyUser(){
-
+  modifyUser(user: any) {
+    const roles = ['USER', 'MODERATOR', 'ADMIN'];
+  
+    this.userService.getUserDetailsByEmail(user.username).subscribe(
+      (userObject: any) => {
+        this.swalService.showModifyUserPopup(userObject, roles, (formData: FormData, selectedRole: string) => {
+          userObject.nombre = formData.get('nombre');
+          userObject.username = formData.get('username');
+          userObject.roles = { nombre: selectedRole, primaryKey: { nombre: selectedRole } };
+  
+          console.log(userObject.nombre);
+          console.log(userObject.username);
+          console.log(userObject.roles);
+  
+          this.userService.updateAdmin(user.username, userObject).subscribe(
+            () => {
+              this.loadUsers();
+            },
+            (error) => {
+              console.error('Error updating user:', error);
+            }
+          );
+        });
+      },
+      (error) => {
+        console.error('Error retrieving user details:', error);
+      }
+    );
   }
 
   deleteUser(user: any) {
@@ -46,7 +72,4 @@ export class UsersListComponent {
       );
     });
   }
-  
-
-  
 }
