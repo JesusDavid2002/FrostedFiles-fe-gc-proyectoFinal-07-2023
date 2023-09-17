@@ -90,8 +90,12 @@ export class UserService {
   }
 
   updateUser(formData: FormData): Observable<any> {
-    const userEmail = this.getUserEmail();  
+    const userEmail = formData.get('username');
     return this.http.patch(`${this.API_URL}/api/users/${userEmail}`, formData);
+  }
+
+  updateAdmin(username: string, user: any): Observable<any> {
+    return this.http.patch(`${this.API_URL}/api/admin/users/${username}`, user);
   }
 
   deleteUser(email: string) {

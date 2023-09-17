@@ -16,7 +16,7 @@
             <td>{{ user.username }}</td>
             <td>{{ user.roles.nombre }}</td>
             <td class="text-center w-25">
-                <div class="btn btn-outline-info mx-4" (click)="modifyUser()">Modify User</div>
+                <div class="btn btn-outline-info mx-4" (click)="modifyUser(user)">Modify User</div>
                 <div class="btn btn-outline-danger" (click)="deleteUser(user)">Delete User</div>
             </td>
         </tr>

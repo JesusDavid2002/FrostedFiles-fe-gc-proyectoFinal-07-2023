@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CommentService } from './comment.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class SwalService {
     throw new Error('Method not implemented.');
   }
 
-  constructor(private commentService: CommentService) { }
+  constructor(private commentService: CommentService,private userService: UserService) { }
 
   async showInputAlert() {
     const { value: formValues } = await Swal.fire({
@@ -166,15 +167,49 @@ export class SwalService {
       cancelButtonText: 'Cancelar',
       reverseButtons: false
     })
-      .then((result) => {
-        if (result.value) {
-          callback();
-          this.showSuccessToast("Sub-Subcategoría borrada exitosamente");
-        } else {
-          console.log('cancel');
-        }
-      });
+    .then((result) => {
+      if (result.value) {
+        callback();
+        this.showSuccessToast("Sub-Subcategoría borrada exitosamente");
+      } else {
+        console.log('cancel');
+      }
+    });
   }
+
+  showModifyUserPopup(user: any, roles: string[], onModify: (formData: FormData, selectedRole: string) => void) {
+    Swal.fire({
+      title: 'Modify User',
+      html: `
+        <input id="nombre" class="swal2-input" value="${user.nombre}" placeholder="Introduce un nuevo nombre">
+        <input id="username" class="swal2-input" value="${user.username}" placeholder="Introduce un nuevo username">
+        <select id="selectedRole" class="swal2-select">
+          ${roles.map((role) => `<option value="${role}">${role}</option>`)}
+        </select>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const formData = new FormData();
+        const nombre = document.getElementById('nombre') as HTMLInputElement;
+        const username = document.getElementById('username') as HTMLInputElement;
+        const selectedRole = (document.getElementById('selectedRole') as HTMLSelectElement).value;
+  
+        formData.append('nombre', nombre.value);
+        formData.append('username', username.value);
+        formData.append('selectedRole', selectedRole);
+  
+        return { formData, selectedRole };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const { formData, selectedRole } = result.value;
+        onModify(formData, selectedRole);
+      }
+    });
+  }
+
 
   showDeleteUserConfirmation(user: any, callback: Function) {
     const swalWithBootstrapButtons = Swal.mixin({

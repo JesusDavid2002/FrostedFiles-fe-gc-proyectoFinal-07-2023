@@ -39,7 +39,6 @@ export class UserProfileComponent {
         this.fotoPortadaUrl = this.sanitizer.bypassSecurityTrustUrl(
           'data:image/jpeg;base64,' + this.fotoPortadaData
         );
-        
         console.log(data);
         this.usuario = data;
       });
@@ -60,47 +59,50 @@ export class UserProfileComponent {
   // Faltaria añadir un aviso al usuario que los cambios se han guardado!
   saveProfile() {
     const formData = new FormData();
-  
-    formData.append('nombre', this.usuario.nombre);
-    formData.append('descripcion', this.usuario.descripcion);
-  
-    if (this.fotoPerfilUrl !== this.usuario.fotoPerfil) {
-      const fotoPerfilBlob = this.dataURItoBlob(this.fotoPerfilUrl);
-      if (fotoPerfilBlob === this.fotoPerfilUrl) {
-      } else  {
-        const fotoPerfilFile = new File([fotoPerfilBlob], 'fotoPerfil.jpg');
-        formData.append('fotoPerfil', fotoPerfilFile);
-    }
-    }
-  
-    if (this.fotoPortadaUrl !== this.usuario.fotoPortada) {
-      const fotoPortadaBlob = this.dataURItoBlob(this.fotoPortadaUrl);
-      if (fotoPortadaBlob === this.fotoPortadaUrl) {
-      } else  {
-        const fotoPortadaFile = new File([fotoPortadaBlob], 'fotoPortada.jpg');
-        formData.append('fotoPortada', fotoPortadaFile);
+    const userEmail = this.userService.getUserEmail();
+
+    if (userEmail !== null && userEmail !== undefined) {
+      formData.append('username', userEmail);
+      formData.append('nombre', this.usuario.nombre);
+      formData.append('descripcion', this.usuario.descripcion);
+    
+      if (this.fotoPerfilUrl !== this.usuario.fotoPerfil) {
+        const fotoPerfilBlob = this.dataURItoBlob(this.fotoPerfilUrl);
+        if (fotoPerfilBlob === this.fotoPerfilUrl) {
+        } else  {
+          const fotoPerfilFile = new File([fotoPerfilBlob], 'fotoPerfil.jpg');
+          formData.append('fotoPerfil', fotoPerfilFile);
+      }
+      }
+    
+      if (this.fotoPortadaUrl !== this.usuario.fotoPortada) {
+        const fotoPortadaBlob = this.dataURItoBlob(this.fotoPortadaUrl);
+        if (fotoPortadaBlob === this.fotoPortadaUrl) {
+        } else  {
+          const fotoPortadaFile = new File([fotoPortadaBlob], 'fotoPortada.jpg');
+          formData.append('fotoPortada', fotoPortadaFile);
+        }
+      }
+    
+      if (
+        formData.has('nombre') ||
+        formData.has('descripcion') ||
+        formData.has('fotoPerfil') ||
+        formData.has('fotoPortada')
+      ) {
+        this.userService.updateUser(formData).subscribe(
+          (data: any) => {
+            this.usuario = data;
+          },
+          (error) => {
+            console.error("Error SaveProfile() user-profile.component:", error);
+          }
+        );
+      } else {
+        console.log("No changes to save.");
       }
     }
-  
-    if (
-      formData.has('nombre') ||
-      formData.has('descripcion') ||
-      formData.has('fotoPerfil') ||
-      formData.has('fotoPortada')
-    ) {
-      this.userService.updateUser(formData).subscribe(
-        (data: any) => {
-          this.usuario = data;
-        },
-        (error) => {
-          console.error("Error SaveProfile() user-profile.component:", error);
-        }
-      );
-    } else {
-      console.log("No changes to save.");
-    }
   }
-  
 
   dataURItoBlob(dataURI: string): Blob {
     if (typeof dataURI !== 'string') {
