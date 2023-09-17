@@ -3,7 +3,7 @@ import { Subcategory } from "./subcategory.model";
 export class Category {
     id?: number;
     nombre: string = '';
-    subcategories?: Subcategory[];
+    subcategories: Subcategory[] = [];
     open?: boolean;
 }
 

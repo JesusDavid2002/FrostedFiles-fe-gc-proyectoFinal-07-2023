@@ -12,6 +12,7 @@ import { Subcategory } from 'src/app/models/subcategory.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { Roles } from 'src/app/models/roles.model';
+import { SubcategoryService } from 'src/app/services/subcategory.service';
 
 @Component({
   selector: 'app-categories',
@@ -43,47 +44,69 @@ export class CategoriesComponent {
   rightPanelStyle: any = {};
   contextMenu: string = 'closed';
   @Output() categorySelected = new EventEmitter<string>();
+  @Output() subcategorySelected = new EventEmitter<string>();
   selectedCategory: any;
   selectedSubCategory: any;
   selectedSubSubCategory: any;
   categoriesList: Category[] = [];
+  subcategoriesList: Subcategory[] = [];
   categories: Observable<Category[]> | undefined;
   roles: Roles[] = [];
+  subcategoriesByCategory: { [categoryName: string]: Subcategory[] } = {};
 
   constructor(
     private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService,
     private swalService: SwalService
   ) {}
 
   ngOnInit(): void {
+    this.categoryService.getAllCategories().subscribe(
+      (result) => {
+        this.categoriesList = result;
+        this.categoriesList.forEach((category) => {
+          this.subcategoryService.getSubcategory(category.nombre).subscribe(
+            (subcategories) => {
+              this.subcategoriesByCategory[category.nombre] = subcategories;
+            },
+            (error) => {
+              console.error(`Error al obtener subcategorías para ${category.nombre}:`, error);
+            }
+          );
+        });
+        
+        
+        console.log(result);
+      }
+    );
     // Escuchar cambios en el BehaviorSubject de CategoryService y actualizar la lista de categorías
-    this.categoryService.categories.subscribe((result) => {
-      console.log(result);
+    // this.categoryService.categories.subscribe((result) => {
+    //   console.log(result);
       
-      const groupedByCategory: any = {};
-      result.forEach((item: any) => {
-        if (item?.categories) { 
-          const categoryId = item.categories.id;
-          if (!groupedByCategory[categoryId]) {
-            groupedByCategory[categoryId] = {
-              id: item.categories.id,
-              nombre: item.categories.nombre,
-              subcategories: [],
-            };
-          }
-          groupedByCategory[categoryId].subcategories.push({
-            id: item.subcategoryId,
-            nombre: item.nombre,
-          });
-        } else {
-          console.warn('Item o item.categories son undefined:', item);
-        }
-      });
+    //   const groupedByCategory: any = {};
+    //   result.forEach((item: any) => {
+    //     if (item?.categories) { 
+    //       const categoryId = item.categories.id;
+    //       if (!groupedByCategory[categoryId]) {
+    //         groupedByCategory[categoryId] = {
+    //           id: item.categories.id,
+    //           nombre: item.categories.nombre,
+    //           subcategories: [],
+    //         };
+    //       }
+    //       groupedByCategory[categoryId].subcategories.push({
+    //         id: item.subcategoryId,
+    //         nombre: item.nombre,
+    //       });
+    //     } else {
+    //       console.warn('Item o item.categories son undefined:', item);
+    //     }
+    //   });
   
-      const transformedArray = Object.values(groupedByCategory);
-      console.log(transformedArray);
-      this.categoriesList = transformedArray as Category[];
-    });
+    //   const transformedArray = Object.values(groupedByCategory);
+    //   console.log(transformedArray);
+    //   this.categoriesList = transformedArray as Category[];
+    // });
   }
   
   
@@ -92,14 +115,28 @@ export class CategoriesComponent {
     this.categorySelected.emit(category);
   }
 
+  onSubcategoryClick(subcategory: string) {
+    this.subcategorySelected.emit(subcategory);
+  }
+
   desplegar(category: Category) {
     category.open = !category.open;
+  }
+
+  desplegarSub(subcategory: Subcategory) {
+    subcategory.open = !subcategory.open;
   }
 
   handleClickOnCategory(category: Category): void {
     this.desplegar(category);
     this.update(category.nombre);
     this.onCategoryClick(category.nombre);
+  }
+
+  handleClickOnSubcategory(subcategory: Subcategory): void {
+    this.desplegarSub(subcategory);
+    this.update(subcategory.nombre);
+    this.onSubcategoryClick(subcategory.nombre);
   }
 
   update(

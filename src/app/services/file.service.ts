@@ -36,6 +36,10 @@ export class FileService {
   getFilesByCategory(category: string): Observable<Files[]>{
     return this.http.get<Files[]>(`${API_URL}/categories/${category}`);
   }
+  
+  getFilesBySubcategory(subcategory: string): Observable<Files[]>{
+    return this.http.get<Files[]>(`${API_URL}/subcategories/${subcategory}`);
+  }
 
   getPDF(nombre: string): Observable<Blob>{
     const headers = new HttpHeaders({

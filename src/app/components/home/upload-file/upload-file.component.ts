@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Files } from 'src/app/models/files.model';
+import { Subcategory } from 'src/app/models/subcategory.model';
 import { CategoryService } from 'src/app/services/category.service';  
 import { FileService } from 'src/app/services/file.service';
+import { SubcategoryService } from 'src/app/services/subcategory.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -11,17 +13,44 @@ import { FileService } from 'src/app/services/file.service';
   styleUrls: ['./upload-file.component.css']
 })
 export class UploadFileComponent {
-  categoriesList: Category[] = [];
+  categoriesList: Category[] = [];  
+  subcategoriesByCategory: { [categoryName: string]: Subcategory[] } = {};
   selectedFiles: File[] = [];
   selectedVisibility: number = 1; 
   selectedCategory: string = '';
+  selectedSubcategory: string = '';
 
-  constructor(private categoryService: CategoryService, private fileService: FileService, private router: Router) {
-    this.categoryService.getAllCategories().subscribe(result => {
-      this.categoriesList = result;
-    });
+  constructor(private categoryService: CategoryService, private subcategoryService: SubcategoryService,private fileService: FileService, private router: Router) {}
+
+  ngOnInit(){
+    this.loadCategories();
   }
-  
+
+  loadCategories(): void {
+    this.categoryService.getAllCategories().subscribe(
+      (result) => {
+        this.categoriesList = result;
+
+        // Inicializa subcategoriesByCategory con las categorías como claves vacías
+        this.categoriesList.forEach((category) => {
+          this.subcategoriesByCategory[category.nombre] = [];
+        });
+
+        // Llena subcategoriesByCategory con las subcategorías correspondientes
+        this.categoriesList.forEach((category) => {
+          this.subcategoryService.getSubcategory(category.nombre).subscribe(
+            (subcategories) => {
+              this.subcategoriesByCategory[category.nombre] = subcategories;
+            },
+            (error) => {
+              console.error(`Error al obtener subcategorías para ${category.nombre}:`, error);
+            }
+          );
+        });
+      }
+    );
+  }
+
   createFile(): void{
     if (this.selectedFiles.length === 0) {
       console.error('No se han seleccionado archivos.');
@@ -47,10 +76,16 @@ export class UploadFileComponent {
         console.log(`La categoría ${this.selectedCategory} no se encontró en la lista de categorías.`);
         return;
       }
+
+      // let selectedSubcategory = this.subcategoriesList.find(c => c.nombre === this.selectedSubcategory);
+      // if (!selectedSubcategory) {
+      //   console.log(`La subcategoría ${this.selectedSubcategory} no se encontró en la lista de subcategorías.`);
+      //   return;
+      // }
     
       // Aquí asignamos la categoría seleccionada de la lista, en vez de una nueva instancia
       fileData.categories = selectedCategory; 
-      
+      // fileData.subcategories = selectedSubcategory; 
 
       this.fileService.postFiles(fileData, file).subscribe({
         next: (response) => {

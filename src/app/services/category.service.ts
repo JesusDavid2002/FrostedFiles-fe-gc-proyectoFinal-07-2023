@@ -31,7 +31,7 @@ export class CategoryService {
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${API_URLSUB}`);
+    return this.http.get<Category[]>(`${API_URL}`);
   }
 
   getAllCategoriesForSelect(): Observable<Category[]> {
@@ -109,7 +109,7 @@ export class CategoryService {
             }
             return category;
           });
-          this.categories.next(updatedCategories);
+          // this.categories.next(updatedCategories);
           location.reload();
         },
         (error) => {
