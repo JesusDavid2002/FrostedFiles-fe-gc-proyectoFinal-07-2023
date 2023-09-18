@@ -1,45 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
 
-  constructor() { }
-comments = [
-  {
-    id: 1,
-    img: '',
-    author: 'John Doe',
-    date: '15-05-2015',
-    text: 'lorem ipsum dolor sit amet',
-  },
-  {
-    id: 2,
-    img: '',
-    author: 'Aurthur Conan Doyle',
-    date: '21-07-1973',
-    text: 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum!',
-  },
-  {
-    id: 3,
-    img: '',
-    author: 'Agatha Cristie',
-    date: '27-01-1988',
-    text: 'lorems ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum! lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum!',
-  }
-];
+  private API_URL = 'http://localhost:8080/api/comentarios';
 
+  constructor(private http: HttpClient) { }
 
-  getComments() {
-    return this.comments;
+  getComments(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}`);
   }
 
-  addComment(comment: any) {
-    this.comments.push(comment);
+  addComment(comment: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/add`, comment);
   }
 
-  deleteComment(comment: any) {
-    this.comments.splice(this.comments.indexOf(comment), 1);
+  deleteCommentById(id: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/${id}`);
   }
 }

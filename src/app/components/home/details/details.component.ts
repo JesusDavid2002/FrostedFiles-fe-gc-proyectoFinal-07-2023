@@ -5,6 +5,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { FileService } from 'src/app/services/file.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { Files } from 'src/app/models/files.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-details',
@@ -15,13 +16,16 @@ export class DetailsComponent {
   comment : any;
   comments : any = [];
   
+  email: string | null = null;
   fileNombre: string = '';
   file: Files = new Files();
   pdfUrl: any;
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  usuario: any = {};
 
 
-  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService) {
+  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService, 
+    private userService: UserService) {
     this.comments = this.commentService.getComments();
   }
 
@@ -39,9 +43,17 @@ export class DetailsComponent {
         this.file.contenido = archivo.contenido;
         
         this.fetchPdfFromDatabase(this.file.nombre);
-        
       }
     );    
+    
+    this.email = this.userService.getUserEmail();
+    this.commentService.getComments().subscribe(
+        (result) => {
+          this.comments = result;
+          
+          
+        }
+      );
   }
 
   downloadPdfFromDatabase(nombre: string, extension: string) {
@@ -89,26 +101,43 @@ export class DetailsComponent {
     });
   }
 
-
   openModalShare() {
+    let selectedFiles = this.file;
+    this.fileService.setSelectedFileName(selectedFiles.nombre);
     const modalRef = this.modalService.open(CompartirComponent);
-    modalRef.componentInstance.name = 'nombre archivo que se compartirá';
+    
+    modalRef.componentInstance.name = selectedFiles;
+    modalRef.componentInstance.selectedFile = this.file;   
   }
 
-  sendComment() {
-    let comment = {
-      id: this.comments.length + 1,
-      img: '',
-      author: 'John Doe',
-      date: '15-05-2015',
-      text: this.comment,
-    };
-    this.commentService.addComment(comment);
+  sendComment() {    
+      if (this.email !== null && this.email !== undefined) {
+      this.userService.getUserDetailsByEmail(this.email).subscribe((data: any) => {
+        this.usuario = data;
+        
+          let comment = {
+            id: this.comments.length + 1,
+            img: data.fotoPerfil,
+            author: data.username,
+            date: Date.now(),
+            text: this.comment,
+          };
+        this.commentService.addComment(comment).subscribe(
+          (result) => {
+            this.comments = result;
+            
+          }
+        );
+      });
+    }
   }
 
-  onDeleteComment(id: any) {
+  onDeleteComment(id: number) {
     this.swalService.showDeleteAlertComment(id, () =>
-      this.commentService.deleteComment(id)
+      this.commentService.deleteCommentById(id).subscribe(
+        (result) =>
+          console.log(result)
+      )
     );
   }
 }
