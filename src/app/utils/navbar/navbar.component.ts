@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -25,12 +25,12 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   menuBtnActive: boolean = false;
   searchFormActive: boolean = false;
   profileWindowActive: boolean = false;
   usuario: any = {};
+  userRole: string | null = null;
 
   constructor(private userService: UserService, private router: Router) {}
   
@@ -41,10 +41,13 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     // El user-profile html puede tener problemas si el userService.getUserEmail no va y devuelve undefinied
-    var userEmail = this.userService.getUserEmail();
+    let userEmail = this.userService.getUserEmail();
     if (userEmail !== null && userEmail !== undefined) {
       this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
         this.usuario = data;
+        this.userRole = this.usuario.roles.nombre;
+        console.log(this.userRole);
+        console.log(this.usuario);
       });
     }
   }
@@ -56,6 +59,7 @@ export class NavbarComponent {
   toggleSearchForm(): void {
     this.searchFormActive = !this.searchFormActive;
   }
+  
   cancelSearch(): void {
     this.searchFormActive = false;
   }
