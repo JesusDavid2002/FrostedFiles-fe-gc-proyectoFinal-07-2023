@@ -111,24 +111,39 @@ export class DetailsComponent {
   }
 
   sendComment() {    
+    console.log(this.email);
       if (this.email !== null && this.email !== undefined) {
-      this.userService.getUserDetailsByEmail(this.email).subscribe((data: any) => {
-        this.usuario = data;
-        
-          let comment = {
-            id: this.comments.length + 1,
-            img: data.fotoPerfil,
-            author: data.username,
-            date: Date.now(),
-            text: this.comment,
-          };
+      // this.userService.getUserDetailsByEmail(this.email).subscribe((data: any) => {
+        // this.usuario = data;
+        console.log(this.email);
+          let fecha = new Date();
+          let month = (fecha.getMonth() + 1) + '';
+          if (month.length < 2) {
+            month = '0' + month;
+          }
+          let day = fecha.getDate() + '';
+          if (day.length < 2) {
+            day = '0' + day;
+          }
+          let fechaFormateada = fecha.getFullYear() + "-" + month + "-" + day + "T" +
+          fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds() + "." + fecha.getMilliseconds();
+
+          let comment = 
+          {
+            "id": null,
+            "users" : { "username": this.email },
+            "files" : { "nombre" : this.file.nombre },
+            "fecha": fechaFormateada,
+            "texto": this.comment
+        }
+        console.log(comment);
         this.commentService.addComment(comment).subscribe(
           (result) => {
             this.comments = result;
             
           }
         );
-      });
+      // });
     }
   }
 
