@@ -6,6 +6,7 @@ import { FileService } from 'src/app/services/file.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { Files } from 'src/app/models/files.model';
 import { UserService } from 'src/app/services/user.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -13,9 +14,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent {
-  comment : any;
-  comments : any = [];
-  
+  comment: any;
+  comments: any = [];
+
   email: string | null = null;
   fileNombre: string = '';
   file: Files = new Files();
@@ -24,12 +25,12 @@ export class DetailsComponent {
   usuario: any = {};
 
 
-  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService, 
+  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService,
     private userService: UserService) {
     this.comments = this.commentService.getComments();
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.fileNombre = this.fileService.getSelectedFileName();
     this.fileService.getFilesByName(this.fileNombre).subscribe(
       (archivo: Files) => {
@@ -41,39 +42,33 @@ export class DetailsComponent {
         this.file.categories = archivo.categories;
         this.file.subcategories = archivo.subcategories;
         this.file.contenido = archivo.contenido;
-        
+
         this.fetchPdfFromDatabase(this.file.nombre);
+        this.loadComments();
+
+
       }
-    );    
-    
-    this.email = this.userService.getUserEmail();
-    this.commentService.getComments().subscribe(
-        (result) => {
-          this.comments = result;
-          
-          
-        }
-      );
+    );
   }
 
   downloadPdfFromDatabase(nombre: string, extension: string) {
     this.fileService.getPDF(nombre).subscribe(
-    (blob) => {
-      // Crear un objeto URL a partir del Blob
-      const url = window.URL.createObjectURL(blob);
+      (blob) => {
+        // Crear un objeto URL a partir del Blob
+        const url = window.URL.createObjectURL(blob);
 
-      // Crear un enlace para descargar el PDF
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = nombre + extension; // Puedes establecer el nombre del archivo aquí
-      document.body.appendChild(a);
-      a.click();
+        // Crear un enlace para descargar el PDF
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = nombre + extension; // Puedes establecer el nombre del archivo aquí
+        document.body.appendChild(a);
+        a.click();
 
-      // Liberar el objeto URL
-      window.URL.revokeObjectURL(url);
-      
-      this.registrarDescargar(nombre);
-    });
+        // Liberar el objeto URL
+        window.URL.revokeObjectURL(url);
+
+        this.registrarDescargar(nombre);
+      });
   }
 
   fetchPdfFromDatabase(nombre: string) {
@@ -96,7 +91,7 @@ export class DetailsComponent {
       },
       error: (error) => {
         console.error('Error al añadir', error);
-        
+
       }
     });
   }
@@ -105,45 +100,44 @@ export class DetailsComponent {
     let selectedFiles = this.file;
     this.fileService.setSelectedFileName(selectedFiles.nombre);
     const modalRef = this.modalService.open(CompartirComponent);
-    
+
     modalRef.componentInstance.name = selectedFiles;
-    modalRef.componentInstance.selectedFile = this.file;   
+    modalRef.componentInstance.selectedFile = this.file;
   }
 
-  sendComment() {    
-    console.log(this.email);
-      if (this.email !== null && this.email !== undefined) {
-      // this.userService.getUserDetailsByEmail(this.email).subscribe((data: any) => {
-        // this.usuario = data;
-        console.log(this.email);
-          let fecha = new Date();
-          let month = (fecha.getMonth() + 1) + '';
-          if (month.length < 2) {
-            month = '0' + month;
-          }
-          let day = fecha.getDate() + '';
-          if (day.length < 2) {
-            day = '0' + day;
-          }
-          let fechaFormateada = fecha.getFullYear() + "-" + month + "-" + day + "T" +
-          fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds() + "." + fecha.getMilliseconds();
+  loadComments() {
+    this.email = this.userService.getUserEmail();
+    this.commentService.getComments().subscribe(
+      (result) => {
+        this.comments = result;
+      });
+  }
 
-          let comment = 
-          {
-            "id": null,
-            "users" : { "username": this.email },
-            "files" : { "nombre" : this.file.nombre },
-            "fecha": fechaFormateada,
-            "texto": this.comment
-        }
-        console.log(comment);
-        this.commentService.addComment(comment).subscribe(
-          (result) => {
-            this.comments = result;
-            
-          }
-        );
-      // });
+
+  sendComment() {
+    console.log(this.email);
+    if (this.email !== null && this.email !== undefined) {
+      console.log(this.email);
+      let fecha = new Date();
+      let fechaFormateada = fecha.toISOString();
+      let comment =
+      {
+        "id": null,
+        "files": { "nombre": this.file.nombre },
+        "fecha": fechaFormateada,
+        "texto": this.comment
+      }
+      console.log(comment);
+      this.commentService.addComment(comment).subscribe({
+        next: (result) => {
+          this.comments = result;
+          this.loadComments();
+        },
+        error: catchError(error => {
+          console.error('Error al obtener categorías:', error);
+          throw error;
+        })
+      });
     }
   }
 

@@ -17,8 +17,8 @@ export class CommentService {
   }
 
   addComment(comment: any): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.userService.getToken());
-    return this.http.post(`${this.API_URL}/add`, comment, { headers }).pipe(
+    // const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.userService.getToken());
+    return this.http.post<any>(`${this.API_URL}/add`, comment).pipe(
       catchError(this.handleError)
     );
   }
