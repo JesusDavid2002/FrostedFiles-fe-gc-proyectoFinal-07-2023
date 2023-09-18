@@ -21,7 +21,7 @@ export class UsersListComponent {
 
   loadUsers() {
     this.userService.getAllUsers().subscribe(
-      (data: any) => {
+      (data: any[]) => {
         this.users = data;
       },
       (error) => {
