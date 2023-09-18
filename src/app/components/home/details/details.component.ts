@@ -5,6 +5,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { FileService } from 'src/app/services/file.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { Files } from 'src/app/models/files.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-details',
@@ -19,9 +20,10 @@ export class DetailsComponent {
   file: Files = new Files();
   pdfUrl: any;
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  usuario: any = {};
+  userRole: string | null = null;
 
-
-  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService) {
+  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService, private userService: UserService) {
     this.comments = this.commentService.getComments();
   }
 
@@ -39,7 +41,7 @@ export class DetailsComponent {
         this.file.contenido = archivo.contenido;
         
         this.fetchPdfFromDatabase(this.file.nombre);
-        
+        this.userRole = this.usuario.roles.nombre;
       }
     );    
   }

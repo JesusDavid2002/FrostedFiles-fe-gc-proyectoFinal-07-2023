@@ -83,7 +83,7 @@
                                         {{ comment.text }}
                                     </div>
                                     <div class="action">
-                                        <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                        <button *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" type="button" class="btn btn-danger btn-xs" title="Delete"
                                             (click)="onDeleteComment(comment.id)">
                                             <span class="material-symbols-outlined">
                                                 delete
