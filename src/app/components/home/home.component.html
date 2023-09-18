@@ -19,16 +19,16 @@
                 </div>
                 <div class="col-6 py-2 rounded cl-btns">
                     <div class="collapse navbar-collapse navbar-expand-lg" id="navbarNavDropdown">
-                        <div class="verticalLine"><button type="button" class="boton-Naranja"
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja"
                                 (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png"
                                     alt=""><span class="TextoEsconder">Crear</span></button></div>
-                        <div class="verticalLine"><button type="button" class="boton-Naranja"
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja"
                                 routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png"
                                     alt=""><span class="TextoEsconder">Subir</span></button></div>
-                        <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
                                 (click)="onSelectFile()"><img src="../../../assets/img/edit-file.png" alt=""><span
                                     class="TextoEsconder">Modificar</span></button></div>
-                        <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
                                 (click)=" onDeleteFile()"><img src="../../../assets/img/delete-file.png" alt=""><span
                                     class="TextoEsconder">Eliminar</span></button></div>
                         <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
@@ -118,7 +118,7 @@
                         <p class="my-2">Size: {{file.tamano}}</p>
                         <p class="my-2">Creation date: {{file.fechaSubida}}</p>
                     </div>
-                    <div class="rounded text-center cl-perms pt-2" id="details"
+                    <div *ngIf="userRole === 'ADMIN' || userRole === 'MODER'" class="rounded text-center cl-perms pt-2" id="details"
                         [ngClass]="{'d-none': !file.visibilidad}">
                         <h4>Permisos</h4>
                         <div class="btn btn-dark mt-3 p-2" (click)="openModalPermissions()">Acceder Permisos</div>
