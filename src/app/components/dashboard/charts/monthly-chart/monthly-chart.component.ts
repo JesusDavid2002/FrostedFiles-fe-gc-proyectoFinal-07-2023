@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MonthlyGraphic } from 'src/app/models/graphic.model';
 import { GraphicService } from 'src/app/services/graphic.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class MonthlyChartComponent {
   showLabels: boolean = true;
   isDoughnut: boolean = false;
 
-  estadisticaMensual: any[] = [];
+  estadisticaMensual: MonthlyGraphic[] = [];
   mesActual: string = '';
 
   constructor(public graphicService: GraphicService) {}
@@ -45,26 +46,29 @@ export class MonthlyChartComponent {
 
   extractData(data: any): any[] {
     const estadisticaMensual: any[] = [];
-
+  
     for (const mes in data) {
       if (data.hasOwnProperty(mes)) {
         const accionesPorMes = data[mes];
-
         if (typeof accionesPorMes === 'object' && accionesPorMes !== null) {
           const accionesTransformadas = [];
-
+  
           for (const tipoAccion in accionesPorMes) {
             if (accionesPorMes.hasOwnProperty(tipoAccion)) {
               const cantidad = accionesPorMes[tipoAccion];
               accionesTransformadas.push({ name: tipoAccion, value: cantidad });
             }
           }
-
-          estadisticaMensual.push({ name: mes, series: accionesTransformadas });
+  
+          const formato = { month: 'long' as const };
+          const nombreMes = new Date(`${mes}-01`).toLocaleDateString('es-ES', formato);
+  
+          estadisticaMensual.push({ name: nombreMes, series: accionesTransformadas });
         }
       }
     }
-
-  return estadisticaMensual;
+  
+    return estadisticaMensual;
   }
+  
 }
