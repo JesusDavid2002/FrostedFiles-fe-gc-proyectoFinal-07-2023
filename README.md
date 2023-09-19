@@ -12,10 +12,11 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 
 ### 🖥️ Frontend
 
-|                                                        Technology Icon                                                        | Technology Name |
+|                                                        Tecnologías Icono                                                        | Tecnologías nombres |
 | :---------------------------------------------------------------------------------------------------------------------------: | :-------------: |
-| <img height="50" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png"> |   JavaScript    |
+| <img height="50" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png"> |   Typescript    |
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png"> |     Angular     |
+| <img height="50" src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png"> |     Bootstrap     |
 
 
 ### 🏗️ Backend
