@@ -6,6 +6,8 @@ import { FileService } from 'src/app/services/file.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { Files } from 'src/app/models/files.model';
 import { UserService } from 'src/app/services/user.service';
+import { catchError } from 'rxjs';
+
 
 @Component({
   selector: 'app-details',
@@ -13,21 +15,23 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent {
-  comment : any;
-  comments : any = [];
-  
+  comment: any;
+  comments: any = [];
+
+  email: string | null = null;
   fileNombre: string = '';
   file: Files = new Files();
   pdfUrl: any;
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   usuario: any = {};
   userRole: string | null = null;
-
-  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService, private userService: UserService) {
+  
+  constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService,
+    private userService: UserService) {
     this.comments = this.commentService.getComments();
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.fileNombre = this.fileService.getSelectedFileName();
     this.fileService.getFilesByName(this.fileNombre).subscribe(
       (archivo: Files) => {
@@ -39,11 +43,12 @@ export class DetailsComponent {
         this.file.categories = archivo.categories;
         this.file.subcategories = archivo.subcategories;
         this.file.contenido = archivo.contenido;
-        
+
         this.fetchPdfFromDatabase(this.file.nombre);
+        this.loadComments();
         this.userRole = this.usuario.roles.nombre;
       }
-    );    
+    );
   }
 
   downloadPdfFromDatabase(nombre: string, extension: string) {
@@ -86,31 +91,61 @@ export class DetailsComponent {
       },
       error: (error) => {
         console.error('Error al añadir', error);
-        
+
       }
     });
   }
 
-
   openModalShare() {
+    let selectedFiles = this.file;
+    this.fileService.setSelectedFileName(selectedFiles.nombre);
     const modalRef = this.modalService.open(CompartirComponent);
-    modalRef.componentInstance.name = 'nombre archivo que se compartirá';
+
+    modalRef.componentInstance.name = selectedFiles;
+    modalRef.componentInstance.selectedFile = this.file;
+  }
+
+  loadComments() {
+    this.email = this.userService.getUserEmail();
+    this.commentService.getComments().subscribe(
+      (result) => {
+        this.comments = result;
+      });
   }
 
   sendComment() {
-    let comment = {
-      id: this.comments.length + 1,
-      img: '',
-      author: 'John Doe',
-      date: '15-05-2015',
-      text: this.comment,
-    };
-    this.commentService.addComment(comment);
+    console.log(this.email);
+    if (this.email !== null && this.email !== undefined) {
+      console.log(this.email);
+      let fecha = new Date();
+      let fechaFormateada = fecha.toISOString();
+      let comment =
+      {
+        "id": null,
+        "files": { "nombre": this.file.nombre },
+        "fecha": fechaFormateada,
+        "texto": this.comment
+      }
+      console.log(comment);
+      this.commentService.addComment(comment).subscribe({
+        next: (result) => {
+          this.comments = result;
+          this.loadComments();
+        },
+        error: catchError(error => {
+          console.error('Error al obtener categorías:', error);
+          throw error;
+        })
+      });
+    }
   }
 
-  onDeleteComment(id: any) {
+  onDeleteComment(id: number) {
     this.swalService.showDeleteAlertComment(id, () =>
-      this.commentService.deleteComment(id)
+      this.commentService.deleteCommentById(id).subscribe(
+        (result) =>
+          console.log(result)
+      )
     );
   }
 }

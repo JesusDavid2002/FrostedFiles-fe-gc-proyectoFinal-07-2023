@@ -40,7 +40,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // El user-profile html puede tener problemas si el userService.getUserEmail no va y devuelve undefinied
     let userEmail = this.userService.getUserEmail();
     if (userEmail !== null && userEmail !== undefined) {
       this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
