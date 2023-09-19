@@ -8,7 +8,7 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class RolesService {
-  private apiUrl = 'http://localhost:8080/api/admin/roles';
+  private apiUrl = 'https://frosted-files-production.up.railway.app/api/admin/roles';
 
   constructor(private http: HttpClient, private userService: UserService) {}
 

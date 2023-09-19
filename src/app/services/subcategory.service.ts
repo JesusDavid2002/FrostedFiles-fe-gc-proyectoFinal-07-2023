@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subcategory } from '../models/subcategory.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Category } from '../models/category.model';
 
-let API_URLSUB = 'http://localhost:8080/api/subcategories';
+let API_URLSUB = 'https://frosted-files-production.up.railway.app/api/subcategories';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class SubcategoryService {
     return this.http.get<Subcategory[]>(`${API_URLSUB}/${category}`);
   }
 
-  addSubcategories(subcategory: string): Observable<any> {
+  addSubcategories(subcategory: Subcategory): Observable<any> {
     return this.http.post(`${API_URLSUB}/add`, subcategory);
   }
 

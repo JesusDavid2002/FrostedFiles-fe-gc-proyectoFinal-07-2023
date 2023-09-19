@@ -231,7 +231,7 @@ export class CategoriesComponent {
       'Ingrese el nombre de la nueva subcategoría:'
     );
     if (subcategoryName && subcategoryName.trim() !== '') {
-      this.subcategoryService.addSubcategories(subcategoryName);
+      // this.subcategoryService.addSubcategories(subcategoryName);
     }
   }
   

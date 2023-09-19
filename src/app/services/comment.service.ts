@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 })
 export class CommentService {
 
-  private API_URL = 'http://localhost:8080/api/comentarios';
+  private API_URL = 'https://frosted-files-production.up.railway.app/api/comentarios';
 
   constructor(private http: HttpClient, private userService: UserService) { }
 

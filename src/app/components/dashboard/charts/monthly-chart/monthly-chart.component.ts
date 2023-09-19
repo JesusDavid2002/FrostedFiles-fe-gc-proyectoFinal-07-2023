@@ -28,24 +28,17 @@ export class MonthlyChartComponent {
     this.graphicService.getMonthlyDataGraphic().subscribe(data => {
       if (typeof data === 'object') {
         let datosTransformados = this.extractData(data);
-        let datosFiltrados = datosTransformados.filter(item => item.name === this.mesActual);
+        let datosFiltrados = datosTransformados.find(item => item.name === this.mesActual);
         
-        if (datosFiltrados.length > 0) {
-          const primerElemento = datosFiltrados[0];
-          
-          if (primerElemento.hasOwnProperty('series')) {
-            const seriesDelMes = primerElemento.series;
-            this.estadisticaMensual = seriesDelMes;
-
-          } else {
-            console.log('El primer elemento no tiene una propiedad "series" válida');
-            this.estadisticaMensual = [];
-          }
-
+        if (datosFiltrados && datosFiltrados.series) {
+          this.estadisticaMensual = datosFiltrados.series;
         } else {
-          console.error('Los datos recibidos no son de un tipo válido.');
-          this.estadisticaMensual = []; 
+          console.log('Los datos recibidos no tienen la estructura esperada.');
+          this.estadisticaMensual = [];
         }
+      } else {
+        console.error('Los datos recibidos no son de tipo objeto.');
+        this.estadisticaMensual = [];
       }
     });
   }
@@ -56,20 +49,22 @@ export class MonthlyChartComponent {
     for (const mes in data) {
       if (data.hasOwnProperty(mes)) {
         const accionesPorMes = data[mes];
-        const accionesTransformadas = [];
 
-        for (const tipoAccion in accionesPorMes) {
-          if (accionesPorMes.hasOwnProperty(tipoAccion)) {
-            const cantidad = accionesPorMes[tipoAccion];
-            accionesTransformadas.push({ name: tipoAccion, value: cantidad });
+        if (typeof accionesPorMes === 'object' && accionesPorMes !== null) {
+          const accionesTransformadas = [];
+
+          for (const tipoAccion in accionesPorMes) {
+            if (accionesPorMes.hasOwnProperty(tipoAccion)) {
+              const cantidad = accionesPorMes[tipoAccion];
+              accionesTransformadas.push({ name: tipoAccion, value: cantidad });
+            }
           }
+
+          estadisticaMensual.push({ name: mes, series: accionesTransformadas });
         }
-        
-        estadisticaMensual.push({ name: mes, series: accionesTransformadas });
       }
     }
 
   return estadisticaMensual;
   }
-
 }

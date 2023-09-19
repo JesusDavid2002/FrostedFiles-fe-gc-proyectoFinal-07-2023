@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Category } from 'src/app/models/category.model';
+import { Subcategory } from 'src/app/models/subcategory.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SubcategoryService } from 'src/app/services/subcategory.service';
 
@@ -14,6 +15,7 @@ export class ModalCategoriaComponent {
   @Input() name: any;
   formCategory: FormGroup;
   categoriesList: Category[] = [];
+  subcategoriesList: Subcategory[] = [];
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -27,24 +29,45 @@ export class ModalCategoriaComponent {
   }
 
   ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories() {
     this.categoryService.getAllCategories().subscribe((result) => {
       this.categoriesList = result;
+    });
+    this.subcategoryService.getAllSubcategories().subscribe((result) => {
+      this.subcategoriesList = result;
+      
     });
   }
 
   crearCategoria() {
     const selectedValue = this.formCategory.get('existingCategory')?.value;
     const newCategoryName = this.formCategory.get('newCategoryName')?.value;
-    if (selectedValue) {
-      // Se seleccionó solo una categoría, agregamos una subcategoría
-      this.categoryService.addSubcategory(selectedValue, newCategoryName);
-    } else {
-      // Si no se seleccionó ninguna categoría o subcategoría, agregamos una nueva categoría principal
+
+    if (!selectedValue) {
       this.categoryService.addCategory(newCategoryName).subscribe(
         (result) =>{
           console.log(result);
           
+          location.reload();
         });
+        
+    } else {
+      
+      const subcategory: Subcategory = {
+        nombre: newCategoryName,
+        category: {
+          nombre: selectedValue
+        }
+      };
+      this.subcategoryService.addSubcategories(subcategory).subscribe(
+        (result) => {
+          console.log(result);
+          location.reload();
+        }
+      );
     }
     this.activeModal.close('Close click');
   }
