@@ -23,7 +23,7 @@ export class DetailsComponent {
   pdfUrl: any;
   pdfSrcPrueba = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   usuario: any = {};
-
+  userRole: string | null = null;
 
   constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService,
     private userService: UserService) {
@@ -45,8 +45,7 @@ export class DetailsComponent {
 
         this.fetchPdfFromDatabase(this.file.nombre);
         this.loadComments();
-
-
+        this.userRole = this.usuario.roles.nombre;
       }
     );
   }
