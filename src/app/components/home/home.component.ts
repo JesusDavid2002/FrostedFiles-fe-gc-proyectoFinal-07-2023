@@ -159,9 +159,8 @@ export class HomeComponent {
 
     this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     this.currentSortColumn = column;
-}
+  }
 
-  // Helper para convertir cadena a objeto tipo Date
   convertToDate(dateString: string): Date {
       const [day, month, year] = dateString.split('/').map(part => parseInt(part, 10));
       return new Date(year, month - 1, day);
@@ -218,8 +217,6 @@ export class HomeComponent {
       this.router.navigate(['home/details']);
       
     }
-    // this.fileService.increaseVisitCount();
-    // this.visitCount = this.fileService.getVisitCount();
   }
 
   onDeleteFile(): void {  
@@ -237,7 +234,6 @@ export class HomeComponent {
           },
           (error) => {
             console.error('Error al eliminar el archivo:', error);
-            // Maneja el error de acuerdo a tus necesidades
           }
         );
       });

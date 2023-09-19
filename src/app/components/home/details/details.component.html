@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Escribe un comentario</label>
                                 <textarea class="form-control" [(ngModel)]='comment' rows="3"></textarea>
-                                <input type="submit" class="btn btn-primary" name="Enviar" (click)="sendComment()">
+                                <input type="submit" class="btn btn-primary mt-2" name="Enviar" (click)="sendComment()">
                             </div>
                         </div>
                     </div>
@@ -76,11 +76,11 @@
                                 <div class="col-xs-10 col-md-11">
                                     <div>
                                         <div class="mic-info">
-                                            By: <a href="#">{{ comment.author }}</a> on {{ comment.date }}
+                                            By: <a href="#">Anonymous</a> on {{ comment.fecha }}
                                         </div>
                                     </div>
                                     <div class="comment-text">
-                                        {{ comment.text }}
+                                        {{ comment.texto }}
                                     </div>
                                     <div class="action">
                                         <button *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" type="button" class="btn btn-danger btn-xs" title="Delete"
