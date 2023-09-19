@@ -42,19 +42,27 @@ export class HomeComponent {
   category: string = '';
   subcategory: string = '';
   visitCount: number = 0;
-  selectedFileIndex: number | null = null; 
+  selectedFileIndex: number | null = null;
+  usuario: any = {};
+  userRole: string | null = null;
     
   constructor(private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private fileService: FileService, 
-    private categoryService: CategoryService, private subcategoryService: SubcategoryService, private swalService: SwalService) {}
+    private categoryService: CategoryService, private subcategoryService: SubcategoryService, private swalService: SwalService, private userService: UserService) {}
 
   ngOnInit(): void{
       this.categoryService.getAllCategories().subscribe(result => {
         this.categoriesList = result;
       });
-
       this.subcategoryService.getAllSubcategories().subscribe(result => {
         this.subcategoriesList = result;
       });
+      let userEmail = this.userService.getUserEmail();
+      if (userEmail !== null && userEmail !== undefined) {
+      this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
+        this.usuario = data;
+        this.userRole = this.usuario.roles.nombre;
+      });
+    }
   }
 
   onCategorySelected(category: string){

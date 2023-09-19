@@ -8,6 +8,7 @@ import { Files } from 'src/app/models/files.model';
 import { UserService } from 'src/app/services/user.service';
 import { catchError } from 'rxjs';
 
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -27,6 +28,9 @@ export class DetailsComponent {
 
   constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService,
     private userService: UserService) {
+
+  userRole: string | null = null;
+
     this.comments = this.commentService.getComments();
   }
 
