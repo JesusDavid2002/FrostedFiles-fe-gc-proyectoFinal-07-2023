@@ -6,8 +6,9 @@
         <!-- <div>
             Visitas: {{visitCount}}
         </div> -->
-        <div class="col-10 border border-primary">                    
+        <div class="col-10 border border-primary" *ngIf="file.extension ? '.pdf': 'ngx-extended-pdf-viewer'">                    
             <ngx-extended-pdf-viewer [src]="pdfUrl" [useBrowserLocale]="true" [textLayer]="true"></ngx-extended-pdf-viewer>
+            <img [src]="pdfUrl">
         </div>
         <div class="col border border-primary pt-5 px-5">
             <p class="my-2"><b class="me-2">Nombre: </b>{{ file.nombre }}</p>

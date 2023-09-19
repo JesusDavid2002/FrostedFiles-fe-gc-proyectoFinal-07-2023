@@ -1,6 +1,10 @@
 .containerRoot{
     background-color: #f0f7ff;
-    height: 92.5vh;
+    height: 91.5vh;
+}
+
+a{
+    text-decoration: none;
 }
 
 .marg-top-cont{

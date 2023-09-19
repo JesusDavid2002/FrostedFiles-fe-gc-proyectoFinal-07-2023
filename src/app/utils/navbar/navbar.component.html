@@ -28,7 +28,7 @@
         <input type="search" class="search-data" placeholder="Buscar" required>
         <button type="submit" class="fas fa-search"></button>
     </form>
-    <div class="profile-circle" style="left: 5px;" (click)="toggleProfileWindow()">
+    <div class="profile-circle ms-3" (click)="toggleProfileWindow()">
         <i class="fas fa-user"></i>
         <div class="profile-popup" [class.active]="profileWindowActive" [@expandCollapse]="profileWindowActive ? 'open' : 'closed'">
             <li style="list-style-type: none" class="pt-2 text-center"><p>{{ usuario.nombre }}</p></li>

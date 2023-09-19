@@ -55,7 +55,7 @@ export class DetailsComponent {
       // Crear un enlace para descargar el PDF
       const a = document.createElement('a');
       a.href = url;
-      a.download = nombre + extension; // Puedes establecer el nombre del archivo aquí
+      a.download = nombre + extension;
       document.body.appendChild(a);
       a.click();
 

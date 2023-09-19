@@ -20,29 +20,23 @@ export class UsersListComponent {
   }
 
   loadUsers() {
-    this.userService.getAllUsers().subscribe(
-      (data: any[]) => {
+    this.userService.getAllUsers().subscribe({
+      next: (data) => {
         this.users = data;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error loading users:', error);
       }
-    );
+    });
   }
 
   modifyUser(user: any) {
-    const roles = ['USER', 'MODERATOR', 'ADMIN'];
+    const roles = ['USER', 'MODER', 'ADMIN'];
   
     this.userService.getUserDetailsByEmail(user.username).subscribe(
       (userObject: any) => {
         this.swalService.showModifyUserPopup(userObject, roles, (formData: FormData, selectedRole: string) => {
-          userObject.nombre = formData.get('nombre');
-          userObject.username = formData.get('username');
           userObject.roles = { nombre: selectedRole, primaryKey: { nombre: selectedRole } };
-  
-          console.log(userObject.nombre);
-          console.log(userObject.username);
-          console.log(userObject.roles);
   
           this.userService.updateAdmin(user.username, userObject).subscribe(
             () => {

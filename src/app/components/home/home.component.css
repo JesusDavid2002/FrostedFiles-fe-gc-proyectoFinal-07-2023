@@ -46,11 +46,6 @@ button {
   margin-right: 5px;
 }
 
-.cl-btns {
-  text-align: center;
-  margin-left: 5vw;
-}
-
 .card {
   margin-top: 15px;
   display: flex;
@@ -281,28 +276,6 @@ hr {
   button {
     width: 80px;
   }
-
-  .cl-btns {
-    margin-left: 20%;
-  }
-}
-
-@media (max-width: 1700px) {
-  .cl-btns {
-    margin-left: 15%;
-  }
-}
-
-@media (max-width: 1500px) {
-  .navbar-collapse.navbar-expand-lg.collapse.show {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-left: 20px;
-  }
-
-  .cl-btns {
-    margin-left: 10%;
-  }
 }
 
 @media (max-width: 990px) {
@@ -317,6 +290,13 @@ hr {
   #ArchivosContainerRoot {
     margin-left: 0;
   }
+
+  .navbar-collapse.navbar-expand-lg.collapse.show {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-left: 20px;
+  }
+
   .cl-detail {
     height: auto;
   }
@@ -324,5 +304,14 @@ hr {
   .cl-img {
     width: 100%;
     background: linear-gradient(to top, rgb(195, 232, 255), transparent);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .navbar-collapse.navbar-expand-lg.collapse.show {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 20px;
   }
 }
