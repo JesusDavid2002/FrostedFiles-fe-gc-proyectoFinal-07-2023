@@ -31,6 +31,51 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 Abra su navegador y vaya a [https://master.d8f626m5zmgyi.amplifyapp.com/](https://master.d8f626m5zmgyi.amplifyapp.com/).
 
 
+## Login
+
+![login](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/361439f7-e02c-48e4-89af-5aadd7de8e49)
+
+## Registro
+
+![register](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/1de699dd-32a2-4085-a561-34733f2e2330)
+
+## Vista Principal Cards (Admin)
+
+![vista principal](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/e99255c4-58d2-404f-97d3-281c66559a58)
+
+## Vista Principal Tabla (Admin)
+
+![vista principal tabla](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/384b9714-7cba-40a5-805c-f3d88b310749)
+
+## Vista Principal Cards (Moder)
+
+## Vista Principal Cards (User)
+
+## Subir archivos
+
+![subir archivos](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/a70f39c0-c3be-40a3-9e5c-fac6b1c1d957)
+
+## Actualizar archivos
+
+![actualizar archivo](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/1d36f085-6c49-4177-9c8c-ab66eb58a8d1)
+
+## Vista del archivo
+
+## Perfil del usuario
+
+![perfil user](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/ef47a700-96c0-4b87-8e75-0adbe1dd8f56)
+
+## About
+
+![about](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/425b9e70-847f-4872-8533-d5b52f53a168)
+
+## Dashboard (Moder)
+
+![graficas](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/34908a25-0597-4ea5-99b2-1f3ec995ce1a)
+
+## Lista usuarios (Admin)
+
+![lista usuarios](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/d93e3fe5-0ba7-4e47-9745-49e68e52ceef)
 
 
 
