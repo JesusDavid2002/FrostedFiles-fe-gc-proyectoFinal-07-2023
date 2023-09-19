@@ -48,6 +48,7 @@ export class DetailsComponent {
 
         this.fetchPdfFromDatabase(this.file.nombre);
         this.loadComments();
+        this.userRole = this.usuario.roles.nombre;
       }
     );
   }
