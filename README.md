@@ -1,4 +1,3 @@
-
 ![logo12](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/135844963/525b1752-2b32-4c21-861f-fd1c707e0e0d)
 
 
@@ -18,7 +17,6 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png"> |   Typescript    |
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png"> |     Angular     |
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png"> |     Bootstrap     |
-| <img src="https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/135844963/ff261532-4a6e-4b25-b332-daaab8e6f9e5" alt="Spring logo" width="40px" height="40px"> |   AWS amplify   |
 
 
 ### 🏗️ Backend
@@ -32,9 +30,11 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 | <img src="https://user-images.githubusercontent.com/25181517/183896128-ec99105a-ec1a-4d85-b08b-1aa1620b2046.png" alt="Spring logo" width="40px" height="40px"> |   MySQL   |
 | <img src="https://cdn.discordapp.com/attachments/900461215124430873/1153812994418032720/image.png" alt="Spring logo" width="40px" height="40px"> |   Railway   |
 
-## Visitar la aplicación
+## Visitar la aplicación <img src="https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/135844963/ff261532-4a6e-4b25-b332-daaab8e6f9e5" alt="Spring logo" width="45px" height="40px">
 
-Abra su navegador y vaya a [https://master.d8f626m5zmgyi.amplifyapp.com/](https://master.d8f626m5zmgyi.amplifyapp.com/).
+La aplicacion esta desplegada usando el servicio de Amazon webservice Amplify.
+
+Para visitar nuestra aplicacion puede [entrar aqui!](https://master.d8f626m5zmgyi.amplifyapp.com/).
 
 
 ## Login
