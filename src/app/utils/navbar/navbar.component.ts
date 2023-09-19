@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -25,8 +25,7 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   menuBtnActive: boolean = false;
   searchFormActive: boolean = false;
   profileWindowActive: boolean = false;
@@ -59,6 +58,7 @@ export class NavbarComponent {
   toggleSearchForm(): void {
     this.searchFormActive = !this.searchFormActive;
   }
+  
   cancelSearch(): void {
     this.searchFormActive = false;
   }
