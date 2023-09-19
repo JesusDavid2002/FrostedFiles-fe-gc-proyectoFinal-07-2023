@@ -10,7 +10,7 @@ import { Users } from '../models/users.model';
 export class UserService {
 
   // URL real del back, una vez tengamos el railway funcionando esta dirección debería cambiar
-  private API_URL = 'http://localhost:8080';
+  private API_URL = 'https://frosted-files-production.up.railway.app';
   private userEmail: string | null = null;
   private userEmailKey = 'userEmail';
 

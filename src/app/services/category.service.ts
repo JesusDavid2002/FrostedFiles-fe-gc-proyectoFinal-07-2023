@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable, catchError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './user.service';
 
-let API_URL = 'http://localhost:8080/api/categories';
-let API_URLSUB = 'http://localhost:8080/api/subcategories';
+let API_URL = 'https://frosted-files-production.up.railway.app/api/categories';
+let API_URLSUB = 'https://frosted-files-production.up.railway.app/api/subcategories';
 
 @Injectable({
   providedIn: 'root',
@@ -34,50 +34,50 @@ export class CategoryService {
       }),
     };
 
-    return this.http.post(`${API_URL}/add`, category);
+    return this.http.post(`${API_URL}/add`, category, httpOptions);
   }
 
-  addSubcategory(categoryName: string, subcategoryName: string) {
-    // Verificar primero si la categoría existe
-    if (!this.categories.value.find((cat) => cat.nombre === categoryName)) {
-      console.error(
-        `La categoría ${categoryName} no existe. No se puede agregar subcategoría.`
-      );
-      return;
-    }
-    // Preparando las opciones del encabezado HTTP con el token
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      })
-    };
-    // Realizar una petición POST al backend para crear la subcategoría
-    this.http.post(`${API_URLSUB}/add`, {
-      nombre: subcategoryName,
-      "category": {
-        "nombre": categoryName
-      }
-    }, httpOptions)
-      .subscribe(
-        (response) => {
-          // Si la categoría existe, actualizar las categorías con la nueva subcategoría
-          const updatedCategories = this.categories.value.map(category => {
-            if (category.nombre === categoryName) {
-              return {
-                ...category,
-                subcategories: [...(category.subcategories || []), { nombre: subcategoryName }]
-              }
-            }
-            return category;
-          });
-          location.reload();
-        },
-        (error) => {
-          console.error('Error al crear la subcategoría:', error);
-        }
-      );
-  }
+  // addSubcategory(categoryName: string, subcategoryName: string) {
+  //   // Verificar primero si la categoría existe
+  //   if (!this.categories.value.find((cat) => cat.nombre === categoryName)) {
+  //     console.error(
+  //       `La categoría ${categoryName} no existe. No se puede agregar subcategoría.`
+  //     );
+  //     return;
+  //   }
+  //   // Preparando las opciones del encabezado HTTP con el token
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${this.userService.getToken()}`
+  //     })
+  //   };
+  //   // Realizar una petición POST al backend para crear la subcategoría
+  //   this.http.post(`${API_URLSUB}/add`, {
+  //     nombre: subcategoryName,
+  //     "category": {
+  //       "nombre": categoryName
+  //     }
+  //   }, httpOptions)
+  //     .subscribe(
+  //       (response) => {
+  //         // Si la categoría existe, actualizar las categorías con la nueva subcategoría
+  //         const updatedCategories = this.categories.value.map(category => {
+  //           if (category.nombre === categoryName) {
+  //             return {
+  //               ...category,
+  //               subcategories: [...(category.subcategories || []), { nombre: subcategoryName }]
+  //             }
+  //           }
+  //           return category;
+  //         });
+  //         location.reload();
+  //       },
+  //       (error) => {
+  //         console.error('Error al crear la subcategoría:', error);
+  //       }
+  //     );
+  // }
 
   deleteCategoryByName(categoryName: string): Observable<any> {
     return this.http.delete(`${API_URL}/${categoryName}`);

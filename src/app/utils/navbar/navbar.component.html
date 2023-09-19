@@ -14,7 +14,7 @@
     </div>
     <div class="nav-items" [class.active]="menuBtnActive">
         <li><a class="nav-link" routerLink="/home">Inicio</a></li>
-        <li *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'"><a class="nav-link" routerLink="/dashboard">Dashboard</a></li>
+        <li *ngIf="userRole === 'ADMIN' || userRole === 'MODER'"><a class="nav-link" routerLink="/dashboard">Dashboard</a></li>
         <li><a class="nav-link" routerLink="/about">About</a></li>
         <li *ngIf="userRole === 'ADMIN'"><a class="nav-link" routerLink="/users-list">User List</a></li>
     </div>

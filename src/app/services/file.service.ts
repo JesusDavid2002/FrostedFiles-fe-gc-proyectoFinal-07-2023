@@ -5,8 +5,8 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ModeloCompartir } from '../models/modelo-compartir.model';
 import { UserService } from './user.service';
 
-let API_URL = 'http://localhost:8080/api/files';
-let API_URL_ACCIONES = 'http://localhost:8080/api/acciones';
+let API_URL = 'https://frosted-files-production.up.railway.app/api/files';
+let API_URL_ACCIONES = 'https://frosted-files-production.up.railway.app/api/acciones';
 
 @Injectable({
   providedIn: 'root'
