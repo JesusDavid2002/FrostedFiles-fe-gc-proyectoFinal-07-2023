@@ -20,12 +20,24 @@ nav {
   height: 8.5vh;
   padding: 0 100px;
 }
+
 nav .logo {
   color: #fff;
   font-size: 27px;
   font-weight: 600;
   letter-spacing: -1px;
 }
+
+.img-logo{
+  width: 3vw;
+  height: 5vh;
+}
+
+.img-titulo{
+  width: 15vw;
+  height: 5vh;
+}
+
 nav .nav-items {
   display: flex;
   flex: 1;
@@ -188,6 +200,9 @@ nav .search-icon {
   nav .cancel-icon.show {
     display: block;
   }
+  .img-titulo{
+    width: 40vw;
+  }
 }
 .content {
   position: absolute;
@@ -219,6 +234,14 @@ nav .logo.space {
   }
   nav form {
     right: 30px;
+  }
+  
+  .img-logo{
+    display: none;
+  }
+
+  .img-titulo{
+    width: 40vw;
   }
 }
 @media (max-width: 350px) {
