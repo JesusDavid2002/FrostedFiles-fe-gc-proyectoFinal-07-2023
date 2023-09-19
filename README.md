@@ -10,12 +10,9 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 
 ## Tecnologías Utilizadas
 
-- <img ![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/fcd732ef-647d-46a0-ad97-3e48b60965ea)
- alt="Angular logo" width="20px" height="20px"> Frontend: Angular
-- ![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/d93c1f79-be80-4de2-a983-71ddb4413308)
- alt="Spring Boot logo" width="20px" height="20px"> Backend: Spring Boot (Java 18)
-- ![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/a2fb7239-7158-451d-99c4-195084f32b91)
- alt="MySQL logo" width="20px" height="20px"> Base de datos: MySQL
+- ![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/fcd732ef-647d-46a0-ad97-3e48b60965ea) Frontend: Angular
+- ![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/d93c1f79-be80-4de2-a983-71ddb4413308) Backend: Spring Boot (Java 18)
+- ![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/a2fb7239-7158-451d-99c4-195084f32b91) Base de datos: MySQL
 
 ## Visitar la aplicación
 
