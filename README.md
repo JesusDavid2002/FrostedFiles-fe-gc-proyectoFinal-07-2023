@@ -12,7 +12,7 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 
 - <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="Angular logo" width="20px" height="20px">
  Frontend: Angular
-- [<img src="https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/d93c1f79-be80-4de2-a983-71ddb4413308"](https://camo.githubusercontent.com/150623b8b4db3b366c283f6539c41c6600aee2cad8b7f3c00a3b4fd11ee293b9/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d537072696e672d677265656e3f7374796c653d666c61742d636972636c65266c6f676f3d737072696e67) Backend: Spring Boot (Java 18)
+- <img src="https://camo.githubusercontent.com/150623b8b4db3b366c283f6539c41c6600aee2cad8b7f3c00a3b4fd11ee293b9/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d537072696e672d677265656e3f7374796c653d666c61742d636972636c65266c6f676f3d737072696" Backend: Spring Boot (Java 18)
 - <img src="https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/a2fb7239-7158-451d-99c4-195084f32b91" Base de datos: MySQL
 
 ## Visitar la aplicación
