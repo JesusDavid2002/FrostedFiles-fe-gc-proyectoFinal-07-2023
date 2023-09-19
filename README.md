@@ -10,10 +10,21 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 
 ## Tecnologías Utilizadas
 
-- <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="Angular logo" width="20px" height="20px">
- Frontend: Angular
-- <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/spring/spring.png" Backend: Spring Boot (Java 18)
-- <img src="https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/55997367/a2fb7239-7158-451d-99c4-195084f32b91" Base de datos: MySQL
+### 🖥️ Frontend
+
+|                                                        Technology Icon                                                        | Technology Name |
+| :---------------------------------------------------------------------------------------------------------------------------: | :-------------: |
+| <img height="50" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png"> |   JavaScript    |
+| <img height="50" src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png"> |     Angular     |
+
+
+### 🏗️ Backend
+- <img src="https://user-images.githubusercontent.com/25181517/117201470-f6d56780-adec-11eb-8f7c-e70e376cfd07.png" alt="Spring logo" width="40px" height="40px"> Backend: Spring Boot (Java 18)
+
+### 💾 Base datos
+
+
+- <img src="https://user-images.githubusercontent.com/25181517/183896128-ec99105a-ec1a-4d85-b08b-1aa1620b2046.png" alt="Spring logo" width="40px" height="40px">  Base de datos: MySQL
 
 ## Visitar la aplicación
 
