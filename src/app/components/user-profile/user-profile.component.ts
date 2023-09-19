@@ -39,14 +39,12 @@ export class UserProfileComponent {
         this.fotoPortadaUrl = this.sanitizer.bypassSecurityTrustUrl(
           'data:image/jpeg;base64,' + this.fotoPortadaData
         );
-        console.log(data);
         this.usuario = data;
       });
     }
   }
 
   toggleEditMode(event: MouseEvent) {
-    console.log(this.editMode);
     event.stopPropagation();
     this.showOverlay = !this.showOverlay;
     if (this.editMode) {

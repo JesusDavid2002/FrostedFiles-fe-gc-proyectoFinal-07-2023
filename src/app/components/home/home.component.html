@@ -17,21 +17,21 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                <div class="col-6 py-2 rounded cl-btns">
-                    <div class="collapse navbar-collapse navbar-expand-lg" id="navbarNavDropdown">
-                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja"
+                <div class="col-12 col-sm-10 col-md-9 col-lg-6 py-2 rounded">
+                    <div class="collapse navbar-collapse navbar-expand-lg float-end me-5" id="navbarNavDropdown">
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine text-center"><button type="button" class="boton-Naranja"
                                 (click)="openModalCategory()"><img src="../../../assets/img/create_folder.png"
                                     alt=""><span class="TextoEsconder">Crear</span></button></div>
-                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja"
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine text-center"><button type="button" class="boton-Naranja"
                                 routerLink="/home/upload-file"><img src="../../../assets/img/upload-file.png"
                                     alt=""><span class="TextoEsconder">Subir</span></button></div>
-                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine text-center"><button type="button" class="boton-Naranja btn-files" disabled
                                 (click)="onSelectFile()"><img src="../../../assets/img/edit-file.png" alt=""><span
                                     class="TextoEsconder">Modificar</span></button></div>
-                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
+                        <div *ngIf="userRole === 'ADMIN' || userRole === 'MODERATOR'" class="verticalLine text-center"><button type="button" class="boton-Naranja btn-files" disabled
                                 (click)=" onDeleteFile()"><img src="../../../assets/img/delete-file.png" alt=""><span
                                     class="TextoEsconder">Eliminar</span></button></div>
-                        <div class="verticalLine"><button type="button" class="boton-Naranja btn-files" disabled
+                        <div class="verticalLine"><button type="button" class="boton-Naranja btn-files text-center" disabled
                                 (click)="openModalShare()"><img src="../../../assets/img/share-file.png" alt=""><span
                                     class="TextoEsconder">Compartir</span></button></div>
                     </div>

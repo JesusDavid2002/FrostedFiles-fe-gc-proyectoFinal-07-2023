@@ -21,14 +21,13 @@ export class CompartirComponent {
     this.modelo.setArchivoFromSelectedFile(this.selectedFile);
   }
 
-  compartir() {         
+  compartir() {             
     this.fileService.postCompartir(this.modelo).subscribe({
       next: (response) => {
         console.log('compartido', response);
       },
       error: (error) => {
         console.log('error', error);
-        
       }
     });
       

@@ -53,22 +53,22 @@ export class DetailsComponent {
 
   downloadPdfFromDatabase(nombre: string, extension: string) {
     this.fileService.getPDF(nombre).subscribe(
-      (blob) => {
-        // Crear un objeto URL a partir del Blob
-        const url = window.URL.createObjectURL(blob);
+    (blob) => {
+      // Crear un objeto URL a partir del Blob
+      const url = window.URL.createObjectURL(blob);
 
-        // Crear un enlace para descargar el PDF
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = nombre + extension;
-        document.body.appendChild(a);
-        a.click();
+      // Crear un enlace para descargar el PDF
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = nombre + extension;
+      document.body.appendChild(a);
+      a.click();
 
-        // Liberar el objeto URL
-        window.URL.revokeObjectURL(url);
-
-        this.registrarDescargar(nombre);
-      });
+      // Liberar el objeto URL
+      window.URL.revokeObjectURL(url);
+      
+      this.registrarDescargar(nombre);
+    });
   }
 
   fetchPdfFromDatabase(nombre: string) {

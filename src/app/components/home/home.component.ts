@@ -112,7 +112,6 @@ export class HomeComponent {
 
   details(index: number): void{
     this.selectedFileIndex = index;
-    console.log('Archivo seleccionado con índice:', this.selectedFileIndex);
     this.fileList.forEach((file, i) => {
       if (i === index) {
         file.visibilidad = !file.visibilidad;
@@ -225,10 +224,8 @@ export class HomeComponent {
       let fileName = fileSelected.nombre;
 
       this.swalService.showDeleteAlertFile(this.selectedFileIndex, () => {
-        console.log('Callback de Swal ejecutado');
         this.fileService.deleteFiles(fileName).subscribe(
           () => {
-            console.log('Archivo eliminado correctamente');
             this.fileList.splice(this.selectedFileIndex!, 1);
             this.selectedFileIndex = null;
           },

@@ -45,8 +45,6 @@ export class NavbarComponent implements OnInit {
       this.userService.getUserDetailsByEmail(userEmail).subscribe((data: any) => {
         this.usuario = data;
         this.userRole = this.usuario.roles.nombre;
-        console.log(this.userRole);
-        console.log(this.usuario);
       });
     }
   }

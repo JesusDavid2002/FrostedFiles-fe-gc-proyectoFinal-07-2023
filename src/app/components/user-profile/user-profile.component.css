@@ -1,7 +1,7 @@
 .fondo {
     width: 100%;
     margin-top: 20px;
-    height: 200px;
+    height: 300px;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -72,14 +72,14 @@
 }
 
 .perfil-detalles {
-    height: 500px;
+    height: 350px;
     border-radius: 8px;
 }
 
 .perfil-dashboard {
     border: 1px solid rgba(109, 109, 109, 0.55);
     padding: 10px;
-    height: 500px;
+    height: 350px;
     border-radius: 4px;
 }
 

@@ -20,40 +20,38 @@ export class UsersListComponent {
   }
 
   loadUsers() {
-    this.userService.getAllUsers().subscribe(
-      (data: any[]) => {
+    this.userService.getAllUsers().subscribe({
+      next: (data) => {
         this.users = data;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error loading users:', error);
       }
-    );
+    });
   }
 
   modifyUser(user: any) {
-    // const roles = ['USER', 'MODER', 'ADMIN'];
+    const roles = ['USER', 'MODER', 'ADMIN'];
   
-    // this.userService.getUserDetailsByEmail(user.username).subscribe(
-    //   (userObject: any) => {
-    //     this.swalService.showModifyUserPopup(userObject, roles, (formData: FormData, selectedRole: string) => {
-    //       userObject.roles = { nombre: selectedRole, primaryKey: { nombre: selectedRole } };
+    this.userService.getUserDetailsByEmail(user.username).subscribe(
+      (userObject: any) => {
+        this.swalService.showModifyUserPopup(userObject, roles, (formData: FormData, selectedRole: string) => {
+          userObject.roles = { nombre: selectedRole, primaryKey: { nombre: selectedRole } };
   
-    //       console.log(userObject.roles);
-  
-    //       this.userService.updateAdmin(user.username, userObject).subscribe(
-    //         () => {
-    //           this.loadUsers();
-    //         },
-    //         (error) => {
-    //           console.error('Error updating user:', error);
-    //         }
-    //       );
-    //     });
-    //   },
-    //   (error) => {
-    //     console.error('Error retrieving user details:', error);
-    //   }
-    // );
+          this.userService.updateAdmin(user.username, userObject).subscribe(
+            () => {
+              this.loadUsers();
+            },
+            (error) => {
+              console.error('Error updating user:', error);
+            }
+          );
+        });
+      },
+      (error) => {
+        console.error('Error retrieving user details:', error);
+      }
+    );
   }
 
   deleteUser(user: any) {
