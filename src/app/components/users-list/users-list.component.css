@@ -1,0 +1,9 @@
+table{
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-align: center;
+}
+.table-responsive {
+    overflow-x: auto; /* Habilita el desplazamiento horizontal */
+    width: 100%; /* Opcional: ajusta el ancho según sea necesario */
+}
