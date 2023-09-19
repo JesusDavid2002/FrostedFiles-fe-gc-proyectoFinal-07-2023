@@ -29,8 +29,6 @@ export class DetailsComponent {
   constructor(private modalService: NgbModal, public commentService: CommentService, public fileService: FileService, private swalService: SwalService,
     private userService: UserService) {
 
-  userRole: string | null = null;
-
     this.comments = this.commentService.getComments();
   }
 
