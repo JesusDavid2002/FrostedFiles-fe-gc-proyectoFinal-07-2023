@@ -52,6 +52,8 @@ Abra su navegador y vaya a [https://master.d8f626m5zmgyi.amplifyapp.com/](https:
 
 ## Vista Principal Cards (User)
 
+![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/0195c280-1ca0-42a0-9efa-daf5b97481d0)
+
 ## Subir archivos
 
 ![subir archivos](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/a70f39c0-c3be-40a3-9e5c-fac6b1c1d957)
@@ -61,6 +63,8 @@ Abra su navegador y vaya a [https://master.d8f626m5zmgyi.amplifyapp.com/](https:
 ![actualizar archivo](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/1d36f085-6c49-4177-9c8c-ab66eb58a8d1)
 
 ## Vista del archivo
+
+![image](https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/82532848/516fc6b8-449c-464f-9e75-7f8bcf2e8718)
 
 ## Perfil del usuario
 
