@@ -1,7 +1,6 @@
 .fondo {
     width: 100%;
-    margin-top: 20px;
-    height: 300px;
+    height: 30vh;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -68,6 +67,7 @@
 }
 
 .detalles {
+    margin-top: -x;
     transform: translateY(-10%);
 }
 
@@ -81,6 +81,10 @@
     padding: 10px;
     height: 350px;
     border-radius: 4px;
+}
+
+.perfil-dashboard label {
+    font-weight: bold;
 }
 
 .perfil-campo {
