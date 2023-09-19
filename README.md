@@ -18,6 +18,7 @@ Este proyecto es una aplicación de almacenamiento de archivos construida con An
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png"> |   Typescript    |
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png"> |     Angular     |
 | <img height="50" src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png"> |     Bootstrap     |
+| <img src="https://github.com/JesusDavid2002/FrostedFiles-fe-gc-proyectoFinal-07-2023/assets/135844963/ff261532-4a6e-4b25-b332-daaab8e6f9e5" alt="Spring logo" width="40px" height="40px"> |   AWS amplify   |
 
 
 ### 🏗️ Backend
