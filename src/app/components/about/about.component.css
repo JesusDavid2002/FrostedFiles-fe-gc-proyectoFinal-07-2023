@@ -46,6 +46,10 @@ a{
     margin-left: 10px;
 }
 
+.centrado{
+    margin-top: 2rem;
+}
+
 
 /* Responsive media queries */
 @media (max-width: 768px) {
@@ -62,6 +66,9 @@ a{
         width: 160px;
         height: 160px;
     }
+    .centrado{
+        margin-top: 1rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -71,5 +78,8 @@ a{
     .perfil-outline {
         width: 160px;
         height: 160px;
+    }
+    .centrado{
+        margin-top: 0rem;
     }
 }
